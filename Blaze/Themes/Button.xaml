@@ -9,35 +9,43 @@
 
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                        <Border Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
                                 CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(core:CornerRadiusExtention.Property)}"
-                                Background="{TemplateBinding Background}" x:Name="Border_Button">
+                                Background="{TemplateBinding Background}"
+                                x:Name="Border_Button">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="2*"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="2*" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <iconPacks:PackIconCodicons Kind="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(core:Icon.Property)}" 
+                                <iconPacks:PackIconCodicons Kind="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(core:Icon.Property)}"
                                                             Foreground="{TemplateBinding Foreground}"
                                                             Grid.Column="1"
                                                             Grid.Row="1"
                                                             VerticalAlignment="Center"
-                                                            HorizontalAlignment="Center"/>
+                                                            HorizontalAlignment="Center" />
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border_Button" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(core:IsMouseOverColor.Property)}"/>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="Border_Button"
+                                        Property="Background"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(core:IsMouseOverColor.Property)}" />
                             </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Border_Button" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(core:IsPressedColor.Property)}"/>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="Border_Button"
+                                        Property="Background"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(core:IsPressedColor.Property)}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

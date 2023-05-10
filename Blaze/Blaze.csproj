@@ -164,6 +164,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\ButtonExtentions.cs" />
+    <Compile Include="Core\DropdownMenuExtention.cs" />
     <Compile Include="Core\ExtentionProperty.cs" />
     <Compile Include="Core\Observable.cs" />
     <Compile Include="Core\RelayCommand.cs" />
@@ -180,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\DropDownMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,8 +242,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Folder Include="CustomControls\" />
     <Folder Include="MVVM\Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fire.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

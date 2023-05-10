@@ -7,7 +7,7 @@ namespace Blaze.Core
     {
         private Action<object> _execute;
         private Func<object, bool> _canExecute;
-        
+
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }

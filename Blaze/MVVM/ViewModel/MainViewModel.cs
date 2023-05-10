@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using Blaze.Core;
 
 namespace Blaze.MVVM.ViewModel
@@ -27,7 +21,9 @@ namespace Blaze.MVVM.ViewModel
         public object CurrentView
         {
             get { return _currentView; }
-            set { _currentView = value;
+            set
+            {
+                _currentView = value;
                 OnPropertyChanged();
             }
         }
@@ -38,8 +34,8 @@ namespace Blaze.MVVM.ViewModel
             DiscoveryVM = new DiscoveryViewModel();
             CurrentView = HomeVM;
 
-            HomeViewCommand = new RelayCommand( o => { CurrentView = HomeVM; });
-            DiscoveryViewCommand = new RelayCommand( o => { CurrentView = DiscoveryVM; });
+            HomeViewCommand = new RelayCommand(o => { CurrentView = HomeVM; });
+            DiscoveryViewCommand = new RelayCommand(o => { CurrentView = DiscoveryVM; });
 
             Close = new RelayCommand(o => { Application.Current.Shutdown(); });
             Maximise = new RelayCommand(o => Maximise_Command());
