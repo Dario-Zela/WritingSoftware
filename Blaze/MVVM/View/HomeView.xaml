@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Blaze.MVVM.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:core="clr-namespace:Blaze.Core"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="810">
+
+    <StackPanel>
+        <Grid Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,10,0">
+                <TabControl>
+                    <TabItem Header="Activity"
+                             x:Name="Activity">
+
+                    </TabItem>
+                    <TabItem Header="Recent"
+                             x:Name="Recent">
+
+                    </TabItem>
+                    <TabItem Header="Details"
+                             x:Name="Details">
+
+                    </TabItem>
+                </TabControl>
+                <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}" />
+                <RadioButton Content="Discovery"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding DiscoveryViewCommand}" />
+                <RadioButton Content="Feature"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}" />
+                <RadioButton Content="About Us"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1"
+                        Margin="20,0,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Discover"
+                               Foreground="White"
+                               FontSize="28"
+                               HorizontalAlignment="Left"
+                               Margin="0,0,0,20" />
+
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal">
+                        <Menu IsMainMenu="False"
+                              HorizontalAlignment="Left"
+                              Width="110"
+                              Background="Transparent">
+                            <MenuItem Style="{StaticResource DropDownMenu}"
+                                      Header="New Project"
+                                      Width="110">
+                                <MenuItem Header="Create a New Project"
+                                          Style="{StaticResource DropDownItem}"
+                                          Foreground="White" />
+                                <MenuItem Header="Create a New Linked Project"
+                                          x:Name="NewLinkedProject"
+                                          Style="{StaticResource HangingMenu}"
+                                          core:Icon.Property="ChevronRight"
+                                          ItemContainerStyle="{StaticResource DropDownItem}">
+                                </MenuItem>
+                            </MenuItem>
+                        </Menu>
+                        <Button core:Header.Property="New Folder" 
+                                Style="{StaticResource MenuButton}"
+                                Width="100"
+                                Margin="10,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>

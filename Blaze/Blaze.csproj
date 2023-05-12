@@ -167,6 +167,8 @@
     <Compile Include="Core\DropdownMenuExtention.cs" />
     <Compile Include="Core\ExtentionProperty.cs" />
     <Compile Include="Core\Observable.cs" />
+    <Compile Include="Core\Project.cs" />
+    <Compile Include="Core\ProjectLibrary.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
