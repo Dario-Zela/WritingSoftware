@@ -9,15 +9,12 @@ namespace Blaze.MVVM.View
     public partial class HomeView : UserControl
     {
 
-        private ProjectLibrary ProjectLibrary = new ProjectLibrary();
+        public ProjectLibrary ProjectLibrary = new ProjectLibrary();
 
         public HomeView()
         {
             InitializeComponent();
-            foreach (Project project in ProjectLibrary.projects)
-            {
-                NewLinkedProject.Items.Add((MenuItem)project);
-            }
+            NewLinkedProject.ItemsSource = ProjectLibrary.projects;
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Blaze.Core
 {
-    class Project
+    public class Project
     {
 		private string _name;
 		public string Name
@@ -23,6 +23,9 @@ namespace Blaze.Core
 			set { _projectPath = value; }
 		}
 
-		public static implicit operator MenuItem(Project project) => new MenuItem() { Header = project.Name };
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

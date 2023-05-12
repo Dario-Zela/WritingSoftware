@@ -5,6 +5,7 @@ namespace Blaze.MVVM.ViewModel
 {
     class MainViewModel : Observable
     {
+
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand DiscoveryViewCommand { get; set; }
 

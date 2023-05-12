@@ -6,6 +6,10 @@
 
     <Style TargetType="{x:Type MenuItem}"
            x:Key="DropDownMenu">
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="Background"
+                Value="#FF3F3F3F"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
@@ -31,14 +35,14 @@
                                                         Width="10"
                                                         VerticalAlignment="Center" />
                         </Grid>
-                        <TextBlock x:Name="Header"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
-                                   Text="{TemplateBinding Header}"
-                                   Margin="10,3,23,3"
-                                   Focusable="True"
-                                   Background="#FF3F3F3F"
-                                   Foreground="White" />
+                        
+                        <ContentPresenter Content="{TemplateBinding Header}"
+                                          Margin="10,3,23,3"
+                                          Focusable="True"
+                                          x:Name="Header"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center" />
+
 
                         <Popup Name="Popup"
                                IsOpen="{TemplateBinding IsSubmenuOpen}"
@@ -65,8 +69,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSubmenuOpen"
                                  Value="True">
-                            <Setter TargetName="Header"
-                                    Property="Foreground"
+                            <Setter Property="Foreground"
                                     Value="Orange" />
                             <Setter TargetName="Arrow"
                                     Property="Kind"
@@ -150,6 +153,7 @@
 
                                     <StackPanel IsItemsHost="True"
                                                 Margin="4,6,4,6"
+                                                Name="ItemHost"
                                                 KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </Grid>
                             </Popup>
@@ -208,6 +212,191 @@
                             Padding="2"
                             SnapsToDevicePixels="true">
                         <ContentPresenter Content="{TemplateBinding Header}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted"
+                                 Value="true">
+                            <Setter TargetName="Border"
+                                    Property="Background"
+                                    Value="#FF4F4F4F" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="false">
+                            <Setter Property="Foreground"
+                                    Value="#888888" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <ControlTemplate x:Key="ComboBoxToggleButton"
+                     TargetType="{x:Type ToggleButton}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="2"
+                    CornerRadius="5"
+                    Background="#FF3F3F3F"
+                    BorderBrush="#FF97A0A5"
+                    BorderThickness="1" />
+            <iconPacks:PackIconCodicons Kind="ChevronDown"
+                                        Name="Arrow"
+                                        Grid.Column="1"
+                                        Foreground="White"
+                                        HorizontalAlignment="Center"
+                                        Width="10"
+                                        VerticalAlignment="Center" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked"
+                     Value="True">
+                <Setter TargetName="Arrow"
+                        Property="Kind"
+                        Value="ChevronUp" />
+                <Setter TargetName="Arrow"
+                        Property="Foreground"
+                        Value="Orange" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ComboBoxTextBox"
+                     TargetType="{x:Type TextBox}">
+        <Border x:Name="PART_ContentHost"
+                Focusable="False"
+                Background="{TemplateBinding Background}" />
+    </ControlTemplate>
+
+    <Style x:Key="DropdownCombobox"
+           TargetType="{x:Type ComboBox}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                Value="Auto" />
+        <Setter Property="ScrollViewer.CanContentScroll"
+                Value="true" />
+        <Setter Property="IsReadOnly"
+                Value="True" />
+        <Setter Property="MinWidth"
+                Value="100" />
+        <Setter Property="MinHeight"
+                Value="20" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="Background"
+                Value="#FF3F3F3F" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <Grid>
+                        <ToggleButton Name="ToggleButton"
+                                      Template="{StaticResource ComboBoxToggleButton}"
+                                      Grid.Column="2"
+                                      Focusable="false"
+                                      IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                      ClickMode="Press">
+                        </ToggleButton>
+
+                        <ContentPresenter Margin="10,3,23,3"
+                                          Focusable="True"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          IsHitTestVisible="False">
+                            <ContentPresenter.Content>
+                                <StackPanel>
+                                    <ContentPresenter Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(core:Header.Property)}"/>
+                                    <TextBlock Text="{TemplateBinding Text}"/>
+                                </StackPanel>
+                            </ContentPresenter.Content>
+                        </ContentPresenter>
+                        
+                        <Popup Name="Popup"
+                               Placement="Bottom"
+                               IsOpen="{TemplateBinding IsDropDownOpen}"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               PopupAnimation="Slide">
+
+                            <Grid Name="DropDown"
+                                  SnapsToDevicePixels="True"
+                                  MinWidth="{TemplateBinding ActualWidth}"
+                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border Name="DropDownBorder"
+                                        Background="#FF3F3F3F"
+                                        BorderThickness="1"
+                                        BorderBrush="#888888" />
+                                <ScrollViewer Margin="4,6,4,6"
+                                              SnapsToDevicePixels="True">
+                                    <StackPanel IsItemsHost="True"
+                                                KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDropDownOpen"
+                                 Value="True">
+                            <Setter Property="Foreground"
+                                    Value="Orange" />
+                        </Trigger>
+                        <Trigger Property="HasItems"
+                                 Value="false">
+                            <Setter TargetName="DropDownBorder"
+                                    Property="MinHeight"
+                                    Value="95" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="false">
+                            <Setter Property="Foreground"
+                                    Value="#888888" />
+                        </Trigger>
+                        <Trigger Property="IsGrouping"
+                                 Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll"
+                                    Value="false" />
+                        </Trigger>
+                        <Trigger SourceName="Popup"
+                                 Property="Popup.AllowsTransparency"
+                                 Value="true">
+                            <Setter TargetName="DropDownBorder"
+                                    Property="CornerRadius"
+                                    Value="5" />
+                            <Setter TargetName="DropDownBorder"
+                                    Property="Margin"
+                                    Value="0,2,0,0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="DropdownComboboxItem"
+           TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Border Name="Border"
+                            Padding="2"
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsHighlighted"

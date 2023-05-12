@@ -7,7 +7,7 @@ using MahApps.Metro.IconPacks;
 
 namespace Blaze.Core
 {
-    public class Header : IExtention<string, Header> { }
+    public class Header : IExtention<object, Header> { }
     public class IconToPlacementConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -84,5 +84,5 @@ namespace Blaze.Core
             else return -(double)value;
         }
     }
-        public class Placement : IExtention<PlacementMode, Placement> { }
+    public class Placement : IExtention<PlacementMode, Placement> { }
 }

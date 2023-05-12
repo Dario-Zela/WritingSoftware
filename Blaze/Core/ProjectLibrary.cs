@@ -5,11 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 
 namespace Blaze.Core
 {
-    class ProjectLibrary
+    public class ProjectLibrary
     {
         private string PATH = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Blaze\\ExistingProjects\\";
 
