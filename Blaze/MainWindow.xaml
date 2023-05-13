@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:Blaze.MVVM.ViewModel"
-        xmlns:core="clr-namespace:Blaze.Core"
+        xmlns:Extentions="clr-namespace:Blaze.Extentions"
         xmlns:local="clr-namespace:Blaze"
         mc:Ignorable="d"
         Height="600"
@@ -45,9 +45,9 @@
                         Orientation="Horizontal"
                         WindowChrome.IsHitTestVisibleInChrome="True">
 
-                <Button core:Icon.Property="ChromeMinimize"
-                        core:IsMouseOverColor.Property="DarkGray"
-                        core:IsPressedColor.Property="Gray"
+                <Button Extentions:Codicons.Property="ChromeMinimize"
+                        Extentions:IsMouseOverColor.Property="DarkGray"
+                        Extentions:IsPressedColor.Property="Gray"
                         Width="30"
                         Height="30"
                         Background="Transparent"
@@ -55,9 +55,9 @@
                         Style="{StaticResource ButtonWithIcon}"
                         Command="{Binding Minimise}" />
 
-                <Button core:Icon.Property="ChromeMaximize"
-                        core:IsMouseOverColor.Property="DarkGray"
-                        core:IsPressedColor.Property="Gray"
+                <Button Extentions:Codicons.Property="ChromeMaximize"
+                        Extentions:IsMouseOverColor.Property="DarkGray"
+                        Extentions:IsPressedColor.Property="Gray"
                         Width="30"
                         Height="30"
                         Background="Transparent"
@@ -66,9 +66,9 @@
                         Style="{StaticResource ButtonWithIcon}"
                         Command="{Binding Maximise}" />
 
-                <Button core:Icon.Property="ChromeClose"
-                        core:IsMouseOverColor.Property="Red"
-                        core:IsPressedColor.Property="#FF7276"
+                <Button Extentions:Codicons.Property="ChromeClose"
+                        Extentions:IsMouseOverColor.Property="Red"
+                        Extentions:IsPressedColor.Property="#FF7276"
                         Width="30"
                         Height="30"
                         Background="Transparent"

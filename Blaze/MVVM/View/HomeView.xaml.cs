@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using Blaze.Core;
+using MahApps.Metro.IconPacks;
 
 namespace Blaze.MVVM.View
 {

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using Blaze.Core.Extentions;
 using MahApps.Metro.IconPacks;
 
-namespace Blaze.Core
+namespace Blaze.Extentions
 {
-    public class Header : IExtention<object, Header> { }
+    public class Header : IExtention<string, Header> { }
     public class IconToPlacementConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -85,4 +86,5 @@ namespace Blaze.Core
         }
     }
     public class Placement : IExtention<PlacementMode, Placement> { }
+    public class MaterialDesignIcon : IExtention<PackIconMaterialDesignKind, MaterialDesignIcon> { }
 }

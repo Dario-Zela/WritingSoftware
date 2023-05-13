@@ -12,6 +12,7 @@ namespace Blaze
         public MainWindow()
         {
             InitializeComponent();
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
         protected void Window_StateChanged(object sender, EventArgs e)
@@ -20,13 +21,13 @@ namespace Blaze
             {
                 BorderThickness = new Thickness(6);
 
-                MaximiseButton.SetValue(Core.Icon.ExtendedProperty, PackIconCodiconsKind.ChromeRestore);
+                MaximiseButton.SetValue(Extentions.Codicons.ExtendedProperty, PackIconCodiconsKind.ChromeRestore);
             }
             else if (WindowState == WindowState.Normal)
             {
                 BorderThickness = new Thickness(0);
 
-                MaximiseButton.SetValue(Core.Icon.ExtendedProperty, PackIconCodiconsKind.ChromeMaximize);
+                MaximiseButton.SetValue(Extentions.Codicons.ExtendedProperty, PackIconCodiconsKind.ChromeMaximize);
             }
         }
     }

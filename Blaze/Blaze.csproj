@@ -163,12 +163,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\ButtonExtentions.cs" />
-    <Compile Include="Core\DropdownMenuExtention.cs" />
+    <Compile Include="ThemeExtentions\ButtonExtentions.cs" />
+    <Compile Include="ThemeExtentions\DropdownMenuExtention.cs" />
     <Compile Include="Core\ExtentionProperty.cs" />
     <Compile Include="Core\Observable.cs" />
-    <Compile Include="Core\Project.cs" />
-    <Compile Include="Core\ProjectLibrary.cs" />
+    <Compile Include="MVVM\Model\Project.cs" />
+    <Compile Include="MVVM\Model\ProjectLibrary.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -245,7 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomControls\" />
-    <Folder Include="MVVM\Model\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\fire.png" />

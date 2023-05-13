@@ -3,9 +3,9 @@ using System.Windows.Media;
 using Blaze.Core.Extentions;
 using MahApps.Metro.IconPacks;
 
-namespace Blaze.Core
+namespace Blaze.Extentions
 {
-    public class Icon : IExtention<PackIconCodiconsKind, Icon>
+    public class Codicons : IExtention<PackIconCodiconsKind, Codicons>
     {
     }
 

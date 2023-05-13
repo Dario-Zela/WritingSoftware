@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:core="clr-namespace:Blaze.Core"
+             xmlns:Extentions="clr-namespace:Blaze.Extentions"
+             xmlns:viewmodels="clr-namespace:Blaze.MVVM.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodels:HomeViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="810">
@@ -54,20 +56,13 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}" />
             </StackPanel>
-            <StackPanel Grid.Column="1"
-                        Margin="20,0,0,0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Discover"
-                               Foreground="White"
-                               FontSize="28"
-                               HorizontalAlignment="Left"
-                               Margin="0,0,0,20" />
+            <Separator Grid.Column="1"
+                       VerticalAlignment="Top"
+                       Margin="0,30,0,0"/>
 
-                    <DockPanel Grid.Row="2">
+            <StackPanel Grid.Column="1">
+                <Grid Margin="1,0,0,0">
+                    <DockPanel>
                         <Menu IsMainMenu="False"
                               HorizontalAlignment="Left"
                               Width="110"
@@ -81,25 +76,27 @@
                                 <MenuItem Header="Create a New Linked Project"
                                           x:Name="NewLinkedProject"
                                           Style="{StaticResource HangingMenu}"
-                                          core:Icon.Property="ChevronRight"
+                                          Extentions:Codicons.Property="ChevronRight"
                                           ItemContainerStyle="{StaticResource DropDownItem}">
                                 </MenuItem>
                             </MenuItem>
                         </Menu>
-                        <Button core:Header.Property="New Folder"
+                        <Button Extentions:Header.Property="New Folder"
                                 Style="{StaticResource MenuButton}"
                                 Width="100"
                                 Margin="10,0,0,0" />
 
 
                         <ComboBox  HorizontalAlignment="Right"
-                                   Width="110"
+                                   x:Name="Sorter"
+                                   Width="140"
                                    Margin="0,0,10,0"
                                    Style="{StaticResource DropdownCombobox}"
-                                   ItemContainerStyle="{StaticResource DropdownComboboxItem}">
+                                   ItemContainerStyle="{StaticResource DropdownComboboxItem}"
+                                   Extentions:MaterialDesignIcon.Property="Sort">
                             <ComboBoxItem Content="Alphabetical"
                                           IsSelected="True" />
-                            <ComboBoxItem Content="Foulders First"/>
+                            <ComboBoxItem Content="Foulders First" />
                             <ComboBoxItem Content="Recently Added" />
                             <Separator />
                             <ComboBoxItem Content="Manual Sorting" />
