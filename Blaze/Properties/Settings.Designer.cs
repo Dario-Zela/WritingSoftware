@@ -22,5 +22,17 @@ namespace Blaze.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string SortingMethod {
+            get {
+                return ((string)(this["SortingMethod"]));
+            }
+            set {
+                this["SortingMethod"] = value;
+            }
+        }
     }
 }

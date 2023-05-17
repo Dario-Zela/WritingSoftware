@@ -9,7 +9,15 @@ namespace Blaze.Extentions
     {
     }
 
+    public class Coolicons : IExtention<PackIconCooliconsKind, Coolicons>
+    {
+    }
+    
     public class CornerRadiusExtention : IExtention<CornerRadius, CornerRadiusExtention>
+    {
+    }
+
+    public class IconHeight : IExtention<int, IconHeight>
     {
     }
 

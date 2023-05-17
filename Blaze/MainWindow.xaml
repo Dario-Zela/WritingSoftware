@@ -6,6 +6,7 @@
         xmlns:viewmodels="clr-namespace:Blaze.MVVM.ViewModel"
         xmlns:Extentions="clr-namespace:Blaze.Extentions"
         xmlns:local="clr-namespace:Blaze"
+        xmlns:custom="clr-namespace:Blaze.CustomControls"
         mc:Ignorable="d"
         Height="600"
         Width="900"
@@ -94,12 +95,14 @@
                      Style="{StaticResource SearchBox}"
                      Grid.Column="1"
                      Grid.Row="1" />
-
+<!--
             <ContentControl Grid.Row="2"
                             Grid.ColumnSpan="2"
                             Margin="10"
                             Content="{Binding CurrentView}" />
-
+-->
+            <custom:Pannel Grid.Row="2"
+                           Grid.ColumnSpan="2"/>
         </Grid>
     </Border>
 </Window>

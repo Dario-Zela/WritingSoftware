@@ -56,6 +56,60 @@
 
     </Style>
 
+    <Style TargetType="{x:Type Button}"
+           x:Key="ButtonWithIcon2">
+        <Style.Setters>
+            <Setter Property="Template">
+
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:CornerRadiusExtention.Property)}"
+                                Background="{TemplateBinding Background}"
+                                x:Name="Border_Button">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="2*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <iconPacks:PackIconCoolicons Kind="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:Coolicons.Property)}"
+                                                             Foreground="{TemplateBinding Foreground}"
+                                                             Grid.Column="1"
+                                                             Grid.Row="1"
+                                                             Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:IconHeight.Property)}"
+                                                             HorizontalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="Border_Button"
+                                        Property="Background"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:IsMouseOverColor.Property)}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="Border_Button"
+                                        Property="Background"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:IsPressedColor.Property)}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style.Setters>
+
+    </Style>
+
 
     <Style TargetType="{x:Type Button}"
            x:Key="MenuButton">
@@ -94,8 +148,10 @@
                             <Setter Property="Foreground"
                                     Value="#888888" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background"
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="Border"
+                                    Property="Background"
                                     Value="#333333" />
                         </Trigger>
                     </ControlTemplate.Triggers>

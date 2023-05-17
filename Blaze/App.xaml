@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Themes\SearchBox.xaml" />
                 <ResourceDictionary Source="Themes\Button.xaml" />
                 <ResourceDictionary Source="Themes\DropDownMenu.xaml" />
+                <ResourceDictionary Source="Themes\FolderGrid.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">

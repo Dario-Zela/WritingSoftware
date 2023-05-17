@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Input;
 using Blaze.Core.Extentions;
 using MahApps.Metro.IconPacks;
 
@@ -87,4 +88,5 @@ namespace Blaze.Extentions
     }
     public class Placement : IExtention<PlacementMode, Placement> { }
     public class MaterialDesignIcon : IExtention<PackIconMaterialDesignKind, MaterialDesignIcon> { }
+
 }

@@ -4,7 +4,7 @@ namespace Blaze.Core.Extentions
 {
     public class IExtention<T, I>
     {
-        public static DependencyProperty ExtendedProperty =
+        public static DependencyProperty PropertyProperty =
             DependencyProperty.RegisterAttached("Property",
                                                 typeof(T),
                                                 typeof(IExtention<T, I>),
@@ -12,12 +12,15 @@ namespace Blaze.Core.Extentions
 
         public static T GetProperty(DependencyObject target)
         {
-            return (T)target.GetValue(ExtendedProperty);
+            if (PropertyProperty == null)
+                return default;
+
+            return (T)target.GetValue(PropertyProperty);
         }
 
         public static void SetProperty(DependencyObject target, T value)
         {
-            target.SetValue(ExtendedProperty, value);
+            target.SetValue(PropertyProperty, value);
         }
     }
 }

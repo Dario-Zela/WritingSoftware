@@ -17,91 +17,111 @@
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <StackPanel Margin="0,0,10,0">
-                <TabControl>
+            <Border Margin="0,0,10,0"
+                    BorderBrush="White"
+                    BorderThickness="0,0,1,0">
+                <TabControl Style="{DynamicResource ToggleTabControl}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            ItemContainerStyle="{StaticResource ToggleTabItem}">
                     <TabItem Header="Activity"
                              x:Name="Activity">
-
+                        <ListBox ItemContainerStyle="{StaticResource ListBoxItemToggle}"
+                                 Style="{StaticResource ListBoxToggle}">
+                            <TextBlock Text="Earlier This Month"
+                                       Foreground="White"
+                                       Margin="0,-5,0,-10" />
+                            <ListBoxItem Content="Test" />
+                            <ListBoxItem Content="Test" />
+                            <ListBoxItem Content="Test" />
+                            <ListBoxItem Content="Test" />
+                        </ListBox>
                     </TabItem>
                     <TabItem Header="Recent"
                              x:Name="Recent">
-
+                        <ListBox ItemContainerStyle="{StaticResource ListBoxItemToggle}"
+                                 Style="{StaticResource ListBoxToggle}">
+                            <ListBoxItem Content="TestPast" />
+                            <ListBoxItem Content="TestPast" />
+                            <ListBoxItem Content="TestPast" />
+                            <ListBoxItem Content="TestPast" />
+                        </ListBox>
                     </TabItem>
                     <TabItem Header="Details"
                              x:Name="Details">
-
+                        <ListBox ItemContainerStyle="{StaticResource ListBoxItemToggle}"
+                                 Style="{StaticResource ListBoxToggle}">
+                            <ListBoxItem Content="TestMore" />
+                            <ListBoxItem Content="TestMore" />
+                            <ListBoxItem Content="TestMore" />
+                            <ListBoxItem Content="TestMore" />
+                        </ListBox>
                     </TabItem>
                 </TabControl>
-                <RadioButton Content="Home"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             IsChecked="True"
-                             Command="{Binding HomeViewCommand}" />
-                <RadioButton Content="Discovery"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding DiscoveryViewCommand}" />
-                <RadioButton Content="Feature"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}" />
-                <RadioButton Content="About Us"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}" />
-            </StackPanel>
-            <Separator Grid.Column="1"
-                       VerticalAlignment="Top"
-                       Margin="0,30,0,0"/>
-
+            </Border>
             <StackPanel Grid.Column="1">
                 <Grid Margin="1,0,0,0">
-                    <DockPanel>
-                        <Menu IsMainMenu="False"
-                              HorizontalAlignment="Left"
-                              Width="110"
-                              Background="Transparent">
-                            <MenuItem Style="{StaticResource DropDownMenu}"
-                                      Header="New Project"
-                                      Width="110">
-                                <MenuItem Header="Create a New Project"
-                                          Style="{StaticResource DropDownItem}"
-                                          Foreground="White" />
-                                <MenuItem Header="Create a New Linked Project"
-                                          x:Name="NewLinkedProject"
-                                          Style="{StaticResource HangingMenu}"
-                                          Extentions:Codicons.Property="ChevronRight"
-                                          ItemContainerStyle="{StaticResource DropDownItem}">
+                    <StackPanel>
+                        <DockPanel>
+                            <Menu IsMainMenu="False"
+                                  HorizontalAlignment="Left"
+                                  Width="110"
+                                  Background="Transparent">
+                                <MenuItem Style="{StaticResource DropDownMenu}"
+                                          Header="New Project"
+                                          Width="110">
+                                    <MenuItem Header="Create a New Project"
+                                              Style="{StaticResource DropDownItem}"
+                                              Command="{Binding NewProject}"
+                                              Foreground="White" />
+                                    <MenuItem Header="Create a New Linked Project"
+                                              x:Name="NewLinkedProject"
+                                              Style="{StaticResource HangingMenu}"
+                                              Extentions:Codicons.Property="ChevronRight">
+                                        <MenuItem.ItemContainerStyle>
+                                            <Style TargetType="MenuItem"
+                                                   BasedOn="{StaticResource DropDownItem}">
+                                                <Setter Property="Header"
+                                                        Value="{Binding Name}" />
+                                            </Style>
+                                        </MenuItem.ItemContainerStyle>
+                                    </MenuItem>
                                 </MenuItem>
-                            </MenuItem>
-                        </Menu>
-                        <Button Extentions:Header.Property="New Folder"
-                                Style="{StaticResource MenuButton}"
-                                Width="100"
-                                Margin="10,0,0,0" />
+                            </Menu>
 
+                            <ComboBox  HorizontalAlignment="Right"
+                                       x:Name="Sorter"
+                                       Width="140"
+                                       Margin="0,0,10,0"
+                                       Style="{StaticResource DropdownCombobox}"
+                                       ItemContainerStyle="{StaticResource DropdownComboboxItem}"
+                                       Extentions:MaterialDesignIcon.Property="Sort">
+                                <ComboBoxItem Content="Alphabetical"
+                                              x:Name="SortAlphabetical" />
+                                <ComboBoxItem Content="Recently Added"
+                                              x:Name="SortDate" />
+                                <Separator />
+                                <ComboBoxItem Content="Manual Sorting"
+                                              x:Name="SortManual" />
+                            </ComboBox>
 
-                        <ComboBox  HorizontalAlignment="Right"
-                                   x:Name="Sorter"
-                                   Width="140"
-                                   Margin="0,0,10,0"
-                                   Style="{StaticResource DropdownCombobox}"
-                                   ItemContainerStyle="{StaticResource DropdownComboboxItem}"
-                                   Extentions:MaterialDesignIcon.Property="Sort">
-                            <ComboBoxItem Content="Alphabetical"
-                                          IsSelected="True" />
-                            <ComboBoxItem Content="Foulders First" />
-                            <ComboBoxItem Content="Recently Added" />
-                            <Separator />
-                            <ComboBoxItem Content="Manual Sorting" />
-                        </ComboBox>
-                    </DockPanel>
+                        </DockPanel>
+                        <Separator Grid.Column="1"
+                                   VerticalAlignment="Top"
+                                   Margin="0,10,0,0" />
+                        <ListBox Style="{StaticResource FolderGrid}"
+                                 x:Name="ExistingProjects">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem"
+                                       BasedOn="{StaticResource FolderGridItem}">
+                                    <Setter Property="Content"
+                                            Value="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Setter Property="Extentions:ImageSourceExtention.Property"
+                                            Value="{Binding ProjectImage}" />
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </StackPanel>
                 </Grid>
             </StackPanel>
         </Grid>

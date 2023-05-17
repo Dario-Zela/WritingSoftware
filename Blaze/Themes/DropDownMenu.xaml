@@ -401,6 +401,7 @@
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
+
                         <Trigger Property="IsHighlighted"
                                  Value="true">
                             <Setter TargetName="Border"
