@@ -110,6 +110,60 @@
 
     </Style>
 
+    <Style TargetType="{x:Type ToggleButton}"
+           x:Key="ToggleButtonWithIcon2">
+        <Style.Setters>
+            <Setter Property="Template">
+
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:CornerRadiusExtention.Property)}"
+                                Background="{TemplateBinding Background}"
+                                x:Name="Border_Button">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="2*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <iconPacks:PackIconCoolicons Kind="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:Coolicons.Property)}"
+                                                             Foreground="{TemplateBinding Foreground}"
+                                                             Grid.Column="1"
+                                                             Grid.Row="1"
+                                                             Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:IconHeight.Property)}"
+                                                             HorizontalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="Border_Button"
+                                        Property="Background"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:IsMouseOverColor.Property)}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+                                <Setter TargetName="Border_Button"
+                                        Property="Background"
+                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:IsPressedColor.Property)}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style.Setters>
+
+    </Style>
+
 
     <Style TargetType="{x:Type Button}"
            x:Key="MenuButton">
@@ -127,10 +181,8 @@
                             </Grid.ColumnDefinitions>
                             <Border Grid.ColumnSpan="2"
                                     Name="Border"
-                                    CornerRadius="5"
-                                    Background="#FF3F3F3F"
-                                    BorderBrush="#FF97A0A5"
-                                    BorderThickness="1" />
+                                    CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:CornerRadiusExtention.Property)}"
+                                    Background="White"/>
                         </Grid>
                         <TextBlock x:Name="Header"
                                    HorizontalAlignment="Left"
@@ -139,20 +191,21 @@
                                    Margin="10,3,23,3"
                                    Focusable="True"
                                    Background="Transparent"
-                                   Foreground="White" />
+                                   Foreground="Black" />
 
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled"
-                                 Value="false">
-                            <Setter Property="Foreground"
-                                    Value="#888888" />
-                        </Trigger>
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="Border"
                                     Property="Background"
-                                    Value="#333333" />
+                                    Value="DarkGray" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter TargetName="Border"
+                                    Property="Background"
+                                    Value="Gray" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

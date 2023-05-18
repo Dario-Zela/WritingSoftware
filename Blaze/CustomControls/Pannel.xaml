@@ -15,7 +15,7 @@
             Width="250"
             MouseEnter="AllowMoving"
             MouseLeave="DisallowMoving">
-        <Grid>
+        <Grid x:Name="Container">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="5*" />
@@ -40,29 +40,47 @@
                         Background="Transparent"
                         Foreground="Black"
                         Visibility="Hidden"
-                        Style="{StaticResource ButtonWithIcon2}" />
+                        PreviewMouseLeftButtonDown="Move_MouseDown"
+                        PreviewMouseMove="Mouse_Move"
+                        PreviewMouseLeftButtonUp="Move_MouseUp"
+                        Style="{StaticResource ButtonWithIcon2}">
+                </Button>
 
-                <Button Extentions:Coolicons.Property="MoreVertical"
-                        Extentions:IsMouseOverColor.Property="DarkGray"
-                        Extentions:IsPressedColor.Property="Gray"
-                        Extentions:IconHeight.Property="10"
-                        Extentions:CornerRadiusExtention.Property="10"
-                        Width="20"
-                        Height="20"
-                        HorizontalAlignment="Right"
-                        Margin="0,0,7,0"
-                        Background="Transparent"
-                        Foreground="Black"
-                        Style="{StaticResource ButtonWithIcon2}" />
+                <ToggleButton Extentions:Coolicons.Property="MoreVertical"
+                              Extentions:IsMouseOverColor.Property="DarkGray"
+                              Extentions:IsPressedColor.Property="Gray"
+                              Extentions:IconHeight.Property="10"
+                              Extentions:CornerRadiusExtention.Property="10"
+                              Width="20"
+                              Height="20"
+                              HorizontalAlignment="Right"
+                              Margin="0,0,7,0"
+                              Name="Extra"
+                              Background="Transparent"
+                              Foreground="Black"
+                              Style="{StaticResource ToggleButtonWithIcon2}">
+                </ToggleButton>
+
+                <Popup IsOpen="{Binding IsChecked,ElementName=Extra, Mode=TwoWay}"
+                       StaysOpen="False"
+                       PlacementTarget="{Binding ElementName=Extra}"
+                       AllowsTransparency="True">
+                    <Border Background="White"
+                            CornerRadius="5"
+                            BorderThickness="1"
+                            BorderBrush="Black">
+                        <StackPanel Orientation="Vertical">
+                            <Button Extentions:Header.Property="Duplicate Pannel"
+                                    Extentions:CornerRadiusExtention.Property="5,5,0,0"
+                                    Style="{StaticResource MenuButton}" />
+                            <Button Extentions:Header.Property="Delete Pannel"
+                                    Extentions:CornerRadiusExtention.Property="0,0,5,5"
+                                    Style="{StaticResource MenuButton}" />
+                        </StackPanel>
+                    </Border>
+                </Popup>
             </StackPanel>
 
-            <avalonedit:TextEditor Grid.Row="1"
-                                   Margin="10,0,10,5"
-                                   BorderThickness="0"
-                                   VerticalScrollBarVisibility="Auto"
-                                   HorizontalScrollBarVisibility="Auto">
-                
-            </avalonedit:TextEditor>
 
             <Button Extentions:Coolicons.Property="Expand"
                     Extentions:IsMouseOverColor.Property="Transparent"
@@ -71,12 +89,12 @@
                     Width="15"
                     Grid.Row="1"
                     Height="15"
+                    Grid.ZIndex="1"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Background="Transparent"
                     Foreground="Black"
                     Style="{StaticResource ButtonWithIcon2}" />
-
         </Grid>
     </Border>
 </UserControl>

@@ -138,6 +138,7 @@
     <Reference Include="MahApps.Metro.IconPacks.Zondicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.4.11.0\lib\net47\MahApps.Metro.IconPacks.Zondicons.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -174,21 +175,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CustomControls\ContentPannel.xaml.cs">
-      <DependentUpon>ContentPannel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CustomControls\Pannel.xaml.cs">
       <DependentUpon>Pannel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\RichTextBox.xaml.cs">
+      <DependentUpon>RichTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\SnappingGrid.xaml.cs">
       <DependentUpon>SnappingGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="ThemeExtentions\FolderGridExtentions.cs" />
-    <Page Include="CustomControls\ContentPannel.xaml">
+    <Page Include="CustomControls\Pannel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\Pannel.xaml">
+    <Page Include="CustomControls\RichTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

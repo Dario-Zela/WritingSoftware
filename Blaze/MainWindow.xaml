@@ -101,7 +101,7 @@
                             Margin="10"
                             Content="{Binding CurrentView}" />
 -->
-            <custom:Pannel Grid.Row="2"
+            <custom:SnappingGrid Grid.Row="2"
                            Grid.ColumnSpan="2"/>
         </Grid>
     </Border>
