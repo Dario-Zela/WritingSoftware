@@ -18,7 +18,7 @@ namespace Blaze.Core
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
-        
+
         //Constructor
         public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {

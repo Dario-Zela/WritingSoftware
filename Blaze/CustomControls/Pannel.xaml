@@ -8,7 +8,9 @@
              xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=local:Pannel}">
+             d:DataContext="{d:DesignInstance Type=local:Pannel}"
+             d:DesignHeight="120"
+             d:DesignWidth="100">
     
     <!-- Outer border -->
     
@@ -43,6 +45,7 @@
                         Extentions:IconHeight.Property="10"
                         Width="20"
                         Height="20"
+                        Cursor="SizeAll"
                         Name="Move"
                         HorizontalAlignment="Right"
                         Margin="0,0,7,0"
@@ -62,6 +65,7 @@
                               Extentions:IsPressedColor.Property="Gray"
                               Extentions:IconHeight.Property="10"
                               Extentions:CornerRadiusExtention.Property="10"
+                              Cursor = "Hand"
                               Width="20"
                               Height="20"
                               HorizontalAlignment="Right"
@@ -104,6 +108,7 @@
                     Grid.Row="1"
                     Name="Resize"
                     Height="15"
+                    Cursor="SizeNWSE"
                     Grid.ZIndex="1"
                     PreviewMouseLeftButtonDown="Resize_MouseDown"
                     PreviewMouseLeftButtonUp="Resize_MouseUp"

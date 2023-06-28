@@ -18,9 +18,13 @@
         StateChanged="Window_StateChanged"
         AllowsTransparency="True">
 
+    <!-- Add Window Chrome -->
+    
     <WindowChrome.WindowChrome>
         <WindowChrome />
     </WindowChrome.WindowChrome>
+
+    <!-- Add Data Context -->
 
     <Window.DataContext>
         <viewmodels:MainViewModel />
@@ -85,16 +89,16 @@
             </StackPanel>
 
 
-            <!--
             <custom:SnappingGrid Grid.Row="2"
                                  Grid.ColumnSpan="2" />
 
-            -->
             <!-- Current Window View -->
 
+            <!--
             <ContentControl Grid.Row="2"
                             Grid.ColumnSpan="2"
                             Content="{Binding CurrentView}" />
+            -->
         </Grid>
     </Border>
 </Window>

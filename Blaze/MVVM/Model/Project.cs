@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Markup;
-using System.Windows.Shapes;
 
 namespace Blaze.Core
 {
@@ -143,11 +135,11 @@ namespace Blaze.Core
                 {
                     BinaryWriter writer = new BinaryWriter(stream);
                     Name = path.Remove(0, ProjectLibrary.PATH.Length);
-                    
+
                     writer.Write(Name);
                     writer.Write(0);
                     _linkedProjects = 0;
-                    
+
                     _dateCreated = DateTime.Now;
                     writer.Write(DateCreated.ToBinary());
 

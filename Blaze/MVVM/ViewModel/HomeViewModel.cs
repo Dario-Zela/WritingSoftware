@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using Blaze.Core;
-using MahApps.Metro.IconPacks;
+﻿using Blaze.Core;
 
 namespace Blaze.MVVM.ViewModel
 {

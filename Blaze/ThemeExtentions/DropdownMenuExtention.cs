@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Input;
 using Blaze.Core.Extentions;
 using MahApps.Metro.IconPacks;
 
@@ -21,7 +19,7 @@ namespace Blaze.Extentions
 
             PackIconCodiconsKind icon = (PackIconCodiconsKind)value;
 
-            switch (icon) 
+            switch (icon)
             {
                 case PackIconCodiconsKind.ChevronDown: return PlacementMode.Bottom;
                 case PackIconCodiconsKind.ChevronUp: return PlacementMode.Top;

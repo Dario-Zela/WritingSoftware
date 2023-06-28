@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Blaze.CustomControls
 {
@@ -28,7 +15,7 @@ namespace Blaze.CustomControls
 
             //Define a resolution
             Resolution = 10;
-            
+
             //To remove
             AddNewPannel();
             AddNewPannel();
@@ -64,7 +51,7 @@ namespace Blaze.CustomControls
         public void AddNewPannel()
         {
             //Adds a text pannel
-            var pannel = new TextPannel();
+            var pannel = new ListPannel();
 
             //Define default values
             pannel.Width = 250;
@@ -72,7 +59,7 @@ namespace Blaze.CustomControls
             pannel.Resolution = Resolution;
             pannel.HorizontalAlignment = HorizontalAlignment.Left;
             pannel.VerticalAlignment = VerticalAlignment.Top;
-            
+
             //Movement method
             pannel.MovementStarted += (s, e) =>
             {

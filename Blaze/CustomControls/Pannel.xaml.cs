@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Blaze.Extentions;
 
 namespace Blaze.CustomControls
 {
@@ -127,7 +119,7 @@ namespace Blaze.CustomControls
         }
 
 
-        
+
         //Mouse movement
         private void Mouse_Move(object sender, MouseEventArgs e)
         {
@@ -180,4 +172,55 @@ namespace Blaze.CustomControls
         }
     }
 
+    //Pannel with a textbox
+    public class ListPannel : Pannel
+    {
+        ListBoxElement ListHolder;
+
+        public ListPannel()
+            : base()
+        {
+            //Add a textbox in slot
+            ListHolder = new ListBoxElement()
+            {
+                Margin = new Thickness(10, 0, 10, 5),
+                BorderThickness = new Thickness(0),
+            };
+            Container.Children.Add(ListHolder);
+            Grid.SetRow(ListHolder, 1);
+
+            ListHolder.AddNewElement();
+            ListHolder.AddNewElement();
+
+            //Add Add Button
+            var addButton = new Button()
+            {
+                Width = 15,
+                Height = 15,
+                Cursor = Cursors.Hand,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                Background = Brushes.Transparent,
+                Foreground = Brushes.Black,
+                Style = Application.Current.FindResource("ButtonWithIcon2") as Style,
+            };
+
+            addButton.Click += new RoutedEventHandler((s, e) => AddListItem());
+
+            Coolicons.SetProperty(addButton, MahApps.Metro.IconPacks.PackIconCooliconsKind.Plus);
+            IsMouseOverColor.SetProperty(addButton, Brushes.DarkGray);
+            IsPressedColor.SetProperty(addButton, Brushes.Gray);
+            IconHeight.SetProperty(addButton, 8);
+
+
+            Container.Children.Add(addButton);
+            Grid.SetRow(addButton, 1);
+            Panel.SetZIndex(addButton, 1);
+        }
+
+        public void AddListItem()
+        {
+            ListHolder.AddNewElement();
+        }
+    }
 }

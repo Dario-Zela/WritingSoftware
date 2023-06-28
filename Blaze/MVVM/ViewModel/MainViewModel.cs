@@ -30,7 +30,7 @@ namespace Blaze.MVVM.ViewModel
             }
         }
 
-        
+
         public MainViewModel()
         {
             //Depreciated, need to be removed

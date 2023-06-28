@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Blaze.Core.Extentions;
 
 namespace Blaze.Extentions
 {
     //Propriety extentions for the current projects grid
 
-    class ImageSourceExtention : IExtention<ImageSource,  ImageSourceExtention>
+    class ImageSourceExtention : IExtention<ImageSource, ImageSourceExtention>
     {
     }
 

@@ -11,7 +11,7 @@ namespace Blaze.Core
     {
         //Inner event
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         //Event raiser
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {

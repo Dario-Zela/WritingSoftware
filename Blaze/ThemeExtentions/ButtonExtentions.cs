@@ -7,27 +7,15 @@ namespace Blaze.Extentions
 {
     //Propriety extentions for the buttons
 
-    public class Codicons : IExtention<PackIconCodiconsKind, Codicons>
-    {
-    }
+    public class Codicons : IExtention<PackIconCodiconsKind, Codicons> { }
 
-    public class Coolicons : IExtention<PackIconCooliconsKind, Coolicons>
-    {
-    }
-    
-    public class CornerRadiusExtention : IExtention<CornerRadius, CornerRadiusExtention>
-    {
-    }
+    public class Coolicons : IExtention<PackIconCooliconsKind, Coolicons> { }
 
-    public class IconHeight : IExtention<int, IconHeight>
-    {
-    }
+    public class CornerRadiusExtention : IExtention<CornerRadius, CornerRadiusExtention> { }
 
-    public class IsMouseOverColor : IExtention<Brush, IsMouseOverColor>
-    {
-    }
+    public class IconHeight : IExtention<int, IconHeight> { }
 
-    public class IsPressedColor : IExtention<Brush, IsPressedColor>
-    {
-    }
+    public class IsMouseOverColor : IExtention<Brush, IsMouseOverColor> { }
+
+    public class IsPressedColor : IExtention<Brush, IsPressedColor> { }
 }

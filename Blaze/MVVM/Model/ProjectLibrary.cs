@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Media3D;
-using System.Xml.Linq;
 
 namespace Blaze.Core
 {
@@ -28,7 +19,7 @@ namespace Blaze.Core
             {
                 Items.Add(project);
             }
-            
+
             //Raise event
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
@@ -97,7 +88,7 @@ namespace Blaze.Core
         {
             //Creates a new folder with the correct project
             var foulderName = Path.Combine(PATH, "Project " + ((NewNumber > 0) ? NewNumber.ToString() : ""));
-            
+
             Directory.CreateDirectory(foulderName);
             projects.Add(new Project(foulderName));
 
