@@ -5,8 +5,10 @@
              xmlns:viewmodels="clr-namespace:Blaze.MVVM.ViewModel"
              xmlns:view="clr-namespace:Blaze.MVVM.View"
              StartupUri="MainWindow.xaml">
+    
     <Application.Resources>
         <ResourceDictionary>
+            <!-- Resource Dictionaries -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="Themes\SearchBox.xaml" />
@@ -15,14 +17,14 @@
                 <ResourceDictionary Source="Themes\FolderGrid.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <!-- MVVM Bindings -->
+
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
                 <view:HomeView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:DiscoveryViewModel}">
-                <view:DiscoveryView />
-            </DataTemplate>
-
         </ResourceDictionary>
+        
     </Application.Resources>
+    
 </Application>

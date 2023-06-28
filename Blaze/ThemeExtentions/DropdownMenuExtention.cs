@@ -9,6 +9,8 @@ using MahApps.Metro.IconPacks;
 
 namespace Blaze.Extentions
 {
+    //Propriety extentions for the drop down menu
+
     public class Header : IExtention<string, Header> { }
     public class IconToPlacementConverter : IValueConverter
     {
@@ -49,7 +51,7 @@ namespace Blaze.Extentions
         }
     }
 
-
+    //Converter to get the negative of the input
     public class NegateValueConverter : IValueConverter
     {
         private static bool IsNumber(object obj)

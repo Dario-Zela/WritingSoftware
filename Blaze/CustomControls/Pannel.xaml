@@ -9,10 +9,13 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=local:Pannel}">
+    
+    <!-- Outer border -->
+    
     <Border Background="White"
             CornerRadius="5"
-            Height="250"
-            Width="250"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
             MouseEnter="AllowMoving"
             MouseLeave="DisallowMoving">
         <Grid x:Name="Container">
@@ -20,6 +23,9 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="5*" />
             </Grid.RowDefinitions>
+
+            <!-- Text Box -->
+
             <TextBox Text="{Binding Title}"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Left"
@@ -28,6 +34,9 @@
 
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
+
+                <!-- Movement Button -->
+
                 <Button Extentions:Coolicons.Property="Move"
                         Extentions:IsMouseOverColor.Property="White"
                         Extentions:IsPressedColor.Property="White"
@@ -46,6 +55,8 @@
                         Style="{StaticResource ButtonWithIcon2}">
                 </Button>
 
+                <!-- Extra content button -->
+
                 <ToggleButton Extentions:Coolicons.Property="MoreVertical"
                               Extentions:IsMouseOverColor.Property="DarkGray"
                               Extentions:IsPressedColor.Property="Gray"
@@ -58,8 +69,10 @@
                               Name="Extra"
                               Background="Transparent"
                               Foreground="Black"
-                              Style="{StaticResource ToggleButtonWithIcon2}">
+                              Style="{StaticResource ToggleButtonWithIcon}">
                 </ToggleButton>
+
+                <!-- Extra Content -->
 
                 <Popup IsOpen="{Binding IsChecked,ElementName=Extra, Mode=TwoWay}"
                        StaysOpen="False"
@@ -81,6 +94,7 @@
                 </Popup>
             </StackPanel>
 
+            <!-- Enlarge Button -->
 
             <Button Extentions:Coolicons.Property="Expand"
                     Extentions:IsMouseOverColor.Property="Transparent"
@@ -88,13 +102,18 @@
                     Extentions:IconHeight.Property="8"
                     Width="15"
                     Grid.Row="1"
+                    Name="Resize"
                     Height="15"
                     Grid.ZIndex="1"
+                    PreviewMouseLeftButtonDown="Resize_MouseDown"
+                    PreviewMouseLeftButtonUp="Resize_MouseUp"
+                    PreviewMouseMove="Mouse_Move"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Background="Transparent"
                     Foreground="Black"
-                    Style="{StaticResource ButtonWithIcon2}" />
+                    Style="{StaticResource ButtonWithIcon2}">
+            </Button>
         </Grid>
     </Border>
 </UserControl>

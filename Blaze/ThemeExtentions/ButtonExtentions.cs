@@ -5,6 +5,8 @@ using MahApps.Metro.IconPacks;
 
 namespace Blaze.Extentions
 {
+    //Propriety extentions for the buttons
+
     public class Codicons : IExtention<PackIconCodiconsKind, Codicons>
     {
     }

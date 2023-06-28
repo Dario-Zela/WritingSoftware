@@ -2,6 +2,11 @@
                     xmlns:Extentions="clr-namespace:Blaze.Extentions"
                     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <!-- Button With Icon -->
+    <!-- Close Button et al -->
+
     <Style TargetType="{x:Type Button}"
            x:Key="ButtonWithIcon">
         <Style.Setters>
@@ -26,6 +31,9 @@
                                     <RowDefinition Height="2*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
+                                
+                                <!-- Icon -->
+
                                 <iconPacks:PackIconCodicons Kind="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:Codicons.Property)}"
                                                             Foreground="{TemplateBinding Foreground}"
                                                             Grid.Column="1"
@@ -35,6 +43,9 @@
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
+                            
+                            <!-- Color Change Triggers -->
+
                             <Trigger Property="IsMouseOver"
                                      Value="True">
                                 <Setter TargetName="Border_Button"
@@ -55,6 +66,9 @@
         </Style.Setters>
 
     </Style>
+
+    <!-- Button With Different Icon Type -->
+    <!-- Move Button On Pannel et al-->
 
     <Style TargetType="{x:Type Button}"
            x:Key="ButtonWithIcon2">
@@ -80,6 +94,9 @@
                                     <RowDefinition Height="2*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
+
+                                <!-- Icon -->
+
                                 <iconPacks:PackIconCoolicons Kind="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:Coolicons.Property)}"
                                                              Foreground="{TemplateBinding Foreground}"
                                                              Grid.Column="1"
@@ -89,6 +106,9 @@
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
+
+                            <!-- Color Change Triggers -->
+
                             <Trigger Property="IsMouseOver"
                                      Value="True">
                                 <Setter TargetName="Border_Button"
@@ -110,8 +130,10 @@
 
     </Style>
 
+    <!-- Toggle Button With Icon -->
+
     <Style TargetType="{x:Type ToggleButton}"
-           x:Key="ToggleButtonWithIcon2">
+           x:Key="ToggleButtonWithIcon">
         <Style.Setters>
             <Setter Property="Template">
 
@@ -134,6 +156,9 @@
                                     <RowDefinition Height="2*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
+
+                                <!-- Icon -->
+
                                 <iconPacks:PackIconCoolicons Kind="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:Coolicons.Property)}"
                                                              Foreground="{TemplateBinding Foreground}"
                                                              Grid.Column="1"
@@ -143,6 +168,9 @@
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
+
+                            <!-- Color Change Triggers -->
+
                             <Trigger Property="IsMouseOver"
                                      Value="True">
                                 <Setter TargetName="Border_Button"
@@ -164,6 +192,7 @@
 
     </Style>
 
+    <!-- Button With The Same Style As The Menu's -->
 
     <Style TargetType="{x:Type Button}"
            x:Key="MenuButton">
@@ -179,11 +208,17 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="20" />
                             </Grid.ColumnDefinitions>
+
+                            <!-- Border -->
+
                             <Border Grid.ColumnSpan="2"
                                     Name="Border"
                                     CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:CornerRadiusExtention.Property)}"
                                     Background="White"/>
                         </Grid>
+
+                        <!-- Header -->
+
                         <TextBlock x:Name="Header"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
@@ -195,6 +230,9 @@
 
                     </Grid>
                     <ControlTemplate.Triggers>
+
+                        <!-- Color Change Triggers -->
+
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="Border"

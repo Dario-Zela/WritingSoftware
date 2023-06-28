@@ -25,78 +25,77 @@ namespace Blaze.CustomControls
         {
             InitializeComponent();
             DataContext = this;
+            //Sets all of the font families and allowed font sizes
             FontFamilySetter.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             FontSizeSetter.ItemsSource = new List<double>() { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 };
-
         }
 
+        
+        //Current state of the tooltip
         public bool TooltipOpen
         {
             get { return (bool)GetValue(TooltipOpenProperty); }
             set { SetValue(TooltipOpenProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for TooltipOpen.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for TooltipOpen. 
         public static readonly DependencyProperty TooltipOpenProperty =
             DependencyProperty.Register("TooltipOpen", typeof(bool), typeof(RichTextBox), new PropertyMetadata(false));
 
 
+        //Current state of the spellchecker
         public bool SpellCheck
         {
             get { return (bool)GetValue(SpellCheckProperty); }
             set { SetValue(SpellCheckProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for SpellCheck.  This enables animation, styling, binding, etc...
+        // Using a DependencyProperty as the backing store for SpellCheck. 
         public static readonly DependencyProperty SpellCheckProperty =
             DependencyProperty.Register("SpellCheck", typeof(bool), typeof(RichTextBox), new PropertyMetadata(true));
 
 
 
+        //Applies font family change
         private void FontFamilyChanged(object sender, SelectionChangedEventArgs e)
         {
             if (FontFamilySetter.SelectedItem == null) return;
             TextEditor.Selection?.ApplyPropertyValue(FontFamilyProperty, FontFamilySetter.SelectedItem);
         }
 
+        //Applies font size change
         private void FontSizeChanged(object sender, SelectionChangedEventArgs e)
         {
             if (FontFamilySetter.SelectedItem == null) return;
             TextEditor.Selection?.ApplyPropertyValue(FontSizeProperty, FontSizeSetter.SelectedItem);
         }
 
+        //Applies strikethrough
         private void StrikeOutButton_Click(object sender, RoutedEventArgs e)
         {
-            Through.IsChecked = !Through.IsChecked.Value;
+            //Get the decorations
             TextRange textRange = TextEditor.Selection;
             var decorations = textRange.GetPropertyValue(Inline.TextDecorationsProperty) as TextDecorationCollection
                               ?? new TextDecorationCollection();
 
-            SanityCheck();
-            decorations = decorations.Contains(TextDecorations.Strikethrough.First())
-                              ? new TextDecorationCollection(decorations.Except(TextDecorations.Strikethrough))
-                              : new TextDecorationCollection(decorations.Union(TextDecorations.Strikethrough));
-
-            textRange.ApplyPropertyValue(Inline.TextDecorationsProperty, decorations);
-            Through.IsChecked = !Through.IsChecked.Value;
-        }
-
-        private void SanityCheck()
-        {
-            TextRange textRange = TextEditor.Selection;
-            var decorations = textRange.GetPropertyValue(Inline.TextDecorationsProperty) as TextDecorationCollection
-                              ?? new TextDecorationCollection();
-
-            if (decorations.Contains(TextDecorations.Strikethrough.First()) != Through.IsChecked.Value)
+            //If nothing exists add strikethrough
+            if (Through.IsChecked.Value && decorations == null)
             {
-                decorations.Clear();
-                if (Underline.IsChecked.Value)
-                    decorations.Add(TextDecorations.Underline.First());
-                if (Through.IsChecked.Value)
-                    decorations.Add(TextDecorations.Strikethrough.First());
+                textRange.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
+            }
+            //If something exist add to the existing decorations
+            else if (Through.IsChecked.Value && decorations != null)
+            {
+                textRange.ApplyPropertyValue(Inline.TextDecorationsProperty, new TextDecorationCollection(decorations.Union(TextDecorations.Strikethrough)));
+            }
+            //Else, if we remove the strikethrough, to avoid "ghost" entities, remove all decorations on the strikethrough location
+            else
+            {
+                textRange.ApplyPropertyValue(Inline.TextDecorationsProperty, new TextDecorationCollection(decorations.Where((d) => { return d.Location != TextDecorationLocation.Strikethrough; })));
             }
         }
 
+        //Finds all the ancestors of an element
         private List FindListAncestor(DependencyObject element)
         {
             while (element != null)
@@ -113,8 +112,10 @@ namespace Blaze.CustomControls
             return null;
         }
 
+        //Applies all other text decorators
         private void TextEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
+            //Opens the ribbon at correct position
             TooltipOpen = false;
             var currentSelectionPosition = TextEditor.Selection.Start.GetCharacterRect(LogicalDirection.Forward);
             currentSelectionPosition.Offset(new Vector(Tooltip.Width / 2, 0));
@@ -122,26 +123,35 @@ namespace Blaze.CustomControls
 
             TooltipOpen = TextEditor.Selection.Text.Length != 0;
 
+            //Applies bold
             object text = TextEditor.Selection.GetPropertyValue(FontWeightProperty);
             Bold.IsChecked = (text != DependencyProperty.UnsetValue) && (text.Equals(FontWeights.Bold));
 
+            //Applies italic
             text = TextEditor.Selection.GetPropertyValue(FontStyleProperty);
             Italic.IsChecked = (text != DependencyProperty.UnsetValue) && (text.Equals(FontStyles.Italic));
 
+            //Applies underline
             text = TextEditor.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
             Underline.IsChecked = (text != DependencyProperty.UnsetValue) && (text.Equals(TextDecorations.Underline));
             Underline.IsChecked = (text != DependencyProperty.UnsetValue) && (text.Equals(TextDecorations.Strikethrough));
 
+            //Applies list types
             text = FindListAncestor(TextEditor.Selection.Start.Parent);
             DottedList.IsChecked = (text != null) && (((List)text).MarkerStyle == TextMarkerStyle.Circle);
             NumberedList.IsChecked = (text != null) && (((List)text).MarkerStyle == TextMarkerStyle.Decimal);
 
+            //Applies font family
             text = TextEditor.Selection.GetPropertyValue(FontFamilyProperty);
             FontFamilySetter.SelectedItem = text;
 
+            //Applies font size
             text = TextEditor.Selection.GetPropertyValue(FontSizeProperty);
             FontSizeSetter.SelectedItem = text;
         }
+
+
+        //Changes state of the list buttons on the ribbon 
 
         private void NumberedList_Click(object sender, RoutedEventArgs e)
         {

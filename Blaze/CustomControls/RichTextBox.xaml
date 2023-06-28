@@ -11,6 +11,7 @@
              d:DataContext="{d:DesignInstance Type=local:RichTextBox}"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <UserControl.Resources>
+        <!-- ToolTip Style -->
         <Style x:Key="Ribbon"
                TargetType="ToolBar">
             <Setter Property="Template">
@@ -24,6 +25,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- ToolTip Button Style -->
 
         <Style x:Key="RibbonToggleButton"
                TargetType="ToggleButton">
@@ -61,7 +64,11 @@
             </Setter>
         </Style>
     </UserControl.Resources>
+    
+    
     <Grid>
+        <!-- ToolTip -->
+
         <Popup IsOpen="{Binding TooltipOpen}"
                Width="500"
                Height="40"
@@ -71,6 +78,9 @@
                AllowsTransparency="True">
             <DockPanel VerticalAlignment="Center">
                 <ToolBar Style="{StaticResource Ribbon}">
+                    
+                    <!-- Bold -->
+
                     <ToggleButton Command="EditingCommands.ToggleBold"
                                   x:Name="Bold"
                                   Width="30"
@@ -78,6 +88,9 @@
                                   Style="{StaticResource RibbonToggleButton}">
                         <iconPacks:PackIconCoolicons Kind="Bold" />
                     </ToggleButton>
+                    
+                    <!-- Italic -->
+                    
                     <ToggleButton Command="EditingCommands.ToggleItalic"
                                   x:Name="Italic"
                                   Width="30"
@@ -86,6 +99,9 @@
                         <iconPacks:PackIconCoolicons Kind="Italic" />
 
                     </ToggleButton>
+
+                    <!-- Underline -->
+
                     <ToggleButton Command="EditingCommands.ToggleUnderline"
                                   x:Name="Underline"
                                   Width="30"
@@ -94,6 +110,9 @@
                         <iconPacks:PackIconCoolicons Kind="Underline" />
 
                     </ToggleButton>
+
+                    <!-- Strikethrough -->
+
                     <ToggleButton Click="StrikeOutButton_Click"
                                   x:Name="Through"
                                   Width="30"
@@ -103,6 +122,9 @@
 
                     </ToggleButton>
                     <Separator Height="20" />
+
+                    <!-- Numbered List -->
+
                     <ToggleButton Command="EditingCommands.ToggleNumbering"
                                   Click="NumberedList_Click"
                                   x:Name="NumberedList"
@@ -112,6 +134,9 @@
                         <iconPacks:PackIconCoolicons Kind="ListOl" />
 
                     </ToggleButton>
+
+                    <!-- Dotted List -->
+
                     <ToggleButton Command="EditingCommands.ToggleBullets"
                                   x:Name="DottedList"
                                   Click="DottedList_Click"
@@ -121,6 +146,9 @@
                         <iconPacks:PackIconCoolicons Kind="ListUl" />
 
                     </ToggleButton>
+
+                    <!-- Spellchecking -->
+
                     <ToggleButton IsChecked="{Binding SpellCheck}"
                                   Width="30"
                                   Height="30"
@@ -129,11 +157,15 @@
 
                     </ToggleButton>
                     <Separator Height="20" />
-                    
+
+                    <!-- Font Family -->
+
                     <ComboBox x:Name="FontFamilySetter"
                                   SelectionChanged="FontFamilyChanged"
                                   Width="100" 
                                       Background="White"/>
+
+                    <!-- Font Size -->
 
                     <ComboBox x:Name="FontSizeSetter"
                               Width="50"
@@ -142,10 +174,15 @@
                 </ToolBar>
             </DockPanel>
         </Popup>
+
+        <!-- Text box -->
+
         <RichTextBox Name="TextEditor"
                      SelectionChanged="TextEditor_SelectionChanged"
                      Width="{Binding Width}"
                      Height="{Binding Height}"
-                     SpellCheck.IsEnabled="{Binding SpellCheck}" />
+                     SpellCheck.IsEnabled="{Binding SpellCheck}"
+                     BorderThickness="0"
+                     Margin="0,5,0,0"/>
     </Grid>
 </UserControl>
