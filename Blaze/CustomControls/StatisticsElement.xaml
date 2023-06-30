@@ -1,0 +1,158 @@
+﻿<UserControl x:Class="Blaze.CustomControls.StatisticsElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Blaze.CustomControls"
+             xmlns:Extentions="clr-namespace:Blaze.Extentions"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <!-- List Container -->
+    <ListBox x:Name="ListHolder">
+        <ListBox.Style>
+
+            <!-- Custom Style -->
+
+            <Style TargetType="ListBox">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBox">
+                            <!-- Add Custom Scroll Viewer -->
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                          Style="{DynamicResource ResourceKey=CustomScrollViewer}"
+                                          VerticalScrollBarVisibility="Auto">
+                                <!-- Remove Outer Border -->
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ListBox.Style>
+
+        <!-- Custom Item Style -->
+
+        <ListBox.ItemContainerStyle>
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+
+                            <!-- Button Hiding Container -->
+
+                            <Grid MouseEnter="AllowExtra"
+                                  MouseLeave="StopExtra"
+                                  Background="Transparent"
+                                  Width="{Binding ActualWidth}">
+                                <StackPanel>
+                                    <Grid Width="{Binding ActualWidth}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <!-- Header -->
+                                        
+                                        <TextBox Style="{StaticResource DefaultTextBox}"
+                                                 Text="Name"
+                                                 FontWeight="SemiBold"
+                                                 FontSize="15"
+                                                 TextWrapping="Wrap"
+                                                 Margin="0,0,50,0"
+                                                 AcceptsReturn="True" />
+                                        
+                                        <!-- Statistics -->
+                                        
+                                        <DockPanel HorizontalAlignment="Right"
+                                                   Grid.Column="1"
+                                                   Margin="-50,0,70,0">
+                                            <TextBox Style="{StaticResource DefaultTextBoxUnderline}"
+                                                     Text="0"
+                                                     FontSize="15" 
+                                                     MaxHeight="30"
+                                                     Margin="0,0,10,0"/>
+
+                                            <TextBox Style="{StaticResource DefaultTextBoxUnderline}"
+                                                     MaxHeight="30"
+                                                     Text="Units"
+                                                     FontSize="15"
+                                                     Name="Units" />
+                                        </DockPanel>
+                                        
+                                        <!-- Extra Menu Button -->
+                                        
+                                        <ToggleButton Extentions:Coolicons.Property="MoreVertical"
+                                                      Style="{StaticResource ToggleButtonWithIcon}"
+                                                      Extentions:IsMouseOverColor.Property="DarkGray"
+                                                      Extentions:IsPressedColor.Property="Gray"
+                                                      Extentions:IconHeight.Property="10"
+                                                      Background="White"
+                                                      Extentions:CornerRadiusExtention.Property="10"
+                                                      Height="20"
+                                                      HorizontalAlignment="Right"
+                                                      Width="20"
+                                                      Margin="0,0,40,0"
+                                                      Grid.Column="1"
+                                                      x:Name="Extra"
+                                                      Visibility="Hidden" />
+
+                                        <!-- Extra Menu Popup -->
+
+                                        <Popup IsOpen="{Binding IsChecked,ElementName=Extra, Mode=TwoWay}"
+                                               StaysOpen="False"
+                                               PlacementTarget="{Binding ElementName=Extra}"
+                                               AllowsTransparency="True">
+                                            <Border Background="White"
+                                                    CornerRadius="5"
+                                                    BorderThickness="1"
+                                                    BorderBrush="Black">
+                                                <StackPanel Orientation="Vertical">
+
+                                                    <!-- Toggle Description -->
+                                                    
+                                                    <Button Extentions:Header.Property="Show Description"
+                                                            Extentions:CornerRadiusExtention.Property="5,5,0,0"
+                                                            Style="{StaticResource MenuButton}"
+                                                            Click="ToggleDescription" />
+
+                                                    <!-- Toggle Units -->
+
+                                                    <Button Extentions:Header.Property="Hide Units"
+                                                            Style="{StaticResource MenuButton}"
+                                                            Click="ToggleUnits" />
+
+                                                    <!-- Delete Item -->
+
+                                                    <Button Extentions:Header.Property="Delete Statistics"
+                                                            Extentions:CornerRadiusExtention.Property="0,0,5,5"
+                                                            Style="{StaticResource MenuButton}"
+                                                            Click="Delete" />
+                                                </StackPanel>
+                                            </Border>
+                                        </Popup>
+                                    </Grid>
+
+                                    <!-- Description -->
+
+                                    <StackPanel Width="{Binding ActualWidth}">
+                                        <TextBox Style="{StaticResource DefaultTextBox}"
+                                                 Text="Add a description"
+                                                 FontStyle="Italic"
+                                                 FontSize="12"
+                                                 x:Name="Description"
+                                                 Visibility="Collapsed"
+                                                 Margin="0,0,30,0"
+                                                 TextWrapping="Wrap"
+                                                 AcceptsReturn="True" />
+                                        <Separator Margin="0,7,0,0" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ListBox.ItemContainerStyle>
+    </ListBox>
+</UserControl>

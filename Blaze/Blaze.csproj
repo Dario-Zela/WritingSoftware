@@ -187,6 +187,12 @@
     <Compile Include="CustomControls\SnappingGrid.xaml.cs">
       <DependentUpon>SnappingGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\StatisticsElement.xaml.cs">
+      <DependentUpon>StatisticsElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TableElement.xaml.cs">
+      <DependentUpon>TableElement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ThemeExtentions\FolderGridExtentions.cs" />
     <Page Include="CustomControls\ListBoxElement.xaml">
       <SubType>Designer</SubType>
@@ -201,6 +207,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomControls\SnappingGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\StatisticsElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\TableElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\CustomScrollViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

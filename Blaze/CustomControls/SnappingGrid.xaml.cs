@@ -1,9 +1,38 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Markup;
+using System.Xml;
 
 namespace Blaze.CustomControls
 {
+    public static class Clone
+    {
+        public static T XamlClone<T>(this T original) where T : class
+        {
+            using (var stream = new MemoryStream())
+            {
+                var writer = XmlWriter.Create(stream, new XmlWriterSettings
+                {
+                    Indent = true,
+                    ConformanceLevel = ConformanceLevel.Fragment,
+                    OmitXmlDeclaration = true,
+                    NamespaceHandling = NamespaceHandling.OmitDuplicates,
+                });
+                var mgr = new XamlDesignerSerializationManager(writer)
+                {
+                    XamlWriterMode = XamlWriterMode.Expression
+                };
+
+                XamlWriter.Save(original, mgr);
+
+                return (T)XamlReader.Load(stream);
+            }
+        }
+    }
+
     /// <summary>
     /// Interaction logic for SnappingGrid.xaml
     /// </summary>
@@ -33,9 +62,11 @@ namespace Blaze.CustomControls
         //A rounding routine
         public Point Round(Point value, int resolution)
         {
-            Point point = new Point();
-            point.X = ((int)value.X) / resolution * resolution;
-            point.Y = ((int)value.Y) / resolution * resolution;
+            Point point = new Point
+            {
+                X = ((int)value.X) / resolution * resolution,
+                Y = ((int)value.Y) / resolution * resolution
+            };
             return point;
         }
 
@@ -51,14 +82,15 @@ namespace Blaze.CustomControls
         public void AddNewPannel()
         {
             //Adds a text pannel
-            var pannel = new ListPannel();
-
-            //Define default values
-            pannel.Width = 250;
-            pannel.Height = 250;
-            pannel.Resolution = Resolution;
-            pannel.HorizontalAlignment = HorizontalAlignment.Left;
-            pannel.VerticalAlignment = VerticalAlignment.Top;
+            var pannel = new TablePannel
+            {
+                //Define default values
+                Width = 250,
+                Height = 250,
+                Resolution = Resolution,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top
+            };
 
             //Movement method
             pannel.MovementStarted += (s, e) =>
@@ -82,6 +114,16 @@ namespace Blaze.CustomControls
                 //Change the marging of the pannel
                 pannel.Margin = new Thickness(position.X, position.Y, 0, 0);
 
+            };
+
+            pannel.DeletePannel += (s, e) =>
+            {
+                Container.Children.Remove(pannel);
+            };
+
+            pannel.DuplicatePannel += (s, e) =>
+            {
+                Container.Children.Add(Clone.XamlClone(this));
             };
 
             //Adds the pannel to the grid

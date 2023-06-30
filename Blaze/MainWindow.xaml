@@ -87,8 +87,8 @@
                         Style="{StaticResource ButtonWithIcon}"
                         Command="{Binding Close}" />
             </StackPanel>
-
-
+                
+            
             <custom:SnappingGrid Grid.Row="2"
                                  Grid.ColumnSpan="2" />
 

@@ -12,19 +12,92 @@
 
                     <!-- Content Grid -->
 
-                    <Grid>
+                    <Grid HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
 
                         <!-- Input -->
 
-                        <TextBox Margin="1,1,1,1"
+                        <TextBox Margin="1,1,5,1"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalContentAlignment="Center"
                                  Padding="5"
+                                 TextWrapping="{TemplateBinding TextWrapping}"
+                                 AcceptsReturn="{TemplateBinding AcceptsReturn}"
                                  CaretBrush="Black"
                                  FontStyle="Normal"
                                  Foreground="Black"
                                  x:Name="SearchElement" />
+
+                        <!-- Default Text -->
+
+                        <TextBlock IsHitTestVisible="False"
+                                   Text="{TemplateBinding Text}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="7,0,0,0"
+                                   Foreground="DarkGray"
+                                   Grid.Column="1">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+
+                                    <!-- If no input exists, show the default text-->
+
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchElement}"
+                                                     Value="">
+                                            <Setter Property="Visibility"
+                                                    Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+
+                                    <!-- Start with it being not visible-->
+
+                                    <Setter Property="Visibility"
+                                            Value="Hidden" />
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                    </Grid>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <!-- Default TextBox Style With Underline -->
+
+    <Style TargetType="{x:Type TextBox}"
+           x:Key="DefaultTextBoxUnderline">
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type TextBox}">
+
+                    <!-- Content Grid -->
+
+                    <Grid HorizontalAlignment="Stretch">
+
+
+                        <!-- Input -->
+
+                        <TextBox Margin="1,1,5,1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalContentAlignment="Center"
+                                 Padding="5"
+                                 TextWrapping="{TemplateBinding TextWrapping}"
+                                 AcceptsReturn="{TemplateBinding AcceptsReturn}"
+                                 CaretBrush="Black"
+                                 FontStyle="Normal"
+                                 Foreground="Black"
+                                 x:Name="SearchElement" />
+
+                        <!-- Underline -->
+                        
+                        <Separator VerticalAlignment="Bottom" />
 
                         <!-- Default Text -->
 

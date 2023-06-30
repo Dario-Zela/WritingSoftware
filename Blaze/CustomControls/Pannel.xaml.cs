@@ -1,9 +1,14 @@
 ﻿using System;
+using System.CodeDom;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Blaze.Extentions;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace Blaze.CustomControls
 {
@@ -25,10 +30,8 @@ namespace Blaze.CustomControls
         //Resolution of the grid
         public int Resolution { get; set; }
 
-        private const int MIN_HEIGHT = 150;
-        private const int MIN_WIDTH = 150;
-
-
+        private const int MIN_HEIGHT = 250;
+        private const int MIN_WIDTH = 250;
 
         //Current movement state of the pannel
         public bool AllowMovement
@@ -41,6 +44,28 @@ namespace Blaze.CustomControls
         public static readonly DependencyProperty AllowMovementProperty =
             DependencyProperty.Register("AllowMovement", typeof(bool), typeof(Pannel), new PropertyMetadata(false));
 
+
+        //Event handler for deleting a pannel
+        public static readonly RoutedEvent DeletePannelEvent =
+            EventManager.RegisterRoutedEvent("DeletePannel", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Pannel));
+
+        // Provide CLR accessors for assigning an event handler.
+        public event RoutedEventHandler DeletePannel
+        {
+            add { AddHandler(DeletePannelEvent, value); }
+            remove { RemoveHandler(DeletePannelEvent, value); }
+        }
+
+        //Event handler for duplicating a pannel
+        public static readonly RoutedEvent DuplicatePannelEvent =
+            EventManager.RegisterRoutedEvent("DuplicatePannel", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Pannel));
+
+        // Provide CLR accessors for assigning an event handler.
+        public event RoutedEventHandler DuplicatePannel
+        {
+            add { AddHandler(DuplicatePannelEvent, value); }
+            remove { RemoveHandler(DuplicatePannelEvent, value); }
+        }
 
 
         //Current resizing state of the pannel
@@ -157,30 +182,44 @@ namespace Blaze.CustomControls
         {
             AllowResize = false;
         }
+
+        private void DeletePannel_Click(object sender, RoutedEventArgs e)
+        {
+            Extra.IsChecked = false;
+            RaiseEvent(new RoutedEventArgs(DeletePannelEvent));
+        }
+
+        private void DuplicatePannel_Click(object sender, RoutedEventArgs e)
+        {
+            Extra.IsChecked = false;
+            RaiseEvent(new RoutedEventArgs(DuplicatePannelEvent));
+        }
     }
 
     //Pannel with a textbox
     public class TextPannel : Pannel
     {
+        RichTextBox richText;
         public TextPannel()
             : base()
         {
             //Add a textbox in slot
-            var richText = new RichTextBox() { Margin = new Thickness(10, 0, 10, 5), BorderThickness = new Thickness(0) };
+            richText = new RichTextBox() { Margin = new Thickness(10, 0, 10, 5), BorderThickness = new Thickness(0) };
             Container.Children.Add(richText);
             Grid.SetRow(richText, 1);
         }
     }
 
-    //Pannel with a textbox
+    //Pannel with a list
     public class ListPannel : Pannel
     {
+        //Reference to the listbox
         ListBoxElement ListHolder;
 
         public ListPannel()
             : base()
         {
-            //Add a textbox in slot
+            //Add a listbox in the slot
             ListHolder = new ListBoxElement()
             {
                 Margin = new Thickness(10, 0, 10, 5),
@@ -192,7 +231,7 @@ namespace Blaze.CustomControls
             ListHolder.AddNewElement();
             ListHolder.AddNewElement();
 
-            //Add Add Button
+            //Add the Add Button
             var addButton = new Button()
             {
                 Width = 15,
@@ -205,22 +244,210 @@ namespace Blaze.CustomControls
                 Style = Application.Current.FindResource("ButtonWithIcon2") as Style,
             };
 
+            Coolicons.SetProperty(addButton, MahApps.Metro.IconPacks.PackIconCooliconsKind.Plus);
+            IsMouseOverColor.SetProperty(addButton, Brushes.DarkGray);
+            IsPressedColor.SetProperty(addButton, Brushes.Gray);
+            IconHeight.SetProperty(addButton, 8);
+
+            //Add click event
             addButton.Click += new RoutedEventHandler((s, e) => AddListItem());
+
+            //Add to container
+            Container.Children.Add(addButton);
+            Grid.SetRow(addButton, 1);
+            Panel.SetZIndex(addButton, 1);
+        }
+
+        //Add a list item
+        public void AddListItem()
+        {
+            ListHolder.AddNewElement();
+        }
+    }
+
+    //Pannel with a list
+    public class StatisticsPannel : Pannel
+    {
+        //Reference to the listbox
+        StatisticsElement ListHolder;
+
+        public StatisticsPannel()
+            : base()
+        {
+            //Add a listbox in the slot
+            ListHolder = new StatisticsElement()
+            {
+                Margin = new Thickness(10, 0, 10, 5),
+                BorderThickness = new Thickness(0),
+            };
+            Container.Children.Add(ListHolder);
+            Grid.SetRow(ListHolder, 1);
+
+            ListHolder.AddNewElement();
+            ListHolder.AddNewElement();
+
+            //Add the Add Button
+            var addButton = new Button()
+            {
+                Width = 15,
+                Height = 15,
+                Cursor = Cursors.Hand,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                Background = Brushes.Transparent,
+                Foreground = Brushes.Black,
+                Style = Application.Current.FindResource("ButtonWithIcon2") as Style,
+            };
 
             Coolicons.SetProperty(addButton, MahApps.Metro.IconPacks.PackIconCooliconsKind.Plus);
             IsMouseOverColor.SetProperty(addButton, Brushes.DarkGray);
             IsPressedColor.SetProperty(addButton, Brushes.Gray);
             IconHeight.SetProperty(addButton, 8);
 
+            //Add click event
+            addButton.Click += new RoutedEventHandler((s, e) => AddListItem());
 
+            //Add to container
             Container.Children.Add(addButton);
             Grid.SetRow(addButton, 1);
             Panel.SetZIndex(addButton, 1);
         }
 
+        //Add a list item
         public void AddListItem()
         {
             ListHolder.AddNewElement();
+        }
+    }
+
+    //Pannel with a list
+    public class TablePannel : Pannel
+    {
+        //Reference to the table
+        TableElement table;
+
+        //Reference to the two add buttons
+        Button addColumn;
+        Button addRow;
+
+        public TablePannel()
+            : base()
+        {
+            //Add a table in the slot
+            table = new TableElement()
+            {
+                Margin = new Thickness(10, 0, 10, 5),
+            };
+
+            Container.Children.Add(table);
+            Grid.SetRow(table, 1);
+
+            //Add the Add Column Button
+            addColumn = new Button()
+            {
+                Width = 25,
+                Height = 25,
+                Cursor = Cursors.Hand,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                Background = Brushes.Transparent,
+                Foreground = Brushes.Black,
+                Style = Application.Current.FindResource("ButtonWithIcon2") as Style,
+                Name = "AddColumn"
+            };
+
+            Coolicons.SetProperty(addColumn, MahApps.Metro.IconPacks.PackIconCooliconsKind.AddColumn);
+            IsMouseOverColor.SetProperty(addColumn, Brushes.DarkGray);
+            IsPressedColor.SetProperty(addColumn, Brushes.Gray);
+            IconHeight.SetProperty(addColumn, 10);
+
+            //Add click event
+            addColumn.Click += new RoutedEventHandler((s, e) => AddColumn());
+
+            //Add to container
+            Container.Children.Add(addColumn);
+            Grid.SetRow(addColumn, 1);
+            Panel.SetZIndex(addColumn, 1);
+
+            //Add the Add Row Button
+            addRow = new Button()
+            {
+                Width = 25,
+                Height = 25,
+                Cursor = Cursors.Hand,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                Background = Brushes.Transparent,
+                Foreground = Brushes.Black,
+                Style = Application.Current.FindResource("ButtonWithIcon2") as Style,
+                Margin = new Thickness(20, 0, 0, 0),
+                Name = "AddRow"
+            };
+
+            Coolicons.SetProperty(addRow, MahApps.Metro.IconPacks.PackIconCooliconsKind.AddRow);
+            IsMouseOverColor.SetProperty(addRow, Brushes.DarkGray);
+            IsPressedColor.SetProperty(addRow, Brushes.Gray);
+            IconHeight.SetProperty(addRow, 10);
+
+            //Add click event
+            addRow.Click += new RoutedEventHandler((s, e) => AddRow());
+
+            //Add to container
+            Container.Children.Add(addRow);
+            Grid.SetRow(addRow, 1);
+            Panel.SetZIndex(addRow, 1);
+
+            //Add the Table Settings Button
+            var settingsTable = new Button()
+            {
+                Style = Application.Current.FindResource("MenuButton") as Style,
+            };
+            Header.SetProperty(settingsTable, "Edit Rows & Columns");
+
+            //Add click event
+            settingsTable.Click += new RoutedEventHandler((s, e) => OpenSettingsMenu());
+
+            //Add to popup menu
+            ExtraMenu.Children.Insert(1, settingsTable);
+
+            //Change the visibility of the buttons in pair with the table settings
+            table.TableSettings.IsVisibleChanged += ToggleButtons;
+        }
+
+        //Toggles the visibility of the buttons
+        private void ToggleButtons(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            //Switch on the button visibility
+            switch(addColumn.Visibility)
+            {
+                case Visibility.Hidden:
+                    addColumn.Visibility = Visibility.Visible;
+                    addRow.Visibility = Visibility.Visible;
+                    break;
+                case Visibility.Visible:
+                    addColumn.Visibility = Visibility.Hidden;
+                    addRow.Visibility = Visibility.Hidden;
+                    break;
+            }
+        }
+
+        //Add a column
+        public void AddColumn()
+        {
+            table.AddColumn();
+        }
+
+        //Add a row
+        public void AddRow()
+        {
+            table.AddRow();
+        }
+
+        //Opens the Settings menu
+        public void OpenSettingsMenu()
+        {
+            Extra.IsChecked = false;
+            table.OpenSettingsMenu();
         }
     }
 }

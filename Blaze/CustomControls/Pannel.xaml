@@ -13,16 +13,16 @@
              d:DesignWidth="100">
     
     <!-- Outer border -->
-    
+
     <Border Background="White"
             CornerRadius="5"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             MouseEnter="AllowMoving"
             MouseLeave="DisallowMoving">
-        <Grid x:Name="Container">
+        <Grid Name="Container">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="5*" />
             </Grid.RowDefinitions>
 
@@ -86,13 +86,16 @@
                             CornerRadius="5"
                             BorderThickness="1"
                             BorderBrush="Black">
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical"
+                                    Name="ExtraMenu">
                             <Button Extentions:Header.Property="Duplicate Pannel"
                                     Extentions:CornerRadiusExtention.Property="5,5,0,0"
-                                    Style="{StaticResource MenuButton}" />
+                                    Style="{StaticResource MenuButton}" 
+                                    Click="DuplicatePannel_Click"/>
                             <Button Extentions:Header.Property="Delete Pannel"
                                     Extentions:CornerRadiusExtention.Property="0,0,5,5"
-                                    Style="{StaticResource MenuButton}" />
+                                    Style="{StaticResource MenuButton}"
+                                    Click="DeletePannel_Click" />
                         </StackPanel>
                     </Border>
                 </Popup>

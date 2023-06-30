@@ -14,29 +14,30 @@ namespace Blaze.CustomControls
             InitializeComponent();
         }
 
+        //Adds a new element
         public void AddNewElement()
         {
             ListHolder.Items.Add(new ListBoxItem());
         }
 
-        object CurrentListItem = null;
-
+        //Show the delete button
         private void AllowClosing(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            ((Button)((Grid)sender).FindName("Close")).Visibility = System.Windows.Visibility.Visible;
-            CurrentListItem = sender;
+            ((Button)((Grid)sender).FindName("Close")).Visibility = Visibility.Visible;
         }
 
+        //Hide the delete button
         private void StopClosing(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            CurrentListItem = null;
-            ((Button)((Grid)sender).FindName("Close")).Visibility = System.Windows.Visibility.Hidden;
+            ((Button)((Grid)sender).FindName("Close")).Visibility = Visibility.Hidden;
         }
 
-        private void Close_Click(object sender, System.Windows.RoutedEventArgs e)
+        //Deletes the current ListBoxItem
+        private void Close_Click(object sender, RoutedEventArgs e)
         {
             foreach(var item in ListHolder.Items) 
             {
+                //Delete the item in listHolder that holds the sender
                 if (((ListBoxItem)item).IsAncestorOf((Button)sender))
                 {
                     ListHolder.Items.Remove(item); 
