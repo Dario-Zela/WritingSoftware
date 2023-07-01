@@ -194,6 +194,12 @@ namespace Blaze.CustomControls
             Extra.IsChecked = false;
             RaiseEvent(new RoutedEventArgs(DuplicatePannelEvent));
         }
+
+        //
+        public virtual void CopyFrom(Pannel pannel) 
+        {
+            if (GetType() != pannel.GetType()) return;
+        }
     }
 
     //Pannel with a textbox
@@ -207,6 +213,13 @@ namespace Blaze.CustomControls
             richText = new RichTextBox() { Margin = new Thickness(10, 0, 10, 5), BorderThickness = new Thickness(0) };
             Container.Children.Add(richText);
             Grid.SetRow(richText, 1);
+        }
+
+
+        public override void CopyFrom(Pannel pannel)
+        {
+            base.CopyFrom(pannel);
+            richText.Load(((TextPannel)pannel).richText.GetBlocks());
         }
     }
 
@@ -263,6 +276,12 @@ namespace Blaze.CustomControls
         {
             ListHolder.AddNewElement();
         }
+
+        public override void CopyFrom(Pannel pannel)
+        {
+            base.CopyFrom(pannel);
+            ListHolder.Load(((ListPannel)pannel).ListHolder.GetElements());
+        }
     }
 
     //Pannel with a list
@@ -317,6 +336,12 @@ namespace Blaze.CustomControls
         public void AddListItem()
         {
             ListHolder.AddNewElement();
+        }
+
+        public override void CopyFrom(Pannel pannel)
+        {
+            base.CopyFrom(pannel);
+            ListHolder.Load(((StatisticsPannel)pannel).ListHolder.GetElements());
         }
     }
 
@@ -448,6 +473,14 @@ namespace Blaze.CustomControls
         {
             Extra.IsChecked = false;
             table.OpenSettingsMenu();
+        }
+
+        //Override copyFrom
+        public override void CopyFrom(Pannel pannel)
+        {
+            base.CopyFrom(pannel);
+            table.Load(((TablePannel)pannel).table.data.Copy());
+            table.Cancel();
         }
     }
 }

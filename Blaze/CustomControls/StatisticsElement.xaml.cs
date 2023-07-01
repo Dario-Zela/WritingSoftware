@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,23 +14,52 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Blaze.Core;
 
 namespace Blaze.CustomControls
 {
+    public class Statistic
+    {
+        public string Name { get; set; }
+        private double _value;
+        public string Value
+        {
+            get => _value.ToString();
+            set
+            {
+                //Add's it if it is a valid number and raises the event
+                if (double.TryParse(value, out double num))
+                {
+                    _value = num;
+                }
+            }
+        }
+        public string Units { get; set; }
+        public string Description { get; set; }
+    }
+
+
     /// <summary>
     /// Interaction logic for StatisticsElement.xaml
     /// </summary>
     public partial class StatisticsElement : UserControl
     {
+        ObservableCollection<Statistic> Statistics;
+
         public StatisticsElement()
         {
             InitializeComponent();
+            Statistics = new ObservableCollection<Statistic>();
+            DataContext = this;
+
+            ListHolder.DataContext = Statistics;
+            ListHolder.ItemsSource = Statistics;
         }
 
         //Adds a new element
         public void AddNewElement()
         {
-            ListHolder.Items.Add(new ListBoxItem());
+            Statistics.Add(new Statistic());
         }
 
         Grid CurrentlyActiveStatistics;
@@ -66,6 +96,8 @@ namespace Blaze.CustomControls
                     Extentions.Header.SetProperty(((Button)sender), "Hide Description");
                     break;
             }
+
+            ((ToggleButton)(CurrentlyActiveStatistics).FindName("Extra")).IsChecked = false;
         }
 
         //Toggle the visibility of the units textbox
@@ -85,20 +117,31 @@ namespace Blaze.CustomControls
                     Extentions.Header.SetProperty(((Button)sender), "Hide Units");
                     break;
             }
+
+            ((ToggleButton)(CurrentlyActiveStatistics).FindName("Extra")).IsChecked = false;
         }
 
         //Delete the current list item
         private void Delete(object sender, RoutedEventArgs e)
         {
-            foreach (var item in ListHolder.Items)
+            Statistics.Remove((Statistic)((Button)sender).DataContext);
+            ((ToggleButton)(CurrentlyActiveStatistics).FindName("Extra")).IsChecked = false;
+        }
+
+        public void Load(Statistic[] list)
+        {
+            Statistics.Clear();
+            foreach (Statistic element in list)
             {
-                //Delete the item in listHolder that holds the sender
-                if (((ListBoxItem)item).IsAncestorOf(CurrentlyActiveStatistics))
-                {
-                    ListHolder.Items.Remove(item);
-                    return;
-                }
+                Statistics.Add(element);
             }
+        }
+
+        public Statistic[] GetElements()
+        {
+            Statistic[] elements = new Statistic[Statistics.Count];
+            Statistics.CopyTo(elements, 0);
+            return elements;
         }
     }
 }

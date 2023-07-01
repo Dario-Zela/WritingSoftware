@@ -6,19 +6,21 @@
              xmlns:local="clr-namespace:Blaze.CustomControls"
              xmlns:Extentions="clr-namespace:Blaze.Extentions"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=local:ListBoxElement}"
              d:DesignHeight="450"
              d:DesignWidth="800">
 
     <!-- List Container -->
-    <ListBox x:Name="ListHolder">
-        <ListBox.Style>
+    <ItemsControl x:Name="ListHolder">
+
+        <ItemsControl.Style>
 
             <!-- Custom Style -->
 
-            <Style TargetType="ListBox">
+            <Style TargetType="ItemsControl">
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="ListBox">
+                        <ControlTemplate TargetType="ItemsControl">
                             <!-- Add Custom Scroll Viewer -->
                             <ScrollViewer HorizontalScrollBarVisibility="Auto"
                                           Style="{DynamicResource ResourceKey=CustomScrollViewer}"
@@ -30,71 +32,66 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-        </ListBox.Style>
+        </ItemsControl.Style>
 
         <!-- Custom Item Style -->
-        
-        <ListBox.ItemContainerStyle>
-            <Style TargetType="ListBoxItem">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
 
-                            <!-- Button Hiding Container -->
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="local:ListElement">
+                <!-- Button Hiding Container -->
 
-                            <Grid MouseEnter="AllowClosing"
-                                  MouseLeave="StopClosing"
-                                  Background="Transparent">
-                                <StackPanel>
-                                    <Grid Width="{Binding ActualWidth}">
+                <Grid MouseEnter="AllowClosing"
+                      MouseLeave="StopClosing"
+                      Background="Transparent">
+                    <StackPanel>
+                        <Grid Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
 
-                                        <!-- Header -->
+                            <!-- Header -->
 
-                                        <TextBox Style="{StaticResource DefaultTextBox}"
-                                                 Text="New Item Name"
-                                                 FontWeight="SemiBold"
-                                                 FontSize="15"
-                                                 TextWrapping="Wrap"
-                                                 Margin="0,0,50,0"
-                                                 AcceptsReturn="True" />
+                            <TextBox Style="{StaticResource DefaultTextBox}"
+                                     Extentions:DefaultText.Property="New Item Name"
+                                     FontWeight="SemiBold"
+                                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     FontSize="15"
+                                     TextWrapping="Wrap"
+                                     Margin="0,0,50,0"
+                                     AcceptsReturn="True" />
 
-                                        <!-- Delete List Item -->
+                            <!-- Delete List Item -->
 
-                                        <Button Style="{StaticResource ButtonWithIcon}"
-                                                Extentions:Codicons.Property="ChromeClose"
-                                                Extentions:IsMouseOverColor.Property="DarkGray"
-                                                Extentions:IsPressedColor.Property="Gray"
-                                                Extentions:IconHeight.Property="10"
-                                                Background="White"
-                                                Extentions:CornerRadiusExtention.Property="7"
-                                                Height="15"
-                                                HorizontalAlignment="Right"
-                                                Width="15"
-                                                Margin="0,0,40,0"
-                                                Grid.Column="1"
-                                                x:Name="Close"
-                                                Visibility="Hidden"
-                                                Click="Close_Click" />
-                                    </Grid>
+                            <Button Style="{StaticResource ButtonWithIcon}"
+                                    Extentions:Codicons.Property="ChromeClose"
+                                    Extentions:IsMouseOverColor.Property="DarkGray"
+                                    Extentions:IsPressedColor.Property="Gray"
+                                    Extentions:IconHeight.Property="10"
+                                    Background="White"
+                                    Extentions:CornerRadiusExtention.Property="7"
+                                    Height="15"
+                                    HorizontalAlignment="Right"
+                                    Width="15"
+                                    Margin="0,0,40,0"
+                                    Grid.Column="1"
+                                    x:Name="Close"
+                                    Visibility="Hidden"
+                                    Click="Close_Click" />
+                        </Grid>
 
-                                    <!-- Description -->
+                        <!-- Description -->
 
-                                    <StackPanel Width="{Binding ActualWidth}">
-                                        <TextBox Style="{StaticResource DefaultTextBox}"
-                                                 Text="Add a description"
-                                                 FontStyle="Italic"
-                                                 FontSize="12"
-                                                 Margin="0,0,30,0"
-                                                 TextWrapping="Wrap"
-                                                 AcceptsReturn="True" />
-                                        <Separator Margin="0,7,0,0" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ListBox.ItemContainerStyle>
-    </ListBox>
+                        <StackPanel Width="{TemplateBinding ActualWidth}">
+                            <TextBox Style="{StaticResource DefaultTextBox}"
+                                     Extentions:DefaultText.Property="Add a description"
+                                     FontStyle="Italic"
+                                     Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     FontSize="12"
+                                     Margin="0,0,30,0"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True" />
+                            <Separator Margin="0,7,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

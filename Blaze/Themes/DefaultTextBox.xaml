@@ -1,4 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:Extentions="clr-namespace:Blaze.Extentions"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Default TextBox Style -->
@@ -25,13 +26,14 @@
                                  AcceptsReturn="{TemplateBinding AcceptsReturn}"
                                  CaretBrush="Black"
                                  FontStyle="Normal"
+                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
                                  Foreground="Black"
-                                 x:Name="SearchElement" />
+                                 x:Name="Text" />
 
                         <!-- Default Text -->
 
                         <TextBlock IsHitTestVisible="False"
-                                   Text="{TemplateBinding Text}"
+                                   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:DefaultText.Property), StringFormat=N2}"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Margin="7,0,0,0"
@@ -43,7 +45,7 @@
                                     <!-- If no input exists, show the default text-->
 
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=SearchElement}"
+                                        <DataTrigger Binding="{Binding Text, ElementName=Text}"
                                                      Value="">
                                             <Setter Property="Visibility"
                                                     Value="Visible" />
@@ -91,9 +93,10 @@
                                  TextWrapping="{TemplateBinding TextWrapping}"
                                  AcceptsReturn="{TemplateBinding AcceptsReturn}"
                                  CaretBrush="Black"
+                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
                                  FontStyle="Normal"
                                  Foreground="Black"
-                                 x:Name="SearchElement" />
+                                 x:Name="Text" />
 
                         <!-- Underline -->
                         
@@ -102,7 +105,7 @@
                         <!-- Default Text -->
 
                         <TextBlock IsHitTestVisible="False"
-                                   Text="{TemplateBinding Text}"
+                                   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(Extentions:DefaultText.Property), StringFormat=N2}"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Margin="7,0,0,0"
@@ -114,7 +117,7 @@
                                     <!-- If no input exists, show the default text-->
 
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=SearchElement}"
+                                        <DataTrigger Binding="{Binding Text, ElementName=Text}"
                                                      Value="">
                                             <Setter Property="Visibility"
                                                     Value="Visible" />

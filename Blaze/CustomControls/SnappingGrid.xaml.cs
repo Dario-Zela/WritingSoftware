@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,31 +11,6 @@ using System.Xml;
 
 namespace Blaze.CustomControls
 {
-    public static class Clone
-    {
-        public static T XamlClone<T>(this T original) where T : class
-        {
-            using (var stream = new MemoryStream())
-            {
-                var writer = XmlWriter.Create(stream, new XmlWriterSettings
-                {
-                    Indent = true,
-                    ConformanceLevel = ConformanceLevel.Fragment,
-                    OmitXmlDeclaration = true,
-                    NamespaceHandling = NamespaceHandling.OmitDuplicates,
-                });
-                var mgr = new XamlDesignerSerializationManager(writer)
-                {
-                    XamlWriterMode = XamlWriterMode.Expression
-                };
-
-                XamlWriter.Save(original, mgr);
-
-                return (T)XamlReader.Load(stream);
-            }
-        }
-    }
-
     /// <summary>
     /// Interaction logic for SnappingGrid.xaml
     /// </summary>
@@ -77,12 +55,18 @@ namespace Blaze.CustomControls
             Container.Children.Add(element);
         }
 
+        private Thickness AddThickness(Thickness thickness1, Thickness thickness2) 
+        {
+            return new Thickness(thickness1.Left + thickness2.Left, thickness1.Top + thickness2.Top,
+                                 thickness1.Right + thickness2.Right, thickness1.Bottom + thickness2.Bottom);
+        }
+
         //To be changed
         //Adds a new pannel to the grid
-        public void AddNewPannel()
+        public StatisticsPannel AddNewPannel()
         {
             //Adds a text pannel
-            var pannel = new TablePannel
+            var pannel = new StatisticsPannel
             {
                 //Define default values
                 Width = 250,
@@ -123,11 +107,20 @@ namespace Blaze.CustomControls
 
             pannel.DuplicatePannel += (s, e) =>
             {
-                Container.Children.Add(Clone.XamlClone(this));
+                var duplicate = AddNewPannel();
+                duplicate.Title = pannel.Title;
+                duplicate.Resolution = pannel.Resolution;
+                duplicate.Margin = AddThickness(pannel.Margin, new Thickness(10, 10, 0, 0));
+                duplicate.Height = pannel.Height;
+                duplicate.Width = pannel.Width;
+
+                duplicate.CopyFrom(pannel);
             };
 
             //Adds the pannel to the grid
             Container.Children.Add(pannel);
+
+            return pannel;
         }
     }
 }

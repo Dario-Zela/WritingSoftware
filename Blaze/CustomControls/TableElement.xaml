@@ -395,6 +395,7 @@
                   HeadersVisibility="None"
                   Name="dataGrid"
                   Padding="0"
+                  AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   Visibility="Hidden">
         </DataGrid>

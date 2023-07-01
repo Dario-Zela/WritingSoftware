@@ -194,6 +194,7 @@
       <DependentUpon>TableElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="ThemeExtentions\FolderGridExtentions.cs" />
+    <Compile Include="ThemeExtentions\TextBoxExtentions.cs" />
     <Page Include="CustomControls\ListBoxElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

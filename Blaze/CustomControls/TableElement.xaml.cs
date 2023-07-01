@@ -25,7 +25,7 @@ namespace Blaze.CustomControls
     public partial class TableElement : UserControl, INotifyPropertyChanged
     {
         //A reference to the data context of the data grid
-        readonly DataTable data;
+        public DataTable data;
 
         //Constructor
         public TableElement()
@@ -88,7 +88,25 @@ namespace Blaze.CustomControls
             }
         }
 
-        //Add a column
+        //Add a pre existing column
+        public void AddColumn(string columnName)
+        {
+            //If it is below a max
+            if (colNum == 100) return;
+
+            //Need to add a column to the data context and the data grid as
+            //data grid doesn't auto update columns
+            data.Columns.Add(columnName);
+            dataGrid.Columns.Add(new DataGridTextColumn()
+            {
+                Binding = new Binding(columnName),
+                Header = columnName,
+                Width = new DataGridLength(1, DataGridLengthUnitType.Star),
+                MinWidth = ActualWidth / 3.0
+            });
+        }
+
+        //Add a new column
         public void AddColumn()
         {
             //If it is below a max
@@ -106,7 +124,17 @@ namespace Blaze.CustomControls
             });
         }
 
-        //Add a row
+        //Add an existing row
+        public void AddRow(object[] row)
+        {
+            //If it is below a max
+            if (rowNum == 100) return;
+
+            //Only need to add the row
+            data.Rows.Add(row);
+        }
+
+        //Add a new row
         public void AddRow()
         {
             //If it is below a max
@@ -227,6 +255,27 @@ namespace Blaze.CustomControls
         {
             TableSettings.Visibility = Visibility.Visible;
             dataGrid.Visibility = Visibility.Collapsed;
+        }
+
+        //Closes the Settings Menu
+        public void Cancel()
+        {
+            TableSettings.Visibility = Visibility.Collapsed;
+            dataGrid.Visibility = Visibility.Visible;
+        }
+
+        //Loads an existing datatable
+        public void Load(DataTable originalData)
+        {
+            foreach (DataColumn column in originalData.Columns)
+            {
+                AddColumn(column.ColumnName);
+            }
+
+            foreach (DataRow row in originalData.Rows)
+            {
+                AddRow(row.ItemArray);
+            }
         }
     }
 }

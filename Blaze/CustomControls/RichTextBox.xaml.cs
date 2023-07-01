@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using ICSharpCode.AvalonEdit;
 
 namespace Blaze.CustomControls
 {
@@ -152,6 +153,20 @@ namespace Blaze.CustomControls
         private void DottedList_Click(object sender, RoutedEventArgs e)
         {
             NumberedList.IsChecked = false;
+        }
+
+
+        public void Load(Block[] blocks)
+        {
+            TextEditor.Document.Blocks.Clear();
+            TextEditor.Document.Blocks.AddRange(blocks);
+        }
+
+        public Block[] GetBlocks()
+        {
+            Block[] blocks = new Block[TextEditor.Document.Blocks.Count];
+            TextEditor.Document.Blocks.CopyTo(blocks, 0);
+            return blocks;
         }
     }
 }

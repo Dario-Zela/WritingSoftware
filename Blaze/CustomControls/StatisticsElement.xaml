@@ -9,17 +9,20 @@
              d:DesignHeight="450"
              d:DesignWidth="800">
     <!-- List Container -->
-    <ListBox x:Name="ListHolder">
-        <ListBox.Style>
+    <ItemsControl x:Name="ListHolder"
+                  Width="{Binding ActualWidth}">
+
+        <ItemsControl.Style>
 
             <!-- Custom Style -->
 
-            <Style TargetType="ListBox">
+            <Style TargetType="ItemsControl">
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="ListBox">
+                        <ControlTemplate TargetType="ItemsControl">
                             <!-- Add Custom Scroll Viewer -->
-                            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                          CanContentScroll="True"
                                           Style="{DynamicResource ResourceKey=CustomScrollViewer}"
                                           VerticalScrollBarVisibility="Auto">
                                 <!-- Remove Outer Border -->
@@ -29,130 +32,128 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-        </ListBox.Style>
+        </ItemsControl.Style>
 
         <!-- Custom Item Style -->
 
-        <ListBox.ItemContainerStyle>
-            <Style TargetType="ListBoxItem">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="local:Statistic">
 
-                            <!-- Button Hiding Container -->
+                <!-- Button Hiding Container -->
 
-                            <Grid MouseEnter="AllowExtra"
-                                  MouseLeave="StopExtra"
-                                  Background="Transparent"
-                                  Width="{Binding ActualWidth}">
-                                <StackPanel>
-                                    <Grid Width="{Binding ActualWidth}">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="150" />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        
-                                        <!-- Header -->
-                                        
-                                        <TextBox Style="{StaticResource DefaultTextBox}"
-                                                 Text="Name"
-                                                 FontWeight="SemiBold"
-                                                 FontSize="15"
-                                                 TextWrapping="Wrap"
-                                                 Margin="0,0,50,0"
-                                                 AcceptsReturn="True" />
-                                        
-                                        <!-- Statistics -->
-                                        
-                                        <DockPanel HorizontalAlignment="Right"
-                                                   Grid.Column="1"
-                                                   Margin="-50,0,70,0">
-                                            <TextBox Style="{StaticResource DefaultTextBoxUnderline}"
-                                                     Text="0"
-                                                     FontSize="15" 
-                                                     MaxHeight="30"
-                                                     Margin="0,0,10,0"/>
+                <Grid MouseEnter="AllowExtra"
+                      MouseLeave="StopExtra"
+                      Background="Transparent"
+                      Width="{Binding Width, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
 
-                                            <TextBox Style="{StaticResource DefaultTextBoxUnderline}"
-                                                     MaxHeight="30"
-                                                     Text="Units"
-                                                     FontSize="15"
-                                                     Name="Units" />
-                                        </DockPanel>
-                                        
-                                        <!-- Extra Menu Button -->
-                                        
-                                        <ToggleButton Extentions:Coolicons.Property="MoreVertical"
-                                                      Style="{StaticResource ToggleButtonWithIcon}"
-                                                      Extentions:IsMouseOverColor.Property="DarkGray"
-                                                      Extentions:IsPressedColor.Property="Gray"
-                                                      Extentions:IconHeight.Property="10"
-                                                      Background="White"
-                                                      Extentions:CornerRadiusExtention.Property="10"
-                                                      Height="20"
-                                                      HorizontalAlignment="Right"
-                                                      Width="20"
-                                                      Margin="0,0,40,0"
-                                                      Grid.Column="1"
-                                                      x:Name="Extra"
-                                                      Visibility="Hidden" />
+                            <!-- Header -->
 
-                                        <!-- Extra Menu Popup -->
+                            <TextBox Style="{StaticResource DefaultTextBox}"
+                                     Extentions:DefaultText.Property="Name"
+                                     Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     FontWeight="SemiBold"
+                                     FontSize="15"
+                                     TextWrapping="Wrap"
+                                     Margin="0,0,50,0"
+                                     AcceptsReturn="True" />
 
-                                        <Popup IsOpen="{Binding IsChecked,ElementName=Extra, Mode=TwoWay}"
-                                               StaysOpen="False"
-                                               PlacementTarget="{Binding ElementName=Extra}"
-                                               AllowsTransparency="True">
-                                            <Border Background="White"
-                                                    CornerRadius="5"
-                                                    BorderThickness="1"
-                                                    BorderBrush="Black">
-                                                <StackPanel Orientation="Vertical">
+                            <!-- Statistics -->
 
-                                                    <!-- Toggle Description -->
-                                                    
-                                                    <Button Extentions:Header.Property="Show Description"
-                                                            Extentions:CornerRadiusExtention.Property="5,5,0,0"
-                                                            Style="{StaticResource MenuButton}"
-                                                            Click="ToggleDescription" />
+                            <DockPanel HorizontalAlignment="Right"
+                                       Grid.Column="1"
+                                       Margin="-50,0,50,0">
+                                <TextBox Style="{StaticResource DefaultTextBoxUnderline}"
+                                         Extentions:DefaultText.Property="0"
+                                         Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         FontSize="15"
+                                         MaxHeight="30"
+                                         Margin="0,0,10,0" />
 
-                                                    <!-- Toggle Units -->
+                                <TextBox Style="{StaticResource DefaultTextBoxUnderline}"
+                                         MaxHeight="30"
+                                         Text="{Binding Units, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Extentions:DefaultText.Property="Units"
+                                         FontSize="15"
+                                         Name="Units" />
+                            </DockPanel>
 
-                                                    <Button Extentions:Header.Property="Hide Units"
-                                                            Style="{StaticResource MenuButton}"
-                                                            Click="ToggleUnits" />
+                            <!-- Extra Menu Button -->
 
-                                                    <!-- Delete Item -->
+                            <ToggleButton Extentions:Coolicons.Property="MoreVertical"
+                                          Style="{StaticResource ToggleButtonWithIcon}"
+                                          Extentions:IsMouseOverColor.Property="DarkGray"
+                                          Extentions:IsPressedColor.Property="Gray"
+                                          Extentions:IconHeight.Property="10"
+                                          Background="White"
+                                          Extentions:CornerRadiusExtention.Property="10"
+                                          Height="20"
+                                          HorizontalAlignment="Right"
+                                          Width="20"
+                                          Margin="0,0,20,0"
+                                          Grid.Column="1"
+                                          x:Name="Extra"
+                                          Visibility="Hidden" />
 
-                                                    <Button Extentions:Header.Property="Delete Statistics"
-                                                            Extentions:CornerRadiusExtention.Property="0,0,5,5"
-                                                            Style="{StaticResource MenuButton}"
-                                                            Click="Delete" />
-                                                </StackPanel>
-                                            </Border>
-                                        </Popup>
-                                    </Grid>
+                            <!-- Extra Menu Popup -->
 
-                                    <!-- Description -->
+                            <Popup IsOpen="{Binding IsChecked,ElementName=Extra, Mode=TwoWay}"
+                                   StaysOpen="False"
+                                   PlacementTarget="{Binding ElementName=Extra}"
+                                   AllowsTransparency="True">
+                                <Border Background="White"
+                                        CornerRadius="5"
+                                        BorderThickness="1"
+                                        BorderBrush="Black">
+                                    <StackPanel Orientation="Vertical">
 
-                                    <StackPanel Width="{Binding ActualWidth}">
-                                        <TextBox Style="{StaticResource DefaultTextBox}"
-                                                 Text="Add a description"
-                                                 FontStyle="Italic"
-                                                 FontSize="12"
-                                                 x:Name="Description"
-                                                 Visibility="Collapsed"
-                                                 Margin="0,0,30,0"
-                                                 TextWrapping="Wrap"
-                                                 AcceptsReturn="True" />
-                                        <Separator Margin="0,7,0,0" />
+                                        <!-- Toggle Description -->
+
+                                        <Button Extentions:Header.Property="Show Description"
+                                                Extentions:CornerRadiusExtention.Property="5,5,0,0"
+                                                Style="{StaticResource MenuButton}"
+                                                Click="ToggleDescription" />
+
+                                        <!-- Toggle Units -->
+
+                                        <Button Extentions:Header.Property="Hide Units"
+                                                Style="{StaticResource MenuButton}"
+                                                Click="ToggleUnits" />
+
+                                        <!-- Delete Item -->
+
+                                        <Button Extentions:Header.Property="Delete Statistics"
+                                                Extentions:CornerRadiusExtention.Property="0,0,5,5"
+                                                Style="{StaticResource MenuButton}"
+                                                Click="Delete" />
                                     </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ListBox.ItemContainerStyle>
-    </ListBox>
+                                </Border>
+                            </Popup>
+                        </Grid>
+
+                        <!-- Description -->
+
+                        <StackPanel Width="{Binding ActualWidth}">
+                            <TextBox Style="{StaticResource DefaultTextBox}"
+                                     Extentions:DefaultText.Property="Add a description"
+                                     FontStyle="Italic"
+                                     FontSize="12"
+                                     Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     x:Name="Description"
+                                     Visibility="Collapsed"
+                                     Margin="0,0,30,0"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True" />
+                            <Separator Margin="0,7,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>
