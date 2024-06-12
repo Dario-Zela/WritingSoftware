@@ -1,14 +1,9 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Blaze.Extentions;
-using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace Blaze.CustomControls
 {
@@ -196,7 +191,7 @@ namespace Blaze.CustomControls
         }
 
         //
-        public virtual void CopyFrom(Pannel pannel) 
+        public virtual void CopyFrom(Pannel pannel)
         {
             if (GetType() != pannel.GetType()) return;
         }
@@ -443,7 +438,7 @@ namespace Blaze.CustomControls
         private void ToggleButtons(object sender, DependencyPropertyChangedEventArgs e)
         {
             //Switch on the button visibility
-            switch(addColumn.Visibility)
+            switch (addColumn.Visibility)
             {
                 case Visibility.Hidden:
                     addColumn.Visibility = Visibility.Visible;

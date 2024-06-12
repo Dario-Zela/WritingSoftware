@@ -193,6 +193,10 @@
     <Compile Include="CustomControls\TableElement.xaml.cs">
       <DependentUpon>TableElement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\ViewModel\StoryElementViewModel.cs" />
+    <Compile Include="MVVM\View\StoryElementView.xaml.cs">
+      <DependentUpon>StoryElementView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ThemeExtentions\FolderGridExtentions.cs" />
     <Compile Include="ThemeExtentions\TextBoxExtentions.cs" />
     <Page Include="CustomControls\ListBoxElement.xaml">
@@ -239,6 +243,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MVVM\View\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\StoryElementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -311,7 +319,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DisplayControls\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\fire.png" />
   </ItemGroup>

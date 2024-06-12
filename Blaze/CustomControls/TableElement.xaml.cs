@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Data;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Blaze.CustomControls
 {
@@ -48,8 +36,8 @@ namespace Blaze.CustomControls
         }
 
         //The row number property
-        private int rowNum  = 1;
-        public string RowNum 
+        private int rowNum = 1;
+        public string RowNum
         {
             get
             {
@@ -210,7 +198,7 @@ namespace Blaze.CustomControls
             TableSettings.Visibility = Visibility.Collapsed;
 
             //If the new value is less then the current it deletes them
-            if(data.Columns.Count - colNum > 0)
+            if (data.Columns.Count - colNum > 0)
             {
                 for (int i = colNum; i < data.Columns.Count; i++)
                 {

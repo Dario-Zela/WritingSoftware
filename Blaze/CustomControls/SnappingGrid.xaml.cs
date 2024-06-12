@@ -1,13 +1,6 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Markup;
-using System.Xml;
 
 namespace Blaze.CustomControls
 {
@@ -55,7 +48,7 @@ namespace Blaze.CustomControls
             Container.Children.Add(element);
         }
 
-        private Thickness AddThickness(Thickness thickness1, Thickness thickness2) 
+        private Thickness AddThickness(Thickness thickness1, Thickness thickness2)
         {
             return new Thickness(thickness1.Left + thickness2.Left, thickness1.Top + thickness2.Top,
                                  thickness1.Right + thickness2.Right, thickness1.Bottom + thickness2.Bottom);
@@ -63,10 +56,10 @@ namespace Blaze.CustomControls
 
         //To be changed
         //Adds a new pannel to the grid
-        public StatisticsPannel AddNewPannel()
+        public TextPannel AddNewPannel()
         {
             //Adds a text pannel
-            var pannel = new StatisticsPannel
+            var pannel = new TextPannel
             {
                 //Define default values
                 Width = 250,

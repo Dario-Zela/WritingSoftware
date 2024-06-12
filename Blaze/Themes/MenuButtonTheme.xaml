@@ -199,7 +199,8 @@
                         <!-- Outer Border -->
 
                         <Border Name="Toggle"
-                                Background="#FF3F3F3F">
+                                Background="#FF3F3F3F"
+                                Margin="0,0,0,10">
                             <Grid Margin="13,10,13,10">
 
                                 <!-- Toggle Button -->
@@ -219,13 +220,13 @@
                                      Value="True">
                                 <Setter TargetName="Toggle"
                                         Property="Background"
-                                        Value="#222100" />
+                                        Value="#272537" />
                             </Trigger>
                             <Trigger Property="IsSelected"
                                      Value="True">
                                 <Setter TargetName="Toggle"
                                         Property="Background"
-                                        Value="#22202f" />
+                                        Value="#272537" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -268,7 +269,7 @@
                         <!-- Outer Border -->
 
                         <Border Name="Toggle"
-                                Background="#FF3F3F3F">
+                                Background="#272537">
                             <Grid Margin="13,10,13,10">
 
                                 <!-- Toggle -->
@@ -288,13 +289,13 @@
                                      Value="True">
                                 <Setter TargetName="Toggle"
                                         Property="Background"
-                                        Value="#222100" />
+                                        Value="#FF3F3F3F" />
                             </Trigger>
                             <Trigger Property="IsSelected"
                                      Value="True">
                                 <Setter TargetName="Toggle"
                                         Property="Background"
-                                        Value="#22202f" />
+                                        Value="#FF3F3F3F" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

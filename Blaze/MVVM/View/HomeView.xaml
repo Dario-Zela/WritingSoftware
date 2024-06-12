@@ -11,9 +11,9 @@
              d:DesignHeight="450"
              d:DesignWidth="810">
 
-    <StackPanel>
+    <DockPanel>
         <!-- Main Grid -->
-        <Grid Margin="0,0,0,20">
+        <Grid Margin="0,0,0,20" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70" />
                 <RowDefinition />
@@ -47,7 +47,7 @@
             <Border Margin="0,0,10,0"
                     BorderBrush="White"
                     BorderThickness="0,0,1,0"
-                    Grid.Row="1">
+                    Grid.Row="1" >
                 <TabControl Style="{DynamicResource ToggleTabControl}"
                             Background="Transparent"
                             BorderThickness="0"
@@ -57,11 +57,9 @@
 
                     <TabItem Header="Activity"
                              x:Name="Activity">
+
                         <ListBox ItemContainerStyle="{StaticResource ListBoxItemToggle}"
                                  Style="{StaticResource ListBoxToggle}">
-                            <TextBlock Text="Earlier This Month"
-                                       Foreground="White"
-                                       Margin="0,-5,0,-10" />
                             <ListBoxItem Content="Test" />
                             <ListBoxItem Content="Test" />
                             <ListBoxItem Content="Test" />
@@ -167,7 +165,7 @@
                                     <Setter Property="Content"
                                             Value="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Setter Property="Extentions:ImageSourceExtention.Property"
-                                            Value="{Binding ProjectImage}" />
+                                            Value="{Binding ProjectImage, TargetNullValue={x:Null}}" />
 
                                 </Style>
                             </ListBox.ItemContainerStyle>
@@ -176,5 +174,5 @@
                 </Grid>
             </StackPanel>
         </Grid>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

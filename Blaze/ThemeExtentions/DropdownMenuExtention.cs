@@ -88,5 +88,4 @@ namespace Blaze.Extentions
     }
     public class Placement : IExtention<PlacementMode, Placement> { }
     public class MaterialDesignIcon : IExtention<PackIconMaterialDesignKind, MaterialDesignIcon> { }
-
 }

@@ -7,7 +7,6 @@ namespace Blaze.Core
     public class Project : Observable
     {
         private string _name;
-
         private static DependencyProperty NameProperty = DependencyProperty.Register(
                         "Name", typeof(string), typeof(Project),
                         new PropertyMetadata(NamePropertyChanged));
@@ -15,11 +14,9 @@ namespace Blaze.Core
 
         private static void NamePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            Project project = d as Project;
-
             string value = (string)e.NewValue;
+            if (!(d is Project project)) { return; }
 
-            if (project == null) { return; }
             if (project._name == null)
             {
                 project._name = value;
@@ -29,16 +26,16 @@ namespace Blaze.Core
             if (value == null || string.IsNullOrWhiteSpace(value))
                 return;
 
-            if (File.Exists(project._projectPath + "\\ProjectMetadata.bz"))
+            if (File.Exists(project._projectPath))
             {
-                using (var stream = File.Open(project._projectPath + "\\ProjectMetadata.bz", FileMode.Open))
+                using (var stream = File.Open(project._projectPath, FileMode.Open))
                 {
                     BinaryWriter writer = new BinaryWriter(stream);
-                    project._name = value;
-                    writer.Write(project._name);
+                    writer.Write(value);
                     writer.Write(project._linkedProjects);
                     writer.Write(project._dateCreated.ToBinary());
                     writer.Write(project._manualSortingPosition);
+                    writer.Write(project._projectImage);
                 }
             }
 
@@ -91,11 +88,13 @@ namespace Blaze.Core
         private string _projectImage;
         public string ProjectImage
         {
-            get { return _projectImage; }
+            get 
+            {
+                return File.Exists(_projectImage) ? _projectImage : null;
+            }
             set
             {
                 _projectImage = value;
-                ProjectLibrary.Sort();
             }
         }
 
@@ -116,25 +115,26 @@ namespace Blaze.Core
         {
 
             ProjectPath = path;
-            ProjectImage = path + "\\ProjectImage.jpg";
 
-            if (File.Exists(path + "\\ProjectMetadata.bz"))
+            if (File.Exists(path))
             {
-                using (var stream = File.Open(path + "\\ProjectMetadata.bz", FileMode.Open))
+                using (var stream = File.Open(path, FileMode.Open))
                 {
+
                     BinaryReader reader = new BinaryReader(stream);
                     Name = reader.ReadString();
                     _linkedProjects = reader.ReadInt32();
                     _dateCreated = DateTime.FromBinary(reader.ReadInt64());
                     _manualSortingPosition = reader.ReadInt32();
+                    ProjectImage = reader.ReadString();
                 }
             }
             else
             {
-                using (var stream = File.Open(path + "\\ProjectMetadata.bz", FileMode.Create))
+                using (var stream = File.Open(path + $@"{Guid.NewGuid()}.bz", FileMode.Create))
                 {
                     BinaryWriter writer = new BinaryWriter(stream);
-                    Name = path.Remove(0, ProjectLibrary.PATH.Length);
+                    Name = "New Project";
 
                     writer.Write(Name);
                     writer.Write(0);
@@ -143,11 +143,10 @@ namespace Blaze.Core
                     _dateCreated = DateTime.Now;
                     writer.Write(DateCreated.ToBinary());
 
-                    string Position = Name.Remove(0, "Project".Length);
-                    Position = Position != "" ? Position : "0";
+                    _manualSortingPosition = ProjectLibrary.projects.Count;
+                    writer.Write(ProjectLibrary.projects.Count);
 
-                    _manualSortingPosition = int.Parse(Position);
-                    writer.Write(int.Parse(Position));
+                    writer.Write("none");
                 }
             }
         }

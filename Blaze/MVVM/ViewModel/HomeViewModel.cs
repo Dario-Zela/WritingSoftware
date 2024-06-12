@@ -7,9 +7,9 @@ namespace Blaze.MVVM.ViewModel
         //New Projects command
         public RelayCommand NewProject { get; set; }
 
-
         public HomeViewModel()
         {
+
             NewProject = new RelayCommand(o => ProjectLibrary.NewProject());
         }
     }

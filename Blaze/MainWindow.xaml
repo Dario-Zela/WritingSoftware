@@ -6,7 +6,8 @@
         xmlns:viewmodels="clr-namespace:Blaze.MVVM.ViewModel"
         xmlns:Extentions="clr-namespace:Blaze.Extentions"
         xmlns:local="clr-namespace:Blaze"
-        xmlns:custom="clr-namespace:Blaze.CustomControls"
+        xmlns:custom="clr-namespace:Blaze.MVVM.View"
+        xmlns:user ="clr-namespace:Blaze.CustomControls"
         mc:Ignorable="d"
         Height="600"
         Width="900"
@@ -49,7 +50,7 @@
                         Grid.Column="2"
                         Orientation="Horizontal"
                         WindowChrome.IsHitTestVisibleInChrome="True">
-                
+
                 <!-- Minimise-->
 
                 <Button Extentions:Codicons.Property="ChromeMinimize"
@@ -61,7 +62,7 @@
                         Foreground="White"
                         Style="{StaticResource ButtonWithIcon}"
                         Command="{Binding Minimise}" />
-                
+
                 <!-- Maximise -->
 
                 <Button Extentions:Codicons.Property="ChromeMaximize"
@@ -87,18 +88,11 @@
                         Style="{StaticResource ButtonWithIcon}"
                         Command="{Binding Close}" />
             </StackPanel>
-                
-            
-            <custom:SnappingGrid Grid.Row="2"
-                                 Grid.ColumnSpan="2" />
 
             <!-- Current Window View -->
 
-            <!--
-            <ContentControl Grid.Row="2"
-                            Grid.ColumnSpan="2"
-                            Content="{Binding CurrentView}" />
-            -->
+            <custom:HomeView Grid.Row="1" 
+                               Grid.ColumnSpan="2"/>
         </Grid>
     </Border>
 </Window>

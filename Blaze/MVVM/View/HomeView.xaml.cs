@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using Blaze.Core;
+using Blaze.MVVM.ViewModel;
 
 namespace Blaze.MVVM.View
 {
@@ -10,9 +11,14 @@ namespace Blaze.MVVM.View
     /// </summary>
     public partial class HomeView : UserControl
     {
+        HomeViewModel ViewModel { get; set; }
+
         public HomeView()
         {
             InitializeComponent();
+            ViewModel = new HomeViewModel();
+            DataContext = ViewModel;
+
             NewLinkedProject.ItemsSource = (ObservableCollection<Project>)ProjectLibrary.projects;
             ExistingProjects.ItemsSource = (ObservableCollection<Project>)ProjectLibrary.projects;
 

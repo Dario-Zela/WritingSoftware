@@ -25,6 +25,10 @@
                 <view:HomeView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:StoryElementViewModel}">
+                <view:StoryElementView />
+            </DataTemplate>
+
         </ResourceDictionary>
         
     </Application.Resources>

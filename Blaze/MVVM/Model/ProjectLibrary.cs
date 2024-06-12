@@ -44,9 +44,6 @@ namespace Blaze.Core
         //The sorting type
         private static int _sortingMethod = 0;
 
-        //The next number added to a new project
-        private static int NewNumber = 0;
-
         //Instantiator
         public static void InitiateLibrary()
         {
@@ -54,16 +51,11 @@ namespace Blaze.Core
             if (projects != null) return;
 
             //Get all of the projects
-            string[] existingProjects = Directory.GetDirectories(PATH);
+            string[] existingProjects = Directory.GetFiles(PATH);
             projects = new ProjectCollection();
 
             foreach (string projectPath in existingProjects)
             {
-                if (projectPath.Remove(0, PATH.Length + "Project".Length) == ((NewNumber > 0) ? " " + NewNumber.ToString() : ""))
-                {
-                    NewNumber++;
-                }
-
                 projects.Add(new Project(projectPath));
             }
 
@@ -86,20 +78,8 @@ namespace Blaze.Core
         //Method to create a new project
         public static void NewProject()
         {
-            //Creates a new folder with the correct project
-            var foulderName = Path.Combine(PATH, "Project " + ((NewNumber > 0) ? NewNumber.ToString() : ""));
-
-            Directory.CreateDirectory(foulderName);
-            projects.Add(new Project(foulderName));
-
-            //Check what the next project number is in case projects have been deleted or renamed
-            foreach (Project project in projects)
-            {
-                if (project.ProjectPath.Remove(0, PATH.Length + "Project".Length) == ((NewNumber > 0) ? " " + NewNumber.ToString() : ""))
-                {
-                    NewNumber++;
-                }
-            }
+            //Creates a new file
+            projects.Add(new Project(PATH));
 
             //Sort the projects
             Sort();
