@@ -175,54 +175,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CustomControls\ListBoxElement.xaml.cs">
-      <DependentUpon>ListBoxElement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\Pannel.xaml.cs">
-      <DependentUpon>Pannel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\RichTextBox.xaml.cs">
-      <DependentUpon>RichTextBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\SnappingGrid.xaml.cs">
-      <DependentUpon>SnappingGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\StatisticsElement.xaml.cs">
-      <DependentUpon>StatisticsElement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\TableElement.xaml.cs">
-      <DependentUpon>TableElement.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MVVM\ViewModel\StoryElementViewModel.cs" />
-    <Compile Include="MVVM\View\StoryElementView.xaml.cs">
-      <DependentUpon>StoryElementView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ThemeExtentions\FolderGridExtentions.cs" />
-    <Compile Include="ThemeExtentions\TextBoxExtentions.cs" />
-    <Page Include="CustomControls\ListBoxElement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomControls\Pannel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomControls\RichTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomControls\SnappingGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomControls\StatisticsElement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomControls\TableElement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -231,99 +183,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ThemeExtentions\ButtonExtentions.cs" />
-    <Compile Include="ThemeExtentions\DropdownMenuExtention.cs" />
-    <Compile Include="Core\ExtentionProperty.cs" />
-    <Compile Include="Core\Observable.cs" />
-    <Compile Include="MVVM\Model\Project.cs" />
-    <Compile Include="MVVM\Model\ProjectLibrary.cs" />
-    <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MVVM\View\HomeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MVVM\View\StoryElementView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Button.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\CustomScrollViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\DefaultTextBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\DropDownMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\FolderGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\MenuButtonTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\SearchBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MVVM\ViewModel\HomeViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
-    <Compile Include="MVVM\View\HomeView.xaml.cs">
-      <DependentUpon>HomeView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <Resource Include="Fonts\Ubuntu-Bold.ttf" />
-    <Resource Include="Fonts\Ubuntu-BoldItalic.ttf" />
-    <Resource Include="Fonts\Ubuntu-Italic.ttf" />
-    <Resource Include="Fonts\Ubuntu-Light.ttf" />
-    <Resource Include="Fonts\Ubuntu-LightItalic.ttf" />
-    <Resource Include="Fonts\Ubuntu-Medium.ttf" />
-    <Resource Include="Fonts\Ubuntu-MediumItalic.ttf" />
-    <Resource Include="Fonts\Ubuntu-Regular.ttf" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DisplayControls\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\fire.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
