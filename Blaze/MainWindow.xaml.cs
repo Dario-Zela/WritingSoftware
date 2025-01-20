@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Blaze.Core;
 using MahApps.Metro.IconPacks;
 
 namespace Blaze
@@ -9,8 +10,10 @@ namespace Blaze
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool _isLight = true;
         public MainWindow()
         {
+
             InitializeComponent();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
@@ -25,6 +28,20 @@ namespace Blaze
             {
                 BorderThickness = new Thickness(0);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var app = (App)Application.Current;
+            if (_isLight == true)
+            {
+                app.ChangeTheme(0);
+            }
+            else
+            {
+                app.ChangeTheme(1);
+            }
+            _isLight = !_isLight;
         }
     }
 }

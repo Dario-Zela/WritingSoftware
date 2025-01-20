@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- Color Pallet -->
+    <SolidColorBrush x:Key="ApplicationPrimaryBrush"
+                     Color="#FF901E" />
+    <SolidColorBrush x:Key="ApplicationSecondaryBrush"
+                     Color="#112B3C" />
+    <SolidColorBrush x:Key="ApplicationSurfaceBrush"
+                     Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ApplicationBackgroundBrush"
+                     Color="#112B3C" />
+    <SolidColorBrush x:Key="ApplicationErrorBrush"
+                     Color="#E61C1C" />
+
+    <!-- Text and Icon Colors -->
+    <SolidColorBrush x:Key="OnApplicationPrimaryBrush"
+                     Color="#FFFFFF" />
+    <SolidColorBrush x:Key="OnApplicationSecondaryBrush"
+                     Color="#FFFFFF" />
+    <SolidColorBrush x:Key="OnApplicationSurfaceBrush"
+                     Color="#112B3C" />
+    <SolidColorBrush x:Key="OnApplicationBackgroundBrush"
+                     Color="#FFFFFF" />
+    <SolidColorBrush x:Key="OnApplicationErrorBrush"
+                     Color="#FFFFFF" />
+
+    <!-- Text  -->
+    <FontFamily x:Key="ApplicationHeaderFont">Miriam</FontFamily>
+    <sys:Double x:Key="ApplicationHeaderFontSize">48</sys:Double>
+
+    <FontFamily x:Key="ApplicationBodyFont">Ariel</FontFamily>
+    <sys:Double x:Key="ApplicationBodyFontSize">18</sys:Double>
+
+    <FontFamily x:Key="ApplicationButtonFont">Ariel</FontFamily>
+    <sys:Double x:Key="ApplicationButtonFontSize">16</sys:Double>
+</ResourceDictionary>

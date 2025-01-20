@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blaze"
+        xmlns:theme="clr-namespace:Blaze.View.Windows.Theme"
         mc:Ignorable="d"
         Height="600"
         Width="900"
@@ -22,7 +23,7 @@
     </WindowChrome.WindowChrome>
 
 
-    <Border Background="#272537">
+    <Border Background="{DynamicResource ApplicationBackgroundBrush}">
         <Grid Margin="10,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
@@ -44,15 +45,15 @@
 
                 <Button Width="30"
                         Height="30"
-                        Background="Transparent"
+                        Background="White"
                         Foreground="White"
-                        Command="{Binding Minimise}" />
+                        Click="Button_Click" />
 
                 <!-- Maximise -->
 
                 <Button Width="30"
                         Height="30"
-                        Background="Transparent"
+                        Background="{DynamicResource OnApplicationBackgroundBrush}"
                         Foreground="White"
                         x:Name="MaximiseButton"
                         Command="{Binding Maximise}" />
@@ -61,11 +62,13 @@
 
                 <Button Width="30"
                         Height="30"
-                        Background="Transparent"
+                        Background="{DynamicResource OnApplicationBackgroundBrush}"
                         Foreground="White"
                         Command="{Binding Close}" />
             </StackPanel>
-
+                
+            <theme:ThemeLibrary Grid.ColumnSpan="2"
+                                Grid.Row="1"/>
         </Grid>
     </Border>
 </Window>
