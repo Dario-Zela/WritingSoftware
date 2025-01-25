@@ -1,0 +1,95 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:Blaze.Core"
+                    xmlns:UIElements="clr-namespace:Blaze.UIElements">
+    <converter:Multiplier x:Key="Multiplier"/>
+    <Style TargetType="TextBox" x:Key="Header">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <TextBox Background="Transparent"
+                             Foreground="{TemplateBinding Foreground}"
+                             TextWrapping="Wrap"
+                             FontFamily="{TemplateBinding FontFamily}"
+                             FontSize="{TemplateBinding FontSize}"
+                             FontWeight="DemiBold"
+                             Text="{TemplateBinding Text}"
+                             IsReadOnly="True"
+                             BorderThickness="0"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="Header2">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <TextBox Background="Transparent"
+                             Foreground="{TemplateBinding Foreground}"
+                             TextWrapping="Wrap"
+                             FontFamily="{TemplateBinding FontFamily}"
+                             FontSize="{TemplateBinding FontSize, Converter={StaticResource Multiplier}, ConverterParameter=0.641}"
+                             FontWeight="DemiBold"
+                             Text="{TemplateBinding Text}"
+                             IsReadOnly="True"
+                             BorderThickness="0"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="Body">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <TextBox Background="Transparent"
+                             Foreground="{TemplateBinding Foreground}"
+                             TextWrapping="Wrap"
+                             FontFamily="{TemplateBinding FontFamily}"
+                             FontSize="{TemplateBinding FontSize}"
+                             FontWeight="{TemplateBinding FontWeight}"
+                             Text="{TemplateBinding Text}"
+                             IsReadOnly="True"
+                             BorderThickness="0"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="Body2">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <TextBox Background="Transparent"
+                             Foreground="{TemplateBinding Foreground}"
+                             TextWrapping="Wrap"
+                             FontFamily="{TemplateBinding FontFamily}"
+                             FontSize="{TemplateBinding FontSize, Converter={StaticResource Multiplier}, ConverterParameter=0.875}"
+                             FontWeight="{TemplateBinding FontWeight}"
+                             Text="{TemplateBinding Text}"
+                             IsReadOnly="True"
+                             BorderThickness="0"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="Body3">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <TextBox Background="Transparent"
+                             Foreground="{TemplateBinding Foreground}"
+                             TextWrapping="Wrap"
+                             FontFamily="{TemplateBinding FontFamily}"
+                             FontSize="{TemplateBinding FontSize, Converter={StaticResource Multiplier}, ConverterParameter=0.75}"
+                             FontWeight="{TemplateBinding FontWeight}"
+                             Text="{TemplateBinding Text}"
+                             IsReadOnly="True"
+                             BorderThickness="0"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

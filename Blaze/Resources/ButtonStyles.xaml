@@ -1,0 +1,74 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:UIElements="clr-namespace:Blaze.UIElements">
+    <Style TargetType="UIElements:CustomButton" x:Key="NormalButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="UIElements:CustomButton">
+                    <UIElements:CustomButton Background="{TemplateBinding Background}"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             HoverColor="{TemplateBinding Background}"
+                                             Command="{TemplateBinding Command}"
+                                             CommandParameter="{TemplateBinding CommandParameter}"
+                                             Content="{TemplateBinding Content}"
+                                             BorderThickness="0"
+                                             FontFamily="{TemplateBinding FontFamily}"
+                                             FontSize="{TemplateBinding FontSize}"
+                                             FontWeight="DemiBold"
+                                             CornerRadius="5"
+                                             Padding="10,5,10,5"
+                                             VerticalContentAlignment="Center"
+                                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                             VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="UIElements:CustomButton" x:Key="AlternateButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="UIElements:CustomButton">
+                    <UIElements:CustomButton Background="{TemplateBinding Background}"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             HoverColor="{TemplateBinding Background}"
+                                             Command="{TemplateBinding Command}"
+                                             CommandParameter="{TemplateBinding CommandParameter}"
+                                             BorderThickness="1"
+                                             BorderBrush="{TemplateBinding Foreground}"
+                                             Content="{TemplateBinding Content}"
+                                             FontFamily="{TemplateBinding FontFamily}"
+                                             FontSize="{TemplateBinding FontSize}"
+                                             FontWeight="DemiBold"
+                                             CornerRadius="5"
+                                             Padding="10,5,10,5"
+                                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                             VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="UIElements:CustomButton" x:Key="TextButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="UIElements:CustomButton">
+                    <UIElements:CustomButton Background="{TemplateBinding Background}"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             HoverColor="{TemplateBinding Background}"
+                                             BorderThickness="0"
+                                             Command="{TemplateBinding Command}"
+                                             CommandParameter="{TemplateBinding CommandParameter}"
+                                             Content="{TemplateBinding Content}"
+                                             FontFamily="{TemplateBinding FontFamily}"
+                                             FontSize="{TemplateBinding FontSize}"
+                                             FontWeight="DemiBold"
+                                             CornerRadius="5"
+                                             Padding="10,5,10,5"
+                                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                             VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

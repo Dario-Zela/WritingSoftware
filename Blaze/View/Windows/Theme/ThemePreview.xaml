@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="Blaze.View.Windows.Theme.ThemePreview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Blaze.View.Windows.Theme"
+             mc:Ignorable="d" 
+             xmlns:converter="clr-namespace:Blaze.Core"
+             xmlns:UIElements="clr-namespace:Blaze.UIElements"
+             xmlns:Model="clr-namespace:Blaze.Model"
+             d:DataContext="{d:DesignInstance Type=Model:Theme}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+        <converter:ColorIntensityConverter x:Key="ColorIntensityConverter" />
+        <converter:ColorToBrushConverter x:Key="BrushConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Border Background="{DynamicResource ApplicationSurfaceBrush}"
+                Margin="10"
+                Padding="10"
+                CornerRadius="10">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" />
+            </Border.Effect>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <TextBox Text="Preview"
+                                         Style="{DynamicResource Header2}"
+                       Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                       FontSize="{DynamicResource ApplicationHeaderFontSize}"
+                       FontFamily="{DynamicResource ApplicationHeaderFont}"/>
+                    <Separator Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                </StackPanel>
+                <Border Background="{Binding SurfaceColor, Converter={StaticResource BrushConverter}}"
+                            BorderThickness="1"
+                            CornerRadius="2"
+                        Grid.Row="1"
+                        Margin="0,20,0,0"
+                        VerticalAlignment="Stretch"
+                            BorderBrush="{Binding SecondaryColor, Converter={StaticResource BrushConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Border Name="mask" 
+                                    Background="{Binding SurfaceColor, Converter={StaticResource BrushConverter}}"
+                                    CornerRadius="2"
+                                    BorderThickness="0"/>
+                            <Grid>
+                                <Grid.OpacityMask>
+                                    <VisualBrush Visual="{Binding ElementName=mask}"/>
+                                </Grid.OpacityMask>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                              VerticalScrollBarVisibility="Disabled">
+                                    <Grid Margin="0,0,1,0">
+                                        <Border Background="{Binding SurfaceColor, Converter={StaticResource BrushConverter}}"
+                                                 Margin="0,0,1,0">
+                                            <Border.Effect>
+                                                <DropShadowEffect BlurRadius="10" ShadowDepth="5" Direction="90"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <TextBox Text="Sidebar"
+                                                 Margin="0,10,0,0"
+                                                   HorizontalAlignment="Center"
+                                                   Foreground="{Binding OnSurfaceColor, Converter={StaticResource BrushConverter}}"
+                                                         Style="{DynamicResource Header2}"
+                                                   FontSize="{Binding HeaderFontSize}"
+                                                   FontFamily="{Binding HeaderFont}"/>
+                                    </Grid>
+
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+
+                        <Border Background="{Binding BackgroundColor, Converter={StaticResource BrushConverter}}"
+                            Grid.Column="1">
+                            <Grid>
+                                <Border Background="{Binding SurfaceColor, Converter={StaticResource BrushConverter}}"
+                                    CornerRadius="10"
+                                        Margin="10"
+                                        Padding="10">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
+                                    </Border.Effect>
+                                </Border>
+                                <StackPanel Margin="20">
+                                    <TextBox Text="A Text Pannel"
+                                            Foreground="{Binding OnSurfaceColor, Converter={StaticResource BrushConverter}}"
+                                            FontSize="{Binding HeaderFontSize}"
+                                                    Margin="0,10,0,10"
+                                            Style="{DynamicResource Header2}"
+                                            FontFamily="{Binding HeaderFont}"/>
+
+                                    <TextBox Text="Here's what a text panel would look like."
+                                            Foreground="{Binding OnSurfaceColor, Converter={StaticResource BrushConverter}}"
+                                            FontSize="{Binding BodyFontSize}"
+                                            Style="{DynamicResource Body3}"
+                                            TextWrapping="Wrap"
+                                            FontFamily="{Binding BodyFont}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

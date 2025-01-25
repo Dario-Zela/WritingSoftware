@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using Blaze.Core;
+using Blaze.View.Windows.Theme;
 using MahApps.Metro.IconPacks;
 
 namespace Blaze
@@ -11,11 +13,42 @@ namespace Blaze
     public partial class MainWindow : Window
     {
         private bool _isLight = true;
+
+        public static MainWindow Instance { get; private set; }
+
+        public bool IsMaximised
+        {
+            get { return (bool)GetValue(IsMaximisedProperty); }
+            set { SetValue(IsMaximisedProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsMaximisedProperty =
+            DependencyProperty.Register("IsMaximised", typeof(bool), typeof(MainWindow));
+
+        //Commands for the window controls
+        public RelayCommand Close { get; set; }
+        public RelayCommand Maximise { get; set; }
+        public RelayCommand Minimise { get; set; }
+
         public MainWindow()
         {
-
             InitializeComponent();
             MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            IsMaximised = false;
+            DataContext = this;
+            Instance = this;
+            Holder.Children.Add(new ThemeLibrary());
+
+            //Adding methods to the commands
+            Close = new RelayCommand(o => { Application.Current.Shutdown(); });
+            Maximise = new RelayCommand(o => Maximise_Command());
+            Minimise = new RelayCommand(o => { Application.Current.MainWindow.WindowState = WindowState.Minimized; });
+        }
+
+        public static void ChangeScene(UIElement element)
+        {
+            MainWindow.Instance.Holder.Children.Clear();
+            MainWindow.Instance.Holder.Children.Add(element);
         }
 
         protected void Window_StateChanged(object sender, EventArgs e)
@@ -23,10 +56,12 @@ namespace Blaze
             if (WindowState == WindowState.Maximized)
             {
                 BorderThickness = new Thickness(6);
+                IsMaximised = true;
             }
             else if (WindowState == WindowState.Normal)
             {
                 BorderThickness = new Thickness(0);
+                IsMaximised = false;
             }
         }
 
@@ -42,6 +77,19 @@ namespace Blaze
                 app.ChangeTheme(1);
             }
             _isLight = !_isLight;
+        }
+
+        //Maximise method
+        private void Maximise_Command()
+        {
+            if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+            {
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            }
         }
     }
 }

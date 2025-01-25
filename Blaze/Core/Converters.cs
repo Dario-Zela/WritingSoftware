@@ -7,19 +7,35 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
 using System.Windows.Media;
+using MahApps.Metro.IconPacks.Converter;
+using System.Windows.Controls;
+using System.Diagnostics;
 
 namespace Blaze.Core
 {
     [ValueConversion(typeof(SolidColorBrush), typeof(SolidColorBrush))]
     public class ColorIntensifier : IValueConverter
     {
+        private double CheckIntensity(Color color)
+        {
+            return ((double)color.R + (double)color.G + (double)color.B) / (265 * 3);
+        }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var intensty = float.Parse((string)parameter);
             SolidColorBrush brush = (SolidColorBrush)value;
-            if(brush == null)
+            if (brush == null)
             {
                 return brush;
+            }
+            if (CheckIntensity(brush.Color) < 0.5)
+            {
+                intensty = intensty < 1 ? 1 / intensty : intensty;
+            }
+            else
+            {
+                intensty = intensty > 1 ? 1 / intensty : intensty;
             }
             var changedColor = brush.Color * intensty;
             changedColor.A = brush.Color.A;
@@ -59,6 +75,48 @@ namespace Blaze.Core
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    [ValueConversion(typeof(bool), typeof(bool))]
+    public class BooleanInverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return !((bool)value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return !((bool)value);
+        }
+    }
+
+    [ValueConversion(typeof(Color), typeof(SolidColorBrush))]
+    public class ColorToBrushConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return new SolidColorBrush((Color)value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    [ValueConversion(typeof(SolidColorBrush), typeof(Brush))]
+    public class ColorBrushToBrushConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((SolidColorBrush)value as Brush);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((Brush)value as SolidColorBrush);
         }
     }
 
@@ -117,6 +175,60 @@ namespace Blaze.Core
             if (Equals(value, FalseValue))
                 return false;
             return null;
+        }
+    }
+
+    [ValueConversion(typeof(SolidColorBrush), typeof(Brush))]
+    public class SolidBrushToBrushConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((SolidColorBrush)value) as Brush;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((SolidColorBrush)value);
+        }
+    }
+
+    [ValueConversion(typeof(Double), typeof(Double))]
+    public class Adder : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var adder = Double.Parse((string)parameter);
+            return (Double)value + adder;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var adder = Double.Parse((string)parameter);
+            return (Double)value - adder;
+        }
+    }
+
+    [ValueConversion(typeof(Double), typeof(Double))]
+    public class Multiplier : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var mult = Double.Parse((string)parameter);
+            return (Double)value * mult;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var mult = Double.Parse((string)parameter);
+            return (Double)value / mult;
+        }
+    }
+
+    public class IconToImageConverter : PackIconKindToImageConverter
+    {
+        public ImageSource ConvertIcon(object iconKind, Brush foregroundBrush)
+        {
+            return CreateImageSource(iconKind, foregroundBrush);
         }
     }
 }

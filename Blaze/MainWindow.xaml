@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blaze"
         xmlns:theme="clr-namespace:Blaze.View.Windows.Theme"
+        xmlns:UIElements="clr-namespace:Blaze.UIElements"
+        xmlns:converter="clr-namespace:Blaze.Core"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Height="600"
         Width="900"
@@ -22,9 +25,8 @@
         <WindowChrome />
     </WindowChrome.WindowChrome>
 
-
     <Border Background="{DynamicResource ApplicationBackgroundBrush}">
-        <Grid Margin="10,0,0,0">
+        <Grid Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition />
@@ -43,32 +45,54 @@
 
                 <!-- Minimise-->
 
-                <Button Width="30"
-                        Height="30"
-                        Background="White"
-                        Foreground="White"
-                        Click="Button_Click" />
+                <UIElements:CustomButton Width="30"
+                                        Height="30"
+                                         VerticalContentAlignment="Bottom"
+                                         Padding="5"
+                                         BorderThickness="0"
+                                        Background="{DynamicResource ApplicationSecondaryBrush}"
+                                        Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                         HoverColor="{DynamicResource ApplicationSecondaryBrush}"
+                                        Command="{Binding Minimise}" >
+                    <UIElements:Icon Kind="ChromeMinimize"
+                                     VerticalAlignment="Bottom"
+                                     Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
+                </UIElements:CustomButton>
 
                 <!-- Maximise -->
 
-                <Button Width="30"
-                        Height="30"
-                        Background="{DynamicResource OnApplicationBackgroundBrush}"
-                        Foreground="White"
-                        x:Name="MaximiseButton"
-                        Command="{Binding Maximise}" />
+                <UIElements:CustomButton Width="30"
+                                        Height="30"
+                                         BorderThickness="0"
+                                        Background="{DynamicResource ApplicationSecondaryBrush}"
+                                        Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                         HoverColor="{DynamicResource ApplicationSecondaryBrush}"
+                                         Padding="5"
+                                        x:Name="MaximiseButton"
+                                        Command="{Binding Maximise}" >
+                    <UIElements:ChangingIcon FirstKind="ChromeMaximize"
+                                             SecondKind="ChromeRestore"
+                                             Change="{Binding IsMaximised, RelativeSource={RelativeSource AncestorType=local:MainWindow}}"
+                                             Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                             ActiveForeground="{DynamicResource OnApplicationSecondaryBrush}"/>
+                </UIElements:CustomButton>
 
                 <!-- Close -->
 
-                <Button Width="30"
-                        Height="30"
-                        Background="{DynamicResource OnApplicationBackgroundBrush}"
-                        Foreground="White"
-                        Command="{Binding Close}" />
+                <UIElements:CustomButton Width="30"
+                                        Height="30"
+                                         Padding="5"
+                                         BorderThickness="0"
+                                         HoverColor="Red"
+                                        Background="{DynamicResource ApplicationSecondaryBrush}"
+                                        Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                        Command="{Binding Close}" >
+                    <UIElements:Icon Kind="ChromeClose" Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
+                </UIElements:CustomButton>
             </StackPanel>
-                
-            <theme:ThemeLibrary Grid.ColumnSpan="2"
-                                Grid.Row="1"/>
+            <Grid x:Name="Holder"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="1"/>
         </Grid>
     </Border>
 </Window>

@@ -7,6 +7,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Template\ApplicationTheme.xaml" />
+                <ResourceDictionary Source="Resources\FontStyles.xaml"/>
+                <ResourceDictionary Source="Resources\ButtonStyles.xaml"/>
+                <ResourceDictionary Source="UIElements\CustomScrollViewer.xaml"/>
                 <ResourceDictionary x:Name="ThemeDictionary">
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="Template\ThemeTemplate.xaml" />

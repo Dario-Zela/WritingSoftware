@@ -1,0 +1,272 @@
+﻿<UserControl x:Class="Blaze.UIElements.ThemeListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Blaze.UIElements"
+             xmlns:converter="clr-namespace:Blaze.Core"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White"
+             d:DataContext="{d:DesignInstance d:Type=local:ThemeListView}"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
+    <UserControl.Resources>
+        <converter:ColorIntensityConverter x:Key="ColorIntensityConverter" />
+        <converter:BoolToVisibilityConverter x:Key="BoolToVis" TrueValue="Visible" FalseValue="Hidden" />
+        <converter:BooleanInverter x:Key="BooleanInverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <ListView x:Name="ContainerListView"
+                  IsEnabled="{Binding IsOpen,ElementName=RenamePopup, Converter={StaticResource BooleanInverter}}">
+            <ListView.Resources>
+                <Style TargetType="{x:Type ListViewItem}" x:Key="ThemeListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border x:Name="Bd"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Margin="{Binding ItemMargin, 
+                                                  RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
+                                        SnapsToDevicePixels="true"
+                                        Cursor="Hand"
+                                        Padding="{Binding ItemPadding, 
+                                                  RelativeSource={RelativeSource AncestorType=local:ThemeListView} }">
+                                    <DockPanel>
+                                        <TextBox HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                 Text="{TemplateBinding Content}"
+                                                 Style="{DynamicResource Body}"
+                                                 FontWeight="DemiBold"
+                                                 FontFamily="{DynamicResource ApplicationBodyFont}" 
+                                                 FontSize="{DynamicResource ApplicationBodyFontSize}" 
+                                                 Cursor="Hand">
+                                            <TextBoxBase.SelectionTextBrush>
+                                                <SolidColorBrush Color="White"/>
+                                            </TextBoxBase.SelectionTextBrush>
+                                        </TextBox>
+                                        <DockPanel HorizontalAlignment="Right"
+                                                    VerticalAlignment="Top">
+                                            <local:CustomButton Background="{DynamicResource ApplicationSecondaryBrush}"
+                                                                Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                                                HoverColor="{DynamicResource ApplicationSecondaryBrush}"
+                                                                Command="{Binding EditTheme, 
+                                                                        RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
+                                                                CommandParameter="{Binding DataContext,
+                                                                        RelativeSource={RelativeSource AncestorType=ListViewItem}}"
+                                                                BorderThickness="0"
+                                                                FontWeight="DemiBold"
+                                                                CornerRadius="5"
+                                                                Padding="10,5,10,5"
+                                                                VerticalContentAlignment="Center"
+                                                                FontFamily="{DynamicResource ApplicationButtonFont}"
+                                                                FontSize="{DynamicResource ApplicationButtonFontSize}"
+                                                                HorizontalAlignment="Right"
+                                                                Content="Edit"
+                                                                VerticalAlignment="Center"
+                                                                Margin="0,0,15,0"
+                                                                Visibility="{TemplateBinding IsSelected, Converter={StaticResource BoolToVis}}"/>
+                                            <local:ButtonPopup Cursor="Arrow"
+                                                                BorderThickness="0"
+                                                               VerticalAlignment="Center"
+                                                               Padding="7"
+                                                               CornerRadius="20"
+                                                               HoverColor="{DynamicResource ApplicationSurfaceBrush}"
+                                                               SelectedBackgroundColor="{DynamicResource ApplicationSurfaceBrush}"
+                                                               x:Name="MoreButton">
+                                                <iconPacks:MaterialDesign Kind="MoreVert"
+                                                                          Width="15"
+                                                                          Height="15"/>
+
+                                            </local:ButtonPopup>
+                                            <Popup x:Name="PopupMenu"
+                                                   IsOpen="{Binding IsChecked, ElementName=MoreButton}"
+                                                    StaysOpen="False"
+                                                    AllowsTransparency="True">
+                                                <local:MenuContent CornerRadius="10"
+                                                                   ItemMargin="10"
+                                                                   Background="{DynamicResource ApplicationSurfaceBrush}"
+                                                                   FontFamily="{DynamicResource ApplicationButtonFont}"
+                                                                   FontSize="{DynamicResource ApplicationButtonFontSize}"
+                                                                   HoverColor="{DynamicResource ApplicationSurfaceBrush}">
+                                                    <local:CustomMenuItem Content="Duplicate Theme"
+                                                                          Command="{Binding DuplicateTheme, 
+                                                                                    RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
+                                                                          CommandParameter="{Binding DataContext,
+                                                                                            RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
+                                                    <local:CustomMenuItem Content="Rename Theme"
+                                                                          Command="{Binding RenameTheme, 
+                                                                                    RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
+                                                                          CommandParameter="{Binding DataContext,
+                                                                                    RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
+                                                    <local:CustomMenuItem Content="Delete Theme"
+                                                                          Command="{Binding DeleteTheme, 
+                                                                                    RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
+                                                                          CommandParameter="{Binding DataContext,
+                                                                                    RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
+                                                </local:MenuContent>
+                                            </Popup>
+                                        </DockPanel>
+                                    </DockPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsMouseOver"
+                                                       Value="True" />
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background"
+                                                TargetName="Bd"
+                                                Value="{Binding ItemMouseOverColor, 
+                                                    Converter={StaticResource ColorIntensityConverter},
+                                                    ConverterParameter=0.5|100,
+                                                     RelativeSource={RelativeSource AncestorType=local:ThemeListView}}" />
+                                    </MultiTrigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsSelected"
+                                                       Value="True" />
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Background"
+                                                TargetName="Bd"
+                                                Value="{Binding ItemSelectedActiveColor,  
+                                                    Converter={StaticResource ColorIntensityConverter},
+                                                    ConverterParameter=0.5|100,
+                                                     RelativeSource={RelativeSource AncestorType=local:ThemeListView}}" />
+                                    </MultiTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.Resources>
+            <ListView.Style>
+                <Style TargetType="ListView">
+                    <Setter Property="ItemContainerStyle" Value="{DynamicResource ThemeListViewItem}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListView">
+                                <Border Background="{Binding Background, 
+                                                     RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
+                                        HorizontalAlignment="Stretch">
+                                    <ItemsPresenter />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.Style>
+        </ListView>
+        <Popup x:Name="RenamePopup"
+               AllowsTransparency="True"
+               StaysOpen="False"
+               Placement="Center">
+            <Grid Margin="10">
+
+                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
+                        Width="400"
+                        CornerRadius="15"
+                        Padding="20"
+                        Height="300">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="15" ShadowDepth="3" Direction="270"/>
+                    </Border.Effect>
+                </Border>
+                <Grid Margin="20">
+                    <StackPanel Margin="0,20,0,20">
+                        <TextBox Style="{DynamicResource Header2}"
+                             Text="Rename Theme"
+                             Foreground="{DynamicResource ApplicationSecondaryBrush}"
+                             FontFamily="{DynamicResource ApplicationHeaderFont}"
+                             FontSize="{DynamicResource ApplicationHeaderFontSize}"
+                             Margin="0,0,0,30"/>
+                        <TextBox Style="{DynamicResource Body3}"
+                             Text="Rename Theme"
+                             Margin="0,0,0,5"
+                             FontWeight="Light"
+                             Foreground="{DynamicResource ApplicationSecondaryBrush}"
+                             FontFamily="{DynamicResource ApplicationBodyFont}"
+                             FontSize="{DynamicResource ApplicationBodyFontSize}"/>
+                        <TextBox Style="{DynamicResource Body}"
+                             Text="Theme Name"
+                                 x:Name="OldNameBox"
+                             FontWeight="DemiBold"
+                             Foreground="{DynamicResource ApplicationSecondaryBrush}"
+                             FontFamily="{DynamicResource ApplicationBodyFont}"
+                             FontSize="{DynamicResource ApplicationBodyFontSize}"
+                             Margin="0,0,0,30"/>
+                        <TextBox Style="{DynamicResource Body3}"
+                             Margin="0,0,0,5"
+                             Text="New Name"
+                             FontWeight="Light"
+                             Foreground="{DynamicResource ApplicationSecondaryBrush}"
+                             FontFamily="{DynamicResource ApplicationBodyFont}"
+                             FontSize="{DynamicResource ApplicationBodyFontSize}"/>
+                        <Border BorderThickness="1"
+                            BorderBrush="{DynamicResource ApplicationSecondaryBrush}"
+                            CornerRadius="5"
+                            Padding="7,3,7,3">
+                            <TextBox x:Name="RenameBox">
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="TextBox">
+                                                    <Grid>
+                                                        <TextBox Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" 
+                                                             BorderThickness="0"
+                                                             FontFamily="{DynamicResource ApplicationBodyFont}"
+                                                             FontSize="{DynamicResource ApplicationBodyFontSize}"
+                                                             FontWeight="DemiBold"/>
+                                                        <TextBlock HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                Text="Enter New Theme Name"
+                                                                Foreground="#FF808080"
+                                                                IsHitTestVisible="False"
+                                                                x:Name="UserMessage"
+                                                               Visibility="Hidden"/>
+                                                    </Grid>
+                                                    <ControlTemplate.Triggers>
+                                                        <MultiTrigger>
+                                                            <MultiTrigger.Conditions>
+                                                                <Condition Property="Text" Value=""/>
+                                                            </MultiTrigger.Conditions>
+                                                            <Setter Property="Visibility" TargetName="UserMessage" Value="Visible"/>
+                                                        </MultiTrigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Border>
+                    </StackPanel>
+                    <DockPanel HorizontalAlignment="Right"
+                               VerticalAlignment="Bottom" Grid.Row="1">
+                        <local:CustomButton Style="{DynamicResource TextButton}"
+                                            Content="Cancel"
+                                            Command="{Binding CloseRenamePopup}"
+                                            Margin="0,0,20,0"
+                                            Background="{DynamicResource ApplicationSurfaceBrush}"
+                                            Foreground="{DynamicResource ApplicationSecondaryBrush}"
+                                            FontFamily="{DynamicResource ApplicationButtonFont}"
+                                            FontSize="{DynamicResource ApplicationButtonFontSize}"
+                                            VerticalContentAlignment="Center"/>
+                        <local:CustomButton Style="{DynamicResource NormalButton}"
+                                            Content="Save"
+                                            Command="{Binding SaveRename}"
+                                            Background="{DynamicResource ApplicationSecondaryBrush}"
+                                            Foreground="{DynamicResource ApplicationSurfaceBrush}"
+                                            FontFamily="{DynamicResource ApplicationButtonFont}"
+                                            FontSize="{DynamicResource ApplicationButtonFontSize}"
+                                            VerticalContentAlignment="Center"/>
+                    </DockPanel>
+                </Grid>
+            </Grid>
+        </Popup>
+    </Grid>
+</UserControl>

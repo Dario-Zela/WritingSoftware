@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              xmlns:converter="clr-namespace:Blaze.Core"
              d:DesignHeight="450" d:DesignWidth="800">
+    <ListView.Resources>
+        <converter:Adder x:Key="Adder" />
+    </ListView.Resources>
+
     <ListView.Style>
         <Style TargetType="ListView">
             <Setter Property="Template">
@@ -15,18 +19,27 @@
                         <Border Background="{Binding Background, 
                                                  RelativeSource={RelativeSource AncestorType=local:MenuContent} }"
                                 CornerRadius="{Binding CornerRadius, 
-                                                 RelativeSource={RelativeSource AncestorType=local:MenuContent} }">
+                                                 RelativeSource={RelativeSource AncestorType=local:MenuContent} }"
+                                BorderThickness="0"
+                                Margin="10,0,10,10">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" />
+                            </Border.Effect>
 
                             <Grid>
-                                <Border Name="mask" Background="{Binding Background, 
+                                <Border Name="mask" 
+                                        Background="{Binding Background, 
                                                  RelativeSource={RelativeSource AncestorType=local:MenuContent} }"
                                         CornerRadius="{Binding CornerRadius, 
-                                                 RelativeSource={RelativeSource AncestorType=local:MenuContent} }"/>
+                                                 RelativeSource={RelativeSource AncestorType=local:MenuContent} }"
+                                        BorderThickness="0"/>
                                 <StackPanel>
                                     <StackPanel.OpacityMask>
                                         <VisualBrush Visual="{Binding ElementName=mask}"/>
                                     </StackPanel.OpacityMask>
-                                    <ItemsPresenter />
+                                    <ScrollViewer Style="{StaticResource CustomScrollViewer}">
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
                                 </StackPanel>
                             </Grid>
                         </Border>
@@ -35,43 +48,4 @@
             </Setter>
         </Style>
     </ListView.Style>
-    <ListView.Resources>
-        <converter:ColorIntensityConverter x:Key="ColorIntensityConverter" />
-        <Style TargetType="{x:Type ListViewItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListViewItem}">
-                        <Button Content="{TemplateBinding Content}">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border x:Name="border"
-                                                Background="{TemplateBinding Background}"
-                                                BorderThickness="0"
-                                                SnapsToDevicePixels="true"
-                                                Cursor="Hand"
-                                                Padding="{Binding ItemMargin, 
-                                            RelativeSource={RelativeSource AncestorType=local:MenuContent} }">
-                                                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                                    </Border>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" TargetName="border" Value="{Binding HoverColor, 
-                                                                                                                    RelativeSource={RelativeSource AncestorType=local:MenuContent},
-                                                                                                                    Converter={StaticResource ColorIntensityConverter}, ConverterParameter=0.4|250}"/>
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </ListView.Resources>
 </ListView>

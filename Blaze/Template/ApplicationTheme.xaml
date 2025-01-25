@@ -27,12 +27,12 @@
                      Color="#FFFFFF" />
 
     <!-- Text  -->
-    <FontFamily x:Key="ApplicationHeaderFont">Miriam</FontFamily>
-    <sys:Double x:Key="ApplicationHeaderFontSize">48</sys:Double>
+    <FontFamily x:Key="ApplicationHeaderFont">Times New Roman</FontFamily>
+    <sys:Double x:Key="ApplicationHeaderFontSize">30</sys:Double>
 
-    <FontFamily x:Key="ApplicationBodyFont">Ariel</FontFamily>
-    <sys:Double x:Key="ApplicationBodyFontSize">18</sys:Double>
+    <FontFamily x:Key="ApplicationBodyFont">Segoe UI</FontFamily>
+    <sys:Double x:Key="ApplicationBodyFontSize">14</sys:Double>
 
-    <FontFamily x:Key="ApplicationButtonFont">Ariel</FontFamily>
-    <sys:Double x:Key="ApplicationButtonFontSize">16</sys:Double>
+    <FontFamily x:Key="ApplicationButtonFont">Segoe UI</FontFamily>
+    <sys:Double x:Key="ApplicationButtonFontSize">14</sys:Double>
 </ResourceDictionary>

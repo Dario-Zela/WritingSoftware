@@ -26,18 +26,18 @@
                      Color="#112B3C" />
 
     <!-- Text  -->
-    <FontFamily x:Key="HeaderFont">Miriam</FontFamily>
-    <sys:Double x:Key="HeaderFontSize">48</sys:Double>
+    <FontFamily x:Key="HeaderFont">Times New Roman</FontFamily>
+    <sys:Double x:Key="HeaderFontSize">30</sys:Double>
 
-    <FontFamily x:Key="BodyFont">Ariel</FontFamily>
-    <sys:Double x:Key="BodyFontSize">18</sys:Double>
+    <FontFamily x:Key="BodyFont">Segoe UI</FontFamily>
+    <sys:Double x:Key="BodyFontSize">14</sys:Double>
 
-    <FontFamily x:Key="ButtonFont">Ariel</FontFamily>
-    <sys:Double x:Key="ButtonFontSize">16</sys:Double>
+    <FontFamily x:Key="ButtonFont">Segoe UI</FontFamily>
+    <sys:Double x:Key="ButtonFontSize">14</sys:Double>
     
     <!-- Images -->
     <!-- TODO: Fix Images-->
     
-    <BitmapImage x:Key="BackgroundImage" UriSource="../Loaded/Background.bmp"/>
-    <BitmapImage x:Key="SurfaceImage" UriSource="../Loaded/Blank.png" />
+    <Image x:Key="BackgroundImage" Source="../Loaded/Background.bmp"/>
+    <Image x:Key="SurfaceImage" Source="../Loaded/Blank.png" />
 </ResourceDictionary>

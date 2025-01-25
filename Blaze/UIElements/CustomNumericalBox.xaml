@@ -1,0 +1,84 @@
+﻿<TextBox x:Class="Blaze.UIElements.CustomNumericalBox"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+         xmlns:local="clr-namespace:Blaze.UIElements"
+         mc:Ignorable="d" 
+         d:DataContext="{d:DesignInstance d:Type=local:CustomNumericalBox}"
+         d:Background="White"
+         d:Foreground="Black"
+         xmlns:converter="clr-namespace:Blaze.Core"
+         d:DesignHeight="450" d:DesignWidth="800">
+    <TextBox.Resources>
+        <converter:ColorBrushToBrushConverter x:Key="BrushConverter"/>
+    </TextBox.Resources>
+    <TextBox.Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Padding="{TemplateBinding Padding}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding CornerRadius, 
+                                              RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <local:CustomButton Grid.Column="0"
+                                                      Command="{Binding Add, 
+                                                                RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
+                                                    BorderThickness="0"
+                                                    CornerRadius="{Binding ButtonCornerRadius, 
+                                                                    RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
+                                                    Background="{TemplateBinding Background}"
+                                                    HoverColor="{TemplateBinding Background}">
+                                    <local:Icon Kind="Add"
+                                                Width="{Binding ItemWidth, 
+                                                  RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
+                                                Foreground="{Binding Foreground, 
+                                                  RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox},
+                                                        Converter={StaticResource BrushConverter}}"/>
+                                </local:CustomButton>
+                                <TextBox Text="{Binding Value, 
+                                              RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
+                                         BorderThickness="0"
+                                         VerticalAlignment="Center"
+                                         FontFamily="{TemplateBinding FontFamily}"
+                                         FontSize="{TemplateBinding FontSize}"
+                                         FontWeight="{TemplateBinding FontWeight}"
+                                         HorizontalAlignment="Stretch"
+                                         TextAlignment="Center"
+                                         Foreground="{Binding Foreground, 
+                                                      RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
+                                         Grid.Column="1">
+
+                                </TextBox>
+                                <local:CustomButton Grid.Column="2"
+                                                    BorderThickness="0"
+                                                    Command="{Binding Subtract, 
+                                                  RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
+                                                    CornerRadius="{Binding ButtonCornerRadius, 
+                                              RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
+                                                    Background="{TemplateBinding Background}"
+                                                    HoverColor="{TemplateBinding Background}">
+                                    <local:Icon Kind="Remove"
+                                                Width="{Binding ItemWidth, 
+                                                        RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
+                                                Foreground="{Binding Foreground, 
+                                                              RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox},
+                                                              Converter={StaticResource BrushConverter}}"/>
+                                </local:CustomButton>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </TextBox.Style>
+</TextBox>
