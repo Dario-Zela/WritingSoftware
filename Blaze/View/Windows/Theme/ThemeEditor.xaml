@@ -16,10 +16,10 @@
         <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
         <converter:ColorIntensityConverter x:Key="ColorIntensityConverter" />
         <converter:ColorToBrushConverter x:Key="BrushConverter"/>
-        <Style TargetType="ToggleButton" x:Key="SelectColorButton">
+        <Style TargetType="Button" x:Key="SelectColorButtonStyle">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
+                    <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}"
                                     BorderThickness="3"
                                     BorderBrush="{DynamicResource ApplicationSecondaryBrush}"
@@ -131,30 +131,14 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <DockPanel>
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding PrimaryColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="PrimaryColorButton"
+                                      Name="PrimaryBrush"
                                       Cursor="Hand"
+                                    Click="OpenColorPicker"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=PrimaryColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding PrimaryColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <StackPanel>
                                 <TextBox Text="Primary"
                                          Style="{DynamicResource Body}"
@@ -170,30 +154,14 @@
                             </StackPanel>
                         </DockPanel>
                         <DockPanel Grid.Column="2">
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding SecondaryColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="SecondaryColorButton"
+                                    Click="OpenColorPicker"
+                                      Name="SecondaryBrush"
                                       Cursor="Hand"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=SecondaryColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding SecondaryColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <StackPanel>
                                 <TextBox Text="Secondary"
                                        FontSize="{DynamicResource ApplicationBodyFontSize}"
@@ -212,30 +180,14 @@
                         <DockPanel Grid.Column="0"
                                Grid.Row="1"
                                Margin="0,10,0,0">
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding SurfaceColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="SurfaceColorButton"
+                                      Name="SurfaceBrush"
+                                    Click="OpenColorPicker"
                                       Cursor="Hand"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=SurfaceColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding SurfaceColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <StackPanel>
                                 <TextBox Text="Surface"
                                        FontSize="{DynamicResource ApplicationBodyFontSize}"
@@ -254,30 +206,14 @@
                         <DockPanel Grid.Column="1"
                                Grid.Row="1"
                                Margin="0,10,0,0">
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding BackgroundColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="BackgroundColorButton"
+                                      Name="BackgroundBrush"
                                       Cursor="Hand"
+                                    Click="OpenColorPicker"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=BackgroundColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding BackgroundColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <StackPanel>
                                 <TextBox Text="Background"
                                        FontSize="{DynamicResource ApplicationBodyFontSize}"
@@ -296,30 +232,14 @@
                         <DockPanel Grid.Column="0"
                                Grid.Row="2"
                                Margin="0,10,0,0">
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding ErrorColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="ErrorColorButton"
+                                    Click="OpenColorPicker"
+                                      Name="ErrorBrush"
                                       Cursor="Hand"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=ErrorColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding ErrorColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <StackPanel>
                                 <TextBox Text="Error"
                                          Style="{DynamicResource Body}"
@@ -335,6 +255,7 @@
                                 </TextBox>
                             </StackPanel>
                         </DockPanel>
+
                     </Grid>
                     <Separator Margin="0,0,0,20"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
@@ -363,30 +284,14 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <DockPanel>
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding OnPrimaryColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="OnPrimaryColorButton"
+                                    Click="OpenColorPicker"
+                                      Name="OnPrimaryBrush"
                                       Cursor="Hand"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=OnPrimaryColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding OnPrimaryColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <TextBox Style="{DynamicResource Body}" Text="On Primary"
                                        FontSize="{DynamicResource ApplicationBodyFontSize}"
                                        VerticalAlignment="Center"
@@ -394,30 +299,14 @@
                                        FontWeight="DemiBold"/>
                         </DockPanel>
                         <DockPanel Grid.Column="2">
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding OnSecondaryColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="OnSecondaryColorButton"
+                                    Click="OpenColorPicker"
+                                      Name="OnSecondaryBrush"
                                       Cursor="Hand"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=OnSecondaryColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding OnSecondaryColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <TextBox Style="{DynamicResource Body}" Text="On Secondary"
                                        FontSize="{DynamicResource ApplicationBodyFontSize}"
                                        VerticalAlignment="Center"
@@ -427,30 +316,14 @@
                         <DockPanel Grid.Column="0"
                                Grid.Row="1"
                                Margin="0,10,0,0">
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding OnSurfaceColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="OnSurfaceColorButton"
+                                    Click="OpenColorPicker"
+                                      Name="OnSurfaceBrush"
                                       Cursor="Hand"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=OnSurfaceColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding OnSurfaceColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <TextBox Style="{DynamicResource Body}" Text="On Surface"
                                        FontSize="{DynamicResource ApplicationBodyFontSize}"
                                        VerticalAlignment="Center"
@@ -460,30 +333,14 @@
                         <DockPanel Grid.Column="1"
                                Grid.Row="1"
                                Margin="0,10,0,0">
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding OnBackgroundColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="OnBackgroundColorButton"
+                                    Click="OpenColorPicker"
+                                      Name="OnBackgroundBrush"
                                       Cursor="Hand"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=OnBackgroundColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding OnBackgroundColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <TextBox Style="{DynamicResource Body}" Text="On Background"
                                     VerticalAlignment="Center"
                                     FontSize="{DynamicResource ApplicationBodyFontSize}"
@@ -493,30 +350,14 @@
                         <DockPanel Grid.Column="0"
                                Grid.Row="2"
                                Margin="0,10,0,0">
-                            <ToggleButton Style="{StaticResource SelectColorButton}"
+                            <Button Style="{StaticResource SelectColorButtonStyle}"
                                       Background="{Binding OnErrorColor, Converter={StaticResource BrushConverter}}"
                                       HorizontalAlignment="Left"
-                                      Name="OnErrorColorButton"
+                                    Click="OpenColorPicker"
+                                      Name="OnErrorBrush"
                                       Cursor="Hand"
                                       Margin="10">
-                            </ToggleButton>
-                            <Popup IsOpen="{Binding IsChecked, ElementName=OnErrorColorButton}"
-                               StaysOpen="False"
-                               AllowsTransparency="True"
-                               Placement="Mouse"
-                               HorizontalOffset="200">
-                                <Border Background="{DynamicResource ApplicationSurfaceBrush}"
-                                    CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                                    <Border.Effect>
-                                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                                    </Border.Effect>
-                                    <UIElements:ColorSelector ColorPicked="{Binding OnErrorColor, Mode=TwoWay}"
-                                                      Height="270"
-                                                      Width="200"/>
-                                </Border>
-                            </Popup>
+                            </Button>
                             <TextBox Style="{DynamicResource Body}" Text="On Error"
                                        VerticalAlignment="Center"
                                        FontSize="{DynamicResource ApplicationBodyFontSize}"
@@ -526,6 +367,26 @@
                     </Grid>
                     <Separator Margin="0,0,0,20"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                    <Popup IsOpen="False"
+                               x:Name="ColorPopup"
+                               StaysOpen="False"
+                               AllowsTransparency="True"
+                               Placement="Mouse"
+                               HorizontalOffset="200">
+                        <Border Background="{DynamicResource ApplicationSurfaceBrush}"
+                                    CornerRadius="10"
+                                    Padding="7"
+                                    Margin="2">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
+                            </Border.Effect>
+                            <UIElements:ColorSelector ColorPicked="{Binding CurrentlyActiveColor, Mode=TwoWay}"
+                                                      Height="270"
+                                                      x:Name="ColorPicker"
+                                                      Width="200"/>
+                        </Border>
+                    </Popup>
+
                     <TextBox Text="Typefaces and Styles"
                              Style="{DynamicResource Header2}"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"

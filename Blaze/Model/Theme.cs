@@ -121,6 +121,19 @@ namespace Blaze.Model
             }
         }
 
+        private string currentlyActiveBrush = "PrimaryBrush";
+        private string currentlyActiveColor => currentlyActiveBrush.Substring(0, currentlyActiveBrush.Length - 5) + "Color";
+        public Color CurrentlyActiveColor
+        {
+            get { return (ThemeDictionary[currentlyActiveBrush] as SolidColorBrush).Color; }
+            set
+            {
+                ThemeDictionary[currentlyActiveBrush] = new SolidColorBrush(value);
+                OnPropertyChanged(currentlyActiveColor);
+                OnPropertyChanged();
+            }
+        }
+
         // Fonts
         public FontFamily HeaderFont
         {
@@ -233,6 +246,11 @@ namespace Blaze.Model
             Load = new RelayCommand(o => LoadDictionary());
             Save = new RelayCommand(o => { SaveDictionary(); MainWindow.ChangeScene(new ThemeLibrary()); });
             Back = new RelayCommand(o => MainWindow.ChangeScene(new ThemeLibrary()));
+        }
+
+        public void ChangeActiveColor(string brush)
+        {
+            currentlyActiveBrush = brush;
         }
 
         public void LoadDictionary()

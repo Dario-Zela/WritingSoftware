@@ -1,4 +1,5 @@
-﻿using Blaze.Model;
+﻿using Blaze.Core;
+using Blaze.Model;
 using Blaze.UIElements;
 using System;
 using System.Collections.Generic;
@@ -84,6 +85,12 @@ namespace Blaze.View.Windows.Theme
                 currentlyCheckedPreview = button;
                 currentlyCheckedPreview.IsEnabled = false;
             }
+        }
+
+        private void OpenColorPicker(object sender, RoutedEventArgs e)
+        {
+            ThemeContext.ChangeActiveColor(((Button)sender).Name);
+            ColorPopup.IsOpen = true;
         }
     }
 }
