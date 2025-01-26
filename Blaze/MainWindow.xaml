@@ -10,7 +10,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Height="600"
-        Width="900"
+        Width="1100"
         WindowStyle="None"
         MinHeight="600"
         MinWidth="900"

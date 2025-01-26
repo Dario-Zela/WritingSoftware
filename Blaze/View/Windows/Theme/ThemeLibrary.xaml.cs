@@ -40,9 +40,10 @@ namespace Blaze.View.Windows.Theme
             AvailableThemes.ListViewReference.SelectionChanged += (s, e) =>
             {
                 if (AvailableThemes.ListViewReference?.SelectedItem?.ToString() == null) return;
-                
+
                 string filePath = System.IO.Path.GetFullPath(Constants.FOLDER_LOCATION) + "\\Themes\\";
                 filePath += AvailableThemes.ListViewReference.SelectedItem.ToString() + ".xaml";
+
                 Preview.DataContext = new Blaze.Model.Theme(filePath);
             };
 
@@ -50,6 +51,12 @@ namespace Blaze.View.Windows.Theme
             {
                 AvailableThemes.ListViewReference.SelectedIndex = 0;
             }
+
+            SizeChanged += (s, e) => 
+            { 
+                Preview.Visibility = ActualWidth > 1000 == true ? Visibility.Visible : Visibility.Collapsed;
+                PreviewGridColumn.Width = ActualWidth > 1000 == true ? new GridLength(400) : GridLength.Auto;
+            };
         }
 
         private void MakeNewThemeDictionary()

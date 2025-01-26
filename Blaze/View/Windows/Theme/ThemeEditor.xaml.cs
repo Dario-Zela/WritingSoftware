@@ -26,7 +26,7 @@ namespace Blaze.View.Windows.Theme
     /// </summary>
     public partial class ThemeEditor : UserControl
     {
-        Blaze.Model.Theme theme;
+        public Blaze.Model.Theme ThemeContext;
 
         public List<FontFamily> fontFamilies = new();
         private void LoadFonts()
@@ -45,19 +45,32 @@ namespace Blaze.View.Windows.Theme
 
         public ThemeEditor(string path)
         {
+
             LoadFonts();
-            theme = new Blaze.Model.Theme(path);
+            ThemeContext = new Blaze.Model.Theme(path);
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
             InitializeComponent();
-            DataContext = theme;
-            
+            stopwatch.Stop();
+            Trace.WriteLine(stopwatch.ElapsedMilliseconds);
+            stopwatch.Restart();
+
+            DataContext = ThemeContext;
+
             HeaderFont.ItemsSource = fontFamilies;
             BodyFont.ItemsSource = fontFamilies;
             ButtonFont.ItemsSource = fontFamilies;
-
+            
             currentlyCheckedPreview = HeaderPreview;
             currentlyCheckedPreview.IsEnabled = false;
 
-            Preview.DataContext = theme;
+            Preview.DataContext = ThemeContext;
+
+            SizeChanged += (s, e) =>
+            {
+                Preview.Visibility = ActualWidth > 1000 == true ? Visibility.Visible : Visibility.Collapsed;
+                PreviewGridColumn.Width = ActualWidth > 1000 == true ? new GridLength(400) : GridLength.Auto;
+            };
         }
 
         private void Preview_Checked(object sender, RoutedEventArgs e)

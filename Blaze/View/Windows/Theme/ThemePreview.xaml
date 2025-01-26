@@ -30,7 +30,8 @@
                 </Grid.RowDefinitions>
                 <StackPanel>
                     <TextBox Text="Preview"
-                                         Style="{DynamicResource Header2}"
+                             Margin="0,30,0,0"
+                                         Style="{DynamicResource Header}"
                        Foreground="{DynamicResource OnApplicationSurfaceBrush}"
                        FontSize="{DynamicResource ApplicationHeaderFontSize}"
                        FontFamily="{DynamicResource ApplicationHeaderFont}"/>
@@ -46,7 +47,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <Grid>
                             <Border Name="mask" 
