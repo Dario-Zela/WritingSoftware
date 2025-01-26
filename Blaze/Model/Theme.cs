@@ -28,7 +28,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public Color SecondaryColor
         {
             get { return (ThemeDictionary["SecondaryBrush"] as SolidColorBrush).Color; }
@@ -38,7 +37,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public Color SurfaceColor
         {
             get { return (ThemeDictionary["SurfaceBrush"] as SolidColorBrush).Color; }
@@ -48,7 +46,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public Color BackgroundColor
         {
             get { return (ThemeDictionary["BackgroundBrush"] as SolidColorBrush).Color; }
@@ -58,7 +55,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public Color ErrorColor
         {
             get { return (ThemeDictionary["ErrorBrush"] as SolidColorBrush).Color; }
@@ -80,7 +76,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public Color OnSecondaryColor
         {
             get { return (ThemeDictionary["OnSecondaryBrush"] as SolidColorBrush).Color; }
@@ -90,7 +85,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public Color OnSurfaceColor
         {
             get { return (ThemeDictionary["OnSurfaceBrush"] as SolidColorBrush).Color; }
@@ -100,7 +94,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public Color OnBackgroundColor
         {
             get { return (ThemeDictionary["OnBackgroundBrush"] as SolidColorBrush).Color; }
@@ -110,7 +103,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public Color OnErrorColor
         {
             get { return (ThemeDictionary["OnErrorBrush"] as SolidColorBrush).Color; }
@@ -120,6 +112,7 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
+
 
         private string currentlyActiveBrush = "PrimaryBrush";
         private string currentlyActiveColor => currentlyActiveBrush.Substring(0, currentlyActiveBrush.Length - 5) + "Color";
@@ -144,7 +137,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public string HeaderFontSize
         {
             get { return ((Double)ThemeDictionary["HeaderFontSize"]).ToString(); }
@@ -159,7 +151,6 @@ namespace Blaze.Model
             }
         }
 
-
         public FontFamily BodyFont
         {
             get { return (ThemeDictionary["BodyFont"] as FontFamily); }
@@ -169,7 +160,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public string BodyFontSize
         {
             get { return ((Double)ThemeDictionary["BodyFontSize"]).ToString(); }
@@ -184,7 +174,6 @@ namespace Blaze.Model
             }
         }
 
-
         public FontFamily ButtonFont
         {
             get { return (ThemeDictionary["ButtonFont"] as FontFamily); }
@@ -194,7 +183,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public string ButtonFontSize
         {
             get { return ((Double)ThemeDictionary["ButtonFontSize"]).ToString(); }
@@ -219,7 +207,6 @@ namespace Blaze.Model
                 OnPropertyChanged();
             }
         }
-
         public Image SurfaceImage
         {
             get { return (ThemeDictionary["SurfaceImage"] as Image); }
@@ -235,7 +222,6 @@ namespace Blaze.Model
         private string Path;
 
         // Commands
-        public RelayCommand Load { get; set; }
         public RelayCommand Save { get; set; }
         public RelayCommand Back { get; set; }
 
@@ -243,7 +229,6 @@ namespace Blaze.Model
         {
             Path = path;
             LoadDictionary();
-            Load = new RelayCommand(o => LoadDictionary());
             Save = new RelayCommand(o => { SaveDictionary(); MainWindow.ChangeScene(new ThemeLibrary()); });
             Back = new RelayCommand(o => MainWindow.ChangeScene(new ThemeLibrary()));
         }
@@ -251,6 +236,7 @@ namespace Blaze.Model
         public void ChangeActiveColor(string brush)
         {
             currentlyActiveBrush = brush;
+            OnPropertyChanged("CurrentlyActiveColor");
         }
 
         public void LoadDictionary()

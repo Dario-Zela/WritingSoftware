@@ -86,7 +86,7 @@
                                          HoverColor="Red"
                                         Background="{DynamicResource ApplicationSecondaryBrush}"
                                         Foreground="{DynamicResource OnApplicationSecondaryBrush}"
-                                        Command="{Binding Close}" >
+                                        Command="{Binding CloseWindow}" >
                     <UIElements:Icon Kind="ChromeClose" Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
                 </UIElements:CustomButton>
             </StackPanel>

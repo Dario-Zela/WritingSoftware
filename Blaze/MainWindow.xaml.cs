@@ -26,7 +26,7 @@ namespace Blaze
             DependencyProperty.Register("IsMaximised", typeof(bool), typeof(MainWindow));
 
         //Commands for the window controls
-        public RelayCommand Close { get; set; }
+        public RelayCommand CloseWindow { get; set; }
         public RelayCommand Maximise { get; set; }
         public RelayCommand Minimise { get; set; }
 
@@ -40,7 +40,7 @@ namespace Blaze
             Holder.Children.Add(new ThemeLibrary());
 
             //Adding methods to the commands
-            Close = new RelayCommand(o => { Application.Current.Shutdown(); });
+            CloseWindow = new RelayCommand(o => { Application.Current.Shutdown(); });
             Maximise = new RelayCommand(o => Maximise_Command());
             Minimise = new RelayCommand(o => { Application.Current.MainWindow.WindowState = WindowState.Minimized; });
         }

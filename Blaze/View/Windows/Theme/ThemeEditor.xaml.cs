@@ -54,7 +54,6 @@ namespace Blaze.View.Windows.Theme
             InitializeComponent();
             stopwatch.Stop();
             Trace.WriteLine(stopwatch.ElapsedMilliseconds);
-            stopwatch.Restart();
 
             DataContext = ThemeContext;
 

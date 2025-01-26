@@ -99,7 +99,7 @@
                                                  FontSize="{DynamicResource ApplicationButtonFontSize}"
                                                  Foreground="{DynamicResource OnApplicationSurfaceBrush}"
                                                  Margin="0,0,10,0"
-                                                     Command="{Binding Load}"
+                                                     Command="{Binding Back}"
                                                  Background="{DynamicResource ApplicationSurfaceBrush}"/>
                             <UIElements:CustomButton Content="Save"
                                                 Style="{DynamicResource NormalButton}"
@@ -381,12 +381,11 @@
                                 <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
                             </Border.Effect>
                             <UIElements:ColorSelector ColorPicked="{Binding CurrentlyActiveColor, Mode=TwoWay}"
-                                                      Height="270"
+                                                      Height="400"
                                                       x:Name="ColorPicker"
                                                       Width="200"/>
                         </Border>
                     </Popup>
-
                     <TextBox Text="Typefaces and Styles"
                              Style="{DynamicResource Header2}"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"
@@ -516,6 +515,7 @@
                                                        DataContext="{Binding DataContext, ElementName=Editor}"
                                                        SelectedItem="{Binding HeaderFont, Mode=TwoWay}"
                                                        BarMargin="0,5,4,5"
+                                                        CacheMode="BitmapCache"
                                                        Height="30"
                                                        Background="Transparent"
                                                        MenuBackgroundColor="{DynamicResource ApplicationSurfaceBrush}"
@@ -532,6 +532,7 @@
                             <UIElements:CustomNumericalBox ButtonCornerRadius="5"
                                                                Grid.Row="1"
                                                        Padding="5,0,5,0"
+                                                        CacheMode="BitmapCache"
                                                                Grid.Column="2"
                                                        DataContext="{Binding DataContext, ElementName=Editor}"
                                                        FontFamily="{DynamicResource ApplicationButtonFont}"
@@ -575,6 +576,7 @@
                                                        SelectedItem="{Binding BodyFont, Mode=TwoWay}"
                                                            Margin="10,0,20,0"
                                                            Grid.Column="1"
+                                                        CacheMode="BitmapCache"
                                                        BarMargin="0,5,4,5"
                                                        Height="30"
                                                        Background="Transparent"
