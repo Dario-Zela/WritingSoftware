@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows;
 using Blaze.Core;
+using Blaze.View.Windows.ContentLibrary;
 using Blaze.View.Windows.Theme;
 using MahApps.Metro.IconPacks;
 
@@ -40,7 +41,7 @@ namespace Blaze
             IsMaximised = false;
             DataContext = this;
             Instance = this;
-            Holder.Children.Add(new ThemeLibrary());
+            Holder.Children.Add(new ImageGallery());
 
             //Adding methods to the commands
             CloseWindow = new RelayCommand(o => { Application.Current.Shutdown(); });

@@ -86,7 +86,7 @@
                                             </local:ButtonPopup>
                                             <!-- More Button Popup -->
                                             <Popup x:Name="PopupMenu"
-                                                   IsOpen="{Binding IsChecked, ElementName=MoreButton}"
+                                                   IsOpen="{Binding IsChecked, ElementName=MoreButton, Mode=TwoWay}"
                                                     StaysOpen="False"
                                                     AllowsTransparency="True">
                                                 <local:MenuContent CornerRadius="10"
@@ -96,16 +96,20 @@
                                                                    FontSize="{DynamicResource ApplicationButtonFontSize}"
                                                                    HoverColor="{DynamicResource ApplicationSurfaceBrush}">
                                                     <local:CustomMenuItem Content="Duplicate Theme"
+                                                                          Selected="MenuContent_Selected"
+                                                                          Background="{DynamicResource ApplicationSurfaceBrush}"
                                                                           Command="{Binding DuplicateTheme, 
                                                                                     RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
                                                                           CommandParameter="{Binding DataContext,
                                                                                             RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
                                                     <local:CustomMenuItem Content="Rename Theme"
+                                                                          Background="{DynamicResource ApplicationSurfaceBrush}"
                                                                           Command="{Binding RenameTheme, 
                                                                                     RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
                                                                           CommandParameter="{Binding DataContext,
                                                                                     RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
                                                     <local:CustomMenuItem Content="Delete Theme"
+                                                                          Background="{DynamicResource ApplicationSurfaceBrush}"
                                                                           Command="{Binding DeleteTheme, 
                                                                                     RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
                                                                           CommandParameter="{Binding DataContext,

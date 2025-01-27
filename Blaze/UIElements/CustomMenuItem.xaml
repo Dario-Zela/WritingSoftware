@@ -15,7 +15,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <Button Content="{TemplateBinding Content}">
+                        <Button Content="{TemplateBinding Content}"
+                                Background="{TemplateBinding Background}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Command" Value="{Binding Command, 
@@ -40,7 +41,7 @@
                                                     <Trigger Property="IsMouseOver" Value="True">
                                                         <Setter Property="Background" TargetName="border" Value="{Binding HoverColor, 
                                                                                                                     RelativeSource={RelativeSource AncestorType=local:MenuContent},
-                                                                                                                    Converter={StaticResource ColorIntensityConverter}, ConverterParameter=0.4|250}"/>
+                                                                                                                    Converter={StaticResource ColorIntensityConverter}, ConverterParameter=2|200}"/>
                                                     </Trigger>
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>

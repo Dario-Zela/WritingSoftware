@@ -16,33 +16,34 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListView">
-                        <Border Background="{Binding Background, 
+                        <Grid>
+                            <Border Background="{Binding Background, 
                                                  RelativeSource={RelativeSource AncestorType=local:MenuContent} }"
                                 CornerRadius="{Binding CornerRadius, 
                                                  RelativeSource={RelativeSource AncestorType=local:MenuContent} }"
                                 BorderThickness="0"
-                                Margin="10,0,10,10">
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" />
-                            </Border.Effect>
+                                Margin="10,3,10,10">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" />
+                                </Border.Effect>
+                            </Border>
 
-                            <Grid>
-                                <Border Name="mask" 
+                            <Border Name="mask" 
                                         Background="{Binding Background, 
                                                  RelativeSource={RelativeSource AncestorType=local:MenuContent} }"
                                         CornerRadius="{Binding CornerRadius, 
                                                  RelativeSource={RelativeSource AncestorType=local:MenuContent} }"
-                                        BorderThickness="0"/>
-                                <StackPanel>
-                                    <StackPanel.OpacityMask>
-                                        <VisualBrush Visual="{Binding ElementName=mask}"/>
-                                    </StackPanel.OpacityMask>
-                                    <ScrollViewer Style="{StaticResource CustomScrollViewer}">
-                                        <ItemsPresenter/>
-                                    </ScrollViewer>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
+                                        BorderThickness="0"
+                                    Margin="10,3,10,10"/>
+                            <StackPanel Margin="9,2,9,9">
+                                <StackPanel.OpacityMask>
+                                    <VisualBrush Visual="{Binding ElementName=mask}"/>
+                                </StackPanel.OpacityMask>
+                                <ScrollViewer Style="{StaticResource CustomScrollViewer}">
+                                    <ItemsPresenter/>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
