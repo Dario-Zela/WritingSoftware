@@ -24,23 +24,29 @@
             <DockPanel>
                 <UIElements:CustomComboSelection BorderThickness="0"
                                                  SelectedIndex="0"
+                                                 Padding="10,4,10,4"
+                                                 ButtonCornerRadius="10"
                                                  MenuBackgroundColor="{Binding SurfaceColor, ElementName=ImageGalleryController}"
                                                  MenuHoverColor="{Binding SurfaceColor, ElementName=ImageGalleryController}"
                                                  AccentColor="{Binding PrimaryColor, ElementName=ImageGalleryController}"
-                                               Background="{Binding SurfaceColor, ElementName=ImageGalleryController}">
+                                                Background="{Binding SurfaceColor, ElementName=ImageGalleryController}">
                     <UIElements:CustomComboSelection.PreTextContent>
                         <UIElements:Icon Kind="ListSelection"
                                          Foreground="Black"
                                          Width="15"/>
                     </UIElements:CustomComboSelection.PreTextContent>
                     <ComboBoxItem Content="Alphabetical"
+                                  Padding="5"
                                   Selected="AlphabeticalSort"/>
                     <ComboBoxItem Content="Recently Added"
+                                  Padding="5"
                                   Selected="RecentSort"/>
                     <ComboBoxItem Content="Albums First"
+                                  Padding="5"
                                   Selected="AlbumsSort"/>
-                    <Separator/>
+                    <Separator Margin="0"/>
                     <ComboBoxItem Content="Manual"
+                                  Padding="5"
                                   Selected="ManualSort"/>
                 </UIElements:CustomComboSelection>
             </DockPanel>

@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Blaze.UIElements"
              mc:Ignorable="d" 
-            xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
              d:DataContext="{d:DesignInstance Type=local:CustomComboSelection}"
          x:Name="ComboBoxControl"
              xmlns:converter="clr-namespace:Blaze.Core"
@@ -25,13 +24,23 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
                         <Grid>
-                            <Border x:Name="templateRoot" HorizontalAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <Border x:Name="templateRoot" 
+                                    Padding="{TemplateBinding Padding}"
+                                    CornerRadius="{Binding ButtonCornerRadius, RelativeSource={RelativeSource AncestorType=local:CustomComboSelection}}"
+                                    HorizontalAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                                 <Grid>
                                     <local:Icon Kind="ChevronDown" Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
                                                 HorizontalAlignment="Right" Width="10"/>
                                 </Grid>
                             </Border>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Background, 
+                                                                    RelativeSource={RelativeSource TemplatedParent},
+                                                                    Converter={StaticResource ColorIntensityConverter}, ConverterParameter=0.5|250}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -40,7 +49,6 @@
         <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
             <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
                 </Grid.ColumnDefinitions>
@@ -72,18 +80,21 @@
                         </StackPanel>
                     </Grid>
                 </Popup>
-                <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="3" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
-                <ContentPresenter Content="{Binding PreTextContent, RelativeSource={RelativeSource AncestorType=local:CustomComboSelection}}"
-                                                      HorizontalAlignment="Left"/>
-                <TextBox x:Name="contentPresenter" Grid.Column="1" Text="{TemplateBinding SelectionBoxItem}"
-                         Style="{DynamicResource Body}"
-                         FontWeight="DemiBold"
-                         Foreground="{TemplateBinding Foreground}"
-                         Background="Transparent"
-                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                         IsHitTestVisible="false" Margin="{TemplateBinding Padding}" 
-                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                <ToggleButton Padding="{TemplateBinding Padding}" x:Name="toggleButton" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
+                <DockPanel Margin="{TemplateBinding Padding}" >
+                    <ContentPresenter Content="{Binding PreTextContent, RelativeSource={RelativeSource AncestorType=local:CustomComboSelection}}"
+                                      HorizontalAlignment="Left"
+                                      IsHitTestVisible="false" />
+                    <TextBox x:Name="contentPresenter" Text="{TemplateBinding SelectionBoxItem}"
+                             Style="{DynamicResource Body}"
+                             FontWeight="DemiBold"
+                             Foreground="{TemplateBinding Foreground}"
+                             Background="Transparent"
+                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                             IsHitTestVisible="false" Margin="{TemplateBinding Padding}" 
+                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </DockPanel>
             </Grid>
             <ControlTemplate.Triggers>
                 <Trigger Property="HasItems" Value="false">
@@ -113,7 +124,7 @@
                         <!-- Background -->
                         <Border BorderBrush="{TemplateBinding BorderBrush}"
                                 x:Name="border"
-                                Padding="10,2,10,2"
+                                Padding="{TemplateBinding Padding}"
                                 Cursor="Hand"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{Binding MenuBackgroundColor, RelativeSource={RelativeSource AncestorType=local:CustomComboSelection}}">
