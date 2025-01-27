@@ -72,7 +72,7 @@ namespace Blaze.View.Windows.Theme
         private void MakeNewThemeDictionary()
         {
             string newFileName = FindNewName();
-            using (FileStream stream = new FileStream("../../../Template/ThemeTemplate.xaml", FileMode.Open))
+            using (FileStream stream = new FileStream(Constants.BASE_LOCATION + "/Template/ThemeTemplate.xaml", FileMode.Open))
             {
                 using (FileStream newStream = new FileStream(newFileName, FileMode.CreateNew))
                 {

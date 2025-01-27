@@ -106,7 +106,14 @@ namespace Blaze.UIElements
         // Initialises the image when loaded
         private void InitialiseImage(object sender, RoutedEventArgs e)
         {
-            Source = Converter.ConvertIcon(FirstKind, Foreground);
+            if (Change)
+            {
+                Source = Converter.ConvertIcon(SecondKind, ActiveForeground);
+            }
+            else
+            {
+                Source = Converter.ConvertIcon(FirstKind, Foreground);
+            }
         }
     }
 }

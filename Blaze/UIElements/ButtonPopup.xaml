@@ -31,13 +31,13 @@
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{Binding HoverColor, 
                                               RelativeSource={RelativeSource AncestorType=local:ButtonPopup},
-                                                Converter={StaticResource ColorIntensityConverter}, ConverterParameter=0.4|250}"/>
+                                                Converter={StaticResource ColorIntensityConverter}, ConverterParameter=2|200}"/>
                             </Trigger>
                             <!-- Selected effect -->
                             <Trigger Property="IsChecked" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{Binding SelectedBackgroundColor, 
                                               RelativeSource={RelativeSource AncestorType=local:ButtonPopup},
-                                                Converter={StaticResource ColorIntensityConverter}, ConverterParameter=0.4|250}"/>
+                                                Converter={StaticResource ColorIntensityConverter}, ConverterParameter=2|200}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

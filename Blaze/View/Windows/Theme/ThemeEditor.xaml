@@ -735,6 +735,7 @@
             </ScrollViewer>
         </DockPanel>
         <local:ThemePreview Grid.Column="1"
+                                VerticalContentAlignment="Top"
                             Margin="0,30,0,30"
                             x:Name="Preview"/>
     </Grid>

@@ -75,15 +75,14 @@
                                             <local:ButtonPopup Cursor="Hand"
                                                                 BorderThickness="0"
                                                                VerticalAlignment="Center"
-                                                               Padding="7"
+                                                               Padding="5"
                                                                CornerRadius="20"
                                                                HoverColor="{DynamicResource ApplicationSurfaceBrush}"
                                                                SelectedBackgroundColor="{DynamicResource ApplicationSurfaceBrush}"
                                                                x:Name="MoreButton">
-                                                <iconPacks:Codicons Kind="KebabVertical"
-                                                                          Width="15"
-                                                                          Height="15"/>
-
+                                                <iconPacks:Material Kind="DotsVertical"
+                                                                          Width="12"
+                                                                          Height="12"/>
                                             </local:ButtonPopup>
                                             <!-- More Button Popup -->
                                             <Popup x:Name="PopupMenu"

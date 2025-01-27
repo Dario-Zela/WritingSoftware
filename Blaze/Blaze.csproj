@@ -12,9 +12,19 @@
     <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Resource Include="Loaded\Background.bmp" />
-    <Content Include="Loaded\Blank.png" />
-    <Content Include="Loaded\Surface.bmp" />
+    <Page Remove="Template\ApplicationTheme.xaml" />
+    <Page Remove="Template\ThemeTemplate.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Background.bmp" />
+    <Content Include="Template\ApplicationTheme.xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Template\ThemeTemplate.xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Blank.png" />
+    <Content Include="Images\Surface.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />
@@ -24,6 +34,7 @@
     <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
     <PackageReference Include="MahApps.Metro.IconPacks.Codicons" Version="5.1.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.1.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.1" />
   </ItemGroup>

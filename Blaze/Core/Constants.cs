@@ -10,5 +10,8 @@ namespace Blaze.Core
     {
         // Location of source folder
         public static string FOLDER_LOCATION = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Blaze";
+
+        // Location of application
+        public static string BASE_LOCATION = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
     }
 }

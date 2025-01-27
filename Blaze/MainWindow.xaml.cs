@@ -46,6 +46,8 @@ namespace Blaze
             CloseWindow = new RelayCommand(o => { Application.Current.Shutdown(); });
             Maximise = new RelayCommand(o => Maximise_Command());
             Minimise = new RelayCommand(o => { Application.Current.MainWindow.WindowState = WindowState.Minimized; });
+
+            Loaded += (s, e) => Maximise_Command();
         }
 
         // Change the currently displayed view
