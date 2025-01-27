@@ -10,67 +10,142 @@
              d:Background="{DynamicResource ApplicationBackgroundBrush}"
              d:Foreground="{DynamicResource OnApplicationSecondaryBrush}"
              d:Text="Testing"
-          d:IsDropDownOpen="False"
-             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
-    <ComboBox.Style>
-        <Style TargetType="ComboBox">
+             d:DataContext="{d:DesignInstance Type=local:CustomComboBox}"
+            x:Name="ComboBoxControl"
+             xmlns:converter="clr-namespace:Blaze.Core"
+            d:IsDropDownOpen="False">
+    <ComboBox.Resources>
+        <converter:ColorIntensityConverter x:Key="ColorIntensityConverter" />
+        <converter:Adder x:Key="Adder"/>
+        <converter:ColorBrushToBrushConverter x:Key="BrushConverter"/>
+        <!-- Toggle button style of the combobox -->
+        <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="ClickMode" Value="Press"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
                         <Grid>
-                            <local:CustomToggleButton x:Name="MoreButton"
-                                                      IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=IsDropDownOpen}"
-                                                      Background="{TemplateBinding Background}"
-                                                      Foreground="{TemplateBinding Foreground}"
-                                                      CornerRadius="{Binding ButtonCornerRadius, 
-                                                                    RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
-                                                      Padding="{TemplateBinding Padding}"
-                                                      Margin="{TemplateBinding Margin}"
-                                                      HorizontalContentAlignment="Stretch"
-                                                      VerticalAlignment="Center"
-                                                      BorderThickness="0"
-                                                      Visibility="{TemplateBinding Visibility}"
-                                                      HoverColor="{TemplateBinding Background}">
-                                <!-- Outer Box -->
-                                <DockPanel IsHitTestVisible="False">
-                                    <TextBox  Text="{TemplateBinding Text}"
-                                                HorizontalAlignment="Left"
-                                                IsHitTestVisible="False"
-                                              Style="{DynamicResource Body}"
-                                                Foreground="{Binding CurrentForegroundColor, 
-                                                             RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
-                                                FontFamily="{TemplateBinding FontFamily}" 
-                                                FontSize="{TemplateBinding FontSize}" />
-                                    <local:ChangingIcon FirstKind="ChevronDown"
-                                                        SecondKind="ChevronUp"
-                                                        HorizontalAlignment="Right"
-                                                        IsHitTestVisible="False"
-                                                        Change="{TemplateBinding IsDropDownOpen}"
-                                                        Foreground="{TemplateBinding Foreground}"
-                                                        ActiveForeground="{Binding ToggleColor, 
-                                                                           RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
-                                                        Width="10" />
-                                </DockPanel>
-                            </local:CustomToggleButton>
-                            <!-- Popup -->
-                            <Popup x:Name="PopupMenu" IsOpen="{TemplateBinding IsDropDownOpen}"
-                                                            StaysOpen="False"
-                                                            AllowsTransparency="True"
-                                                            PlacementTarget = "{Binding ElementName = MoreButton}">
-                                <local:MenuContent CornerRadius="10"
-                                                   ItemsSource="{Binding Items, 
-                                                                 RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
-                                                    ItemMargin="10"
-                                                    Background="{Binding MenuBackgroundColor, 
-                                                                 RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
-                                                    HoverColor="{Binding MenuHoverColor, 
-                                                                 RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}">
-                                </local:MenuContent>
-                            </Popup>
+                            <Border x:Name="templateRoot" 
+                                    Padding="{TemplateBinding Padding}"
+                                    CornerRadius="{Binding ButtonCornerRadius, RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
+                                    HorizontalAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                                <Grid>
+                                    <local:Icon Kind="ChevronDown" Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
+                                                HorizontalAlignment="Right" Width="10"/>
+                                </Grid>
+                            </Border>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Background, 
+                                                                    RelativeSource={RelativeSource TemplatedParent},
+                                                                    Converter={StaticResource ColorIntensityConverter}, ConverterParameter=0.5|250}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+        <!-- Template for a combobox -->
+        <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+            <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+                </Grid.ColumnDefinitions>
+                <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="3" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Placement="Bottom">
+                    <Grid MinWidth="{Binding ActualWidth, ElementName=templateRoot, Converter={StaticResource Adder}, ConverterParameter=5}">
+                        <Border Background="{TemplateBinding Background}"
+                            CornerRadius="10"
+                            x:Name="dropDownBorder"
+                            MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                            BorderThickness="0"
+                            Margin="5,2,5,5">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" />
+                            </Border.Effect>
+                        </Border>
+
+                        <Border Name="mask" 
+                                    Background="{TemplateBinding Background }"
+                                    CornerRadius="15"
+                                Margin="5,2,5,5"
+                                    BorderThickness="0"/>
+                        <StackPanel Margin="4,1,4,4">
+                            <StackPanel.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=mask}"/>
+                            </StackPanel.OpacityMask>
+                            <ScrollViewer Style="{StaticResource CustomScrollViewer}" HorizontalScrollBarVisibility="Hidden">
+                                <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Grid>
+                </Popup>
+                <ToggleButton Padding="{TemplateBinding Padding}" x:Name="toggleButton" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
+                <DockPanel Margin="{TemplateBinding Padding}" >
+                    <ContentPresenter Content="{Binding PreTextContent, RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
+                                      HorizontalAlignment="Left"
+                                      IsHitTestVisible="false" />
+                    <TextBox x:Name="contentPresenter" Text="{Binding Header, RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
+                             Style="{DynamicResource Body}"
+                             FontWeight="DemiBold"
+                             Foreground="{TemplateBinding Foreground}"
+                             Background="Transparent"
+                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                             IsHitTestVisible="false" Margin="{TemplateBinding Padding}" 
+                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </DockPanel>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="HasItems" Value="false">
+                    <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                </Trigger>
+                <Trigger Property="IsDropDownOpen" Value="true">
+                    <Setter Property="Foreground" TargetName="contentPresenter" Value="{Binding AccentColor, RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </ComboBox.Resources>
+    <ComboBox.Style>
+        <!-- Style definition of combobox -->
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
+        </Style>
     </ComboBox.Style>
+    <ComboBox.ItemContainerStyle>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <!-- Background -->
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                x:Name="border"
+                                Padding="{TemplateBinding Padding}"
+                                Cursor="Hand"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{Binding MenuBackgroundColor, RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- On Mouse Effect -->
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{Binding MenuHoverColor, RelativeSource={RelativeSource AncestorType=local:CustomComboBox},
+                                                                                         Converter={StaticResource ColorIntensityConverter}, ConverterParameter=1.5|150}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ComboBox.ItemContainerStyle>
 </ComboBox>

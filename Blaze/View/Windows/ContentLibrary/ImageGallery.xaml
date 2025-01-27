@@ -49,6 +49,22 @@
                                   Padding="5"
                                   Selected="ManualSort"/>
                 </UIElements:CustomComboSelection>
+
+                <UIElements:CustomComboBox BorderThickness="0"
+                                                 SelectedIndex="0"
+                                                 Padding="10,4,10,4"
+                                               Header="Move All to Album"
+                                                 ButtonCornerRadius="10"
+                                                 MenuBackgroundColor="{Binding SurfaceColor, ElementName=ImageGalleryController}"
+                                                 MenuHoverColor="{Binding SurfaceColor, ElementName=ImageGalleryController}"
+                                                 AccentColor="{Binding PrimaryColor, ElementName=ImageGalleryController}"
+                                                Background="{Binding SurfaceColor, ElementName=ImageGalleryController}">
+                    <UIElements:CustomComboBox.PreTextContent>
+                        <UIElements:Icon Kind="ListSelection"
+                                         Foreground="Black"
+                                         Width="15"/>
+                    </UIElements:CustomComboBox.PreTextContent>
+                </UIElements:CustomComboBox>
             </DockPanel>
         </StackPanel>
     </Grid>

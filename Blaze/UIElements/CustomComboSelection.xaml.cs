@@ -77,8 +77,8 @@ namespace Blaze.UIElements
 
         public CustomComboSelection()
         {
-            DataContext = this;
             InitializeComponent();
+            DataContext = this;
         }
 
     }

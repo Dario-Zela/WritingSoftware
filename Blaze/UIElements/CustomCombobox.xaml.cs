@@ -24,7 +24,7 @@ namespace Blaze.UIElements
     {
         // Dependency proprieties of Custom Combobox
 
-        // Corner Radius of Custom Combobox
+        // Corner Radius of Box
         public CornerRadius ButtonCornerRadius
         {
             get { return (CornerRadius)GetValue(ButtonCornerRadiusProperty); }
@@ -34,27 +34,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty ButtonCornerRadiusProperty =
             DependencyProperty.Register("ButtonCornerRadius", typeof(CornerRadius), typeof(CustomComboBox));
 
-        // Color of Arrow when Toggled 
-        public SolidColorBrush ToggleColor
-        {
-            get { return (SolidColorBrush)GetValue(ToggleColorProperty); }
-            set { SetValue(ToggleColorProperty, value); }
-        }
-
-        public static readonly DependencyProperty ToggleColorProperty =
-            DependencyProperty.Register("ToggleColor", typeof(SolidColorBrush), typeof(CustomComboBox));
-
-        // Foreground Color of text
-        public SolidColorBrush CurrentForegroundColor
-        {
-            get { return (SolidColorBrush)GetValue(CurrentForegroundColorProperty); }
-            set { SetValue(CurrentForegroundColorProperty, value); }
-        }
-
-        public static readonly DependencyProperty CurrentForegroundColorProperty =
-            DependencyProperty.Register("CurrentForegroundColor", typeof(SolidColorBrush), typeof(CustomComboBox));
-
-        // Color of Menu when hover
+        // Hover color of the Menu
         public SolidColorBrush MenuHoverColor
         {
             get { return (SolidColorBrush)GetValue(MenuHoverColorProperty); }
@@ -64,7 +44,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty MenuHoverColorProperty =
             DependencyProperty.Register("MenuHoverColor", typeof(SolidColorBrush), typeof(CustomComboBox));
 
-        // Background Color of Menu
+        // Background color of the Menu
         public SolidColorBrush MenuBackgroundColor
         {
             get { return (SolidColorBrush)GetValue(MenuBackgroundColorProperty); }
@@ -74,25 +54,39 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty MenuBackgroundColorProperty =
             DependencyProperty.Register("MenuBackgroundColor", typeof(SolidColorBrush), typeof(CustomComboBox));
 
+        // Objects to add before Text
+        public object PreTextContent
+        {
+            get { return (object)GetValue(PreTextContentProperty); }
+            set { SetValue(PreTextContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty PreTextContentProperty =
+            DependencyProperty.Register("PreTextContent", typeof(object), typeof(CustomComboBox));
+
+        // Accent Color of Text
+        public SolidColorBrush AccentColor
+        {
+            get { return (SolidColorBrush)GetValue(AccentColorProperty); }
+            set { SetValue(AccentColorProperty, value); }
+        }
+
+        public static readonly DependencyProperty AccentColorProperty =
+            DependencyProperty.Register("AccentColor", typeof(SolidColorBrush), typeof(CustomComboBox));
+
+        public string Header
+        {
+            get { return (string)GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
+        }
+
+        public static readonly DependencyProperty HeaderProperty =
+            DependencyProperty.Register("Header", typeof(string), typeof(CustomComboBox));
+
         public CustomComboBox()
         {
             InitializeComponent();
-            // Set Color of text
-            this.DropDownOpened += OnDropdown;
-            this.DropDownClosed += OnDropdown;
-            this.Loaded += (s,e) => { OnDropdown(s, e); };
-        }
-
-        private void OnDropdown(object sender, EventArgs e)
-        {
-            if (IsDropDownOpen)
-            {
-                CurrentForegroundColor = ToggleColor;
-            }
-            else
-            {
-                CurrentForegroundColor = (SolidColorBrush)Foreground;
-            }
+            DataContext = this;
         }
     }
 }
