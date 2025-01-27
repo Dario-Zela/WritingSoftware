@@ -19,16 +19,26 @@ namespace Blaze.UIElements
     /// </summary>
     public partial class ThemeListView : UserControl
     {
-        // UI Dependencies
+        // Dependency Proprieties of List View
+
+        // Margin of List View Items
+        public Thickness ItemMargin
+        {
+            get { return (Thickness)base.GetValue(ItemMarginProperty); }
+            set { base.SetValue(ItemMarginProperty, value); }
+        }
+
         public static DependencyProperty ItemMarginProperty = DependencyProperty.Register(
             name: "ItemMargin",
             propertyType: typeof(Thickness),
             ownerType: typeof(ThemeListView));
 
-        public Thickness ItemMargin
+
+        // Mouse over color
+        public SolidColorBrush ItemMouseOverColor
         {
-            get { return (Thickness)base.GetValue(ItemMarginProperty); }
-            set { base.SetValue(ItemMarginProperty, value); }
+            get { return (SolidColorBrush)base.GetValue(ItemMouseOverColorProperty); }
+            set { base.SetValue(ItemMouseOverColorProperty, value); }
         }
 
         public static DependencyProperty ItemMouseOverColorProperty = DependencyProperty.Register(
@@ -37,6 +47,7 @@ namespace Blaze.UIElements
             ownerType: typeof(ThemeListView),
             typeMetadata: new PropertyMetadata((SolidColorBrush)Application.Current.Resources["ApplicationPrimaryBrush"]));
 
+        // Padding of items
         public Thickness ItemPadding
         {
             get { return (Thickness)GetValue(ItemPaddingProperty); }
@@ -46,10 +57,11 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty ItemPaddingProperty =
             DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(ThemeListView));
 
-        public SolidColorBrush ItemMouseOverColor
+        // Selected color of active item
+        public SolidColorBrush ItemSelectedActiveColor
         {
-            get { return (SolidColorBrush)base.GetValue(ItemMouseOverColorProperty); }
-            set { base.SetValue(ItemMouseOverColorProperty, value); }
+            get { return (SolidColorBrush)base.GetValue(ItemSelectedActiveColorProperty); }
+            set { base.SetValue(ItemSelectedActiveColorProperty, value); }
         }
 
         public static DependencyProperty ItemSelectedActiveColorProperty = DependencyProperty.Register(
@@ -58,18 +70,7 @@ namespace Blaze.UIElements
             ownerType: typeof(ThemeListView),
             typeMetadata: new PropertyMetadata((SolidColorBrush)Application.Current.Resources["ApplicationPrimaryBrush"]));
 
-        public SolidColorBrush ItemSelectedActiveColor
-        {
-            get { return (SolidColorBrush)base.GetValue(ItemSelectedActiveColorProperty); }
-            set { base.SetValue(ItemSelectedActiveColorProperty, value); }
-        }
-
-        public static DependencyProperty ItemInactiveColorProperty = DependencyProperty.Register(
-            name: "ItemInactiveColor",
-            propertyType: typeof(SolidColorBrush),
-            ownerType: typeof(ThemeListView),
-            typeMetadata: new PropertyMetadata((SolidColorBrush)Application.Current.Resources["ApplicationSurface"]));
-
+        // Surface Brush for list view
         public SolidColorBrush SurfaceBrush
         {
             get { return (SolidColorBrush)GetValue(SurfaceBrushProperty); }
@@ -79,6 +80,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty SurfaceBrushProperty =
             DependencyProperty.Register("SurfaceBrush", typeof(SolidColorBrush), typeof(ThemeListView));
 
+        // On Surface Brush for list view
         public SolidColorBrush OnSurfaceBrush
         {
             get { return (SolidColorBrush)GetValue(OnSurfaceBrushProperty); }
@@ -88,6 +90,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty OnSurfaceBrushProperty =
             DependencyProperty.Register("OnSurfaceBrush", typeof(SolidColorBrush), typeof(ThemeListView));
 
+        // Secondary Brush for list view
         public SolidColorBrush SecondaryBrush
         {
             get { return (SolidColorBrush)GetValue(SecondaryBrushProperty); }
@@ -97,6 +100,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty SecondaryBrushProperty =
             DependencyProperty.Register("SecondaryBrush", typeof(SolidColorBrush), typeof(ThemeListView));
 
+        // On Secondary Brush for list view
         public SolidColorBrush OnSecondaryBrush
         {
             get { return (SolidColorBrush)GetValue(OnSecondaryBrushProperty); }
@@ -106,15 +110,11 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty OnSecondaryBrushProperty =
             DependencyProperty.Register("OnSecondaryBrush", typeof(SolidColorBrush), typeof(ThemeListView));
 
-        public SolidColorBrush ItemInactiveColor
-        {
-            get { return (SolidColorBrush)base.GetValue(ItemInactiveColorProperty); }
-            set { base.SetValue(ItemInactiveColorProperty, value); }
-        }
 
         // List View
         public ListView ListViewReference => ContainerListView;
 
+        // Commands
         public RelayCommand DuplicateTheme {  get; set; }
         public RelayCommand RenameTheme {  get; set; }
         public RelayCommand DeleteTheme { get; set; }
@@ -136,11 +136,13 @@ namespace Blaze.UIElements
             RenamePopup.Closed += (s, e) => RenameBox.Text = "";
         }
 
+        // Force Close Rename Popup
         private void CloseRenamePopupMethod(object obj)
         {
             RenamePopup.IsOpen = false;
         }
 
+        // Force Close More Popup
         private void ClosePopup(object obj)
         {
             for (int i = 0; i < ContainerListView.Items.Count; i++)
@@ -152,21 +154,26 @@ namespace Blaze.UIElements
             }
         }
 
+        // Start Rename Popup
         private void StartRenameDialouge(object obj)
         {
+            // Close More Popup
             ClosePopup(obj);
+            RenameError.Visibility = Visibility.Collapsed;
             RenamePopup.IsOpen = true;
             OldNameBox.Text = obj.ToString();
         }
 
+        // Open Theme Editor
         private void EditThemeMethod(object obj)
         {
             string filePath = System.IO.Path.GetFullPath(Constants.FOLDER_LOCATION) + "\\Themes\\";
             filePath += obj.ToString() + ".xaml";
-
-            MainWindow.ChangeScene(new ThemeEditor(filePath));
+            var editor = new ThemeEditor(filePath);
+            MainWindow.ChangeScene(editor);
         }
 
+        // Delete Theme c
         private void DeleteThemeMethod(object obj)
         {
             ClosePopup(obj);
@@ -176,16 +183,27 @@ namespace Blaze.UIElements
             ((App)Application.Current).InitialiseThemes();
         }
 
+        // Rename Theme 
         private void RenameThemeMethod(object obj)
         {
             string filePath = System.IO.Path.GetFullPath(Constants.FOLDER_LOCATION) + "\\Themes\\";
             string oldFilePath = filePath + OldNameBox.Text + ".xaml";
             string newFilePath = filePath + RenameBox.Text + ".xaml";
+
+            // Make sure file does not exist
+            if (File.Exists(newFilePath))
+            {
+                RenameError.Visibility = Visibility.Visible;
+                return;
+            }
+            
             File.Move(oldFilePath, newFilePath);
             ((App)Application.Current).InitialiseThemes();
+            
             RenamePopup.IsOpen = false;
         }
 
+        // Duplicate Theme 
         private void DuplicateThemeMethod(object obj)
         {
             ClosePopup(obj);
@@ -196,6 +214,7 @@ namespace Blaze.UIElements
             ((App)Application.Current).InitialiseThemes();
         }
 
+        // Find avaliable name for theme 
         private string FindNewName(string name)
         {
             int counter = 0;
@@ -211,11 +230,6 @@ namespace Blaze.UIElements
             while (File.Exists(System.IO.Path.Combine(folderPath, fileName)));
 
             return System.IO.Path.Combine(folderPath, fileName);
-        }
-
-        private void PopupMenu_Opened(object sender, EventArgs e)
-        {
-            Console.WriteLine("Opened");
         }
     }
 }

@@ -66,7 +66,6 @@ namespace Blaze.Model
         }
 
         //On Colors
-
         public Color OnPrimaryColor
         {
             get { return (ThemeDictionary["OnPrimaryBrush"] as SolidColorBrush).Color; }
@@ -113,7 +112,7 @@ namespace Blaze.Model
             }
         }
 
-
+        // Actively changed color
         private string currentlyActiveBrush = "PrimaryBrush";
         private string currentlyActiveColor => currentlyActiveBrush.Substring(0, currentlyActiveBrush.Length - 5) + "Color";
         public Color CurrentlyActiveColor
@@ -233,12 +232,14 @@ namespace Blaze.Model
             Back = new RelayCommand(o => MainWindow.ChangeScene(new ThemeLibrary()));
         }
 
+        // Changes Active Color
         public void ChangeActiveColor(string brush)
         {
             currentlyActiveBrush = brush;
             OnPropertyChanged("CurrentlyActiveColor");
         }
 
+        // Loads the theme
         public void LoadDictionary()
         {
             using (FileStream stream = new FileStream(Path, FileMode.Open))
@@ -247,6 +248,7 @@ namespace Blaze.Model
             }
         }
 
+        // Saves the theme
         public void SaveDictionary()
         {
             using (FileStream stream = new FileStream(Path, FileMode.Create))

@@ -16,6 +16,7 @@
         <converter:ColorToBrushConverter x:Key="BrushConverter"/>
     </UserControl.Resources>
     <Grid>
+        <!-- Background -->
         <Border Background="{DynamicResource ApplicationSurfaceBrush}"
                 Margin="10"
                 Padding="10"
@@ -29,6 +30,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <StackPanel>
+                    <!-- Header -->
                     <TextBox Text="Preview"
                              Margin="0,30,0,0"
                                          Style="{DynamicResource Header}"
@@ -61,6 +63,7 @@
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                                               VerticalScrollBarVisibility="Disabled">
                                     <Grid Margin="0,0,1,0">
+                                        <!-- Sidebar Preview -->
                                         <Border Background="{Binding SurfaceColor, Converter={StaticResource BrushConverter}}"
                                                  Margin="0,0,1,0">
                                             <Border.Effect>
@@ -92,6 +95,7 @@
                                     </Border.Effect>
                                 </Border>
                                 <StackPanel Margin="20">
+                                    <!-- Pannel Preview -->
                                     <TextBox Text="A Text Pannel"
                                             Foreground="{Binding OnSurfaceColor, Converter={StaticResource BrushConverter}}"
                                             FontSize="{Binding HeaderFontSize}"

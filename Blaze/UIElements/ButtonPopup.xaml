@@ -19,6 +19,7 @@
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
                         <DockPanel>
 
+                            <!-- Button Display -->
                             <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="{Binding CornerRadius, 
                                                   RelativeSource={RelativeSource AncestorType=local:ButtonPopup} }" SnapsToDevicePixels="true"
                                     Cursor="Hand">
@@ -26,11 +27,13 @@
                             </Border>
                         </DockPanel>
                         <ControlTemplate.Triggers>
+                            <!-- On hover effect -->
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{Binding HoverColor, 
                                               RelativeSource={RelativeSource AncestorType=local:ButtonPopup},
                                                 Converter={StaticResource ColorIntensityConverter}, ConverterParameter=0.4|250}"/>
                             </Trigger>
+                            <!-- Selected effect -->
                             <Trigger Property="IsChecked" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="{Binding SelectedBackgroundColor, 
                                               RelativeSource={RelativeSource AncestorType=local:ButtonPopup},

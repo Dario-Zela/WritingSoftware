@@ -17,11 +17,11 @@ namespace Blaze.UIElements
 {
     /// <summary>
     /// Interaction logic for CustomImage.xaml
+    /// Custom Image allows for blank images to be used as dynamic resources
     /// </summary>
     public partial class CustomImage : Image
     {
-
-
+        // Source image
         public Image SourceImage
         {
             get { return (Image)GetValue(SourceImageProperty); }
@@ -32,6 +32,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty SourceImageProperty =
             DependencyProperty.Register("SourceImage", typeof(Image), typeof(CustomImage), new PropertyMetadata(ChangeImage));
 
+        // Changes the image displayed
         private static void ChangeImage(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var image = (d as CustomImage);

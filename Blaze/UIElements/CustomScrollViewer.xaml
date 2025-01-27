@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Color Definitions -->
     <SolidColorBrush x:Key="StandardBorderBrush" Color="#888" />
     <SolidColorBrush x:Key="StandardBackgroundBrush" Color="Black" />
     <SolidColorBrush x:Key="HoverBorderBrush" Color="#DDD" />
@@ -40,6 +41,7 @@
         </GradientBrush.GradientStops>
     </LinearGradientBrush>
 
+    <!-- Bar Styles -->
     <Style x:Key="ScrollBarLineButton" TargetType="{x:Type RepeatButton}">
         <Setter Property="Visibility" Value="Hidden"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -78,6 +80,7 @@
         </Setter>
     </Style>
 
+    <!-- Thumb Style -->
     <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -154,6 +157,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!-- Final Style -->
     <Style x:Key="CustomScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Template">

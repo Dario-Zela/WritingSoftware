@@ -22,6 +22,9 @@ namespace Blaze.UIElements
     /// </summary>
     public partial class CustomNumericalBox : TextBox
     {
+        // Dependency Proprieties of the Numerical Box
+
+        // Corner Radius of Box
         public CornerRadius CornerRadius
         {
             get { return (CornerRadius)GetValue(CornerRadiusProperty); }
@@ -31,6 +34,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(CustomNumericalBox));
 
+        // Corner Radius of buttons
         public CornerRadius ButtonCornerRadius
         {
             get { return (CornerRadius)GetValue(ButtonCornerRadiusProperty); }
@@ -40,6 +44,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty ButtonCornerRadiusProperty =
             DependencyProperty.Register("ButtonCornerRadius", typeof(CornerRadius), typeof(CustomNumericalBox));
 
+        // Currently Displayed Value
         public uint Value
         {
             get { return uint.Parse((string)GetValue(ValueProperty)); }
@@ -49,6 +54,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register("Value", typeof(string), typeof(CustomNumericalBox), new PropertyMetadata("0", ValueSet));
 
+        // Update Value
         private static void ValueSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             CustomNumericalBox box = (CustomNumericalBox)d;
@@ -63,6 +69,7 @@ namespace Blaze.UIElements
             }
         }
 
+        // Width of Buttons
         public double ItemWidth
         {
             get { return (double)GetValue(ItemWidthProperty); }

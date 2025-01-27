@@ -13,9 +13,18 @@ using System.Diagnostics;
 
 namespace Blaze.Core
 {
+    /// <summary>
+    /// The collections of converters used in the solution
+    /// </summary>
+
+
+    // Changes the intensity of a binded color.
+    // Will change between intensifying and dimming color depending on the
+    // Intensity of the color.
     [ValueConversion(typeof(SolidColorBrush), typeof(SolidColorBrush))]
     public class ColorIntensifier : IValueConverter
     {
+        // Check Intensity
         private double CheckIntensity(Color color)
         {
             return ((double)color.R + (double)color.G + (double)color.B) / (265 * 3);
@@ -44,18 +53,11 @@ namespace Blaze.Core
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var intensty = float.Parse((string)parameter);
-            SolidColorBrush brush = (SolidColorBrush)value;
-            if (brush == null)
-            {
-                return brush;
-            }
-            var changedColor = brush.Color * (1 / intensty);
-            changedColor.A = brush.Color.A;
-            return new SolidColorBrush(changedColor);
+            throw new NotImplementedException();
         }
     }
 
+    // Changes the alpha value of a binded color.
     [ValueConversion(typeof(SolidColorBrush), typeof(SolidColorBrush))]
     public class ColorTranslucifier : IValueConverter
     {
@@ -78,6 +80,7 @@ namespace Blaze.Core
         }
     }
 
+    // Inverts the value of a boolean
     [ValueConversion(typeof(bool), typeof(bool))]
     public class BooleanInverter : IValueConverter
     {
@@ -92,6 +95,7 @@ namespace Blaze.Core
         }
     }
 
+    // Converts color to solid color brush
     [ValueConversion(typeof(Color), typeof(SolidColorBrush))]
     public class ColorToBrushConverter : IValueConverter
     {
@@ -106,6 +110,7 @@ namespace Blaze.Core
         }
     }
 
+    // Converts SolidColorBursh to Brush
     [ValueConversion(typeof(SolidColorBrush), typeof(Brush))]
     public class ColorBrushToBrushConverter : IValueConverter
     {
@@ -120,6 +125,7 @@ namespace Blaze.Core
         }
     }
 
+    // Combines a color intenifier and a translucifier
     public class ColorIntensityConverter : IValueConverter
     {
         public IValueConverter Converter1 = new ColorIntensifier();
@@ -128,6 +134,7 @@ namespace Blaze.Core
         public object Convert(
             object value, Type targetType, object parameter, CultureInfo culture)
         {
+            // Paramters are gotten in the form intensity|alpha
             var parameters = (parameter as string).Split('|');
             object convertedValue =
                 Converter1.Convert(value, targetType, parameters[0], culture);
@@ -138,14 +145,11 @@ namespace Blaze.Core
         public object ConvertBack(
             object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var parameters = (parameter as string).Split('|');
-            object convertedValue =
-                Converter1.ConvertBack(value, targetType, parameters[0], culture);
-            return Converter2.ConvertBack(
-                convertedValue, targetType, parameters[1], culture);
+            throw new NotImplementedException();
         }
     }
 
+    // Converts a boolean to a specified visibility
     [ValueConversion(typeof(bool), typeof(Visibility))]
     public sealed class BoolToVisibilityConverter : IValueConverter
     {
@@ -178,20 +182,7 @@ namespace Blaze.Core
         }
     }
 
-    [ValueConversion(typeof(SolidColorBrush), typeof(Brush))]
-    public class SolidBrushToBrushConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return ((SolidColorBrush)value) as Brush;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return ((SolidColorBrush)value);
-        }
-    }
-
+    // Adds a value to a double
     [ValueConversion(typeof(Double), typeof(Double))]
     public class Adder : IValueConverter
     {
@@ -208,6 +199,7 @@ namespace Blaze.Core
         }
     }
 
+    // Multiplies a value to a double
     [ValueConversion(typeof(Double), typeof(Double))]
     public class Multiplier : IValueConverter
     {
@@ -224,7 +216,8 @@ namespace Blaze.Core
         }
     }
 
-    public class IconToImageConverter : PackIconKindToImageConverter
+    // Converts an icon to a image source
+    public class IconToImageConverter : PackIconCodiconsKindToImageConverter
     {
         public ImageSource ConvertIcon(object iconKind, Brush foregroundBrush)
         {

@@ -3,6 +3,7 @@ using Blaze.Model;
 using Blaze.UIElements;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -27,8 +28,10 @@ namespace Blaze.View.Windows.Theme
     /// </summary>
     public partial class ThemeEditor : UserControl
     {
+        // Current Context
         public Blaze.Model.Theme ThemeContext;
 
+        // Font Families Available
         public List<FontFamily> fontFamilies = new();
         private void LoadFonts()
         {
@@ -42,30 +45,32 @@ namespace Blaze.View.Windows.Theme
             fontFamilies.Sort(new Comparison<FontFamily>((f1, f2) => { return string.Compare(f1.Source, f2.Source); }));
         }
         
+        // Which Preview Button is Active
         private ToggleButton currentlyCheckedPreview;
 
         public ThemeEditor(string path)
         {
-
+            // Load Fonts and Theme
             LoadFonts();
             ThemeContext = new Blaze.Model.Theme(path);
 
-            Stopwatch stopwatch = Stopwatch.StartNew();
             InitializeComponent();
-            stopwatch.Stop();
-            Trace.WriteLine(stopwatch.ElapsedMilliseconds);
 
+            // Set Theme and Fonts
             DataContext = ThemeContext;
 
             HeaderFont.ItemsSource = fontFamilies;
             BodyFont.ItemsSource = fontFamilies;
             ButtonFont.ItemsSource = fontFamilies;
-            
+
+            // Set Header Preview To Active
             currentlyCheckedPreview = HeaderPreview;
             currentlyCheckedPreview.IsEnabled = false;
 
+            // Preview Data Context
             Preview.DataContext = ThemeContext;
 
+            // Keep Preview visible only if window is large enough
             SizeChanged += (s, e) =>
             {
                 Preview.Visibility = ActualWidth > 1000 == true ? Visibility.Visible : Visibility.Collapsed;
@@ -73,6 +78,7 @@ namespace Blaze.View.Windows.Theme
             };
         }
 
+        // Keep only one preview open
         private void Preview_Checked(object sender, RoutedEventArgs e)
         {
             if (currentlyCheckedPreview != null)
@@ -86,6 +92,7 @@ namespace Blaze.View.Windows.Theme
             }
         }
 
+        // Open Color Picker
         private void OpenColorPicker(object sender, RoutedEventArgs e)
         {
             ThemeContext.ChangeActiveColor(((Button)sender).Name);

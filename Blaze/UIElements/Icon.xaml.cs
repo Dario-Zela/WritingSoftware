@@ -23,6 +23,7 @@ namespace Blaze.UIElements
     /// </summary>
     public partial class Icon : Image
     {
+        // Icon Kind displayed
         public PackIconCodiconsKind Kind
         {
             get { return (PackIconCodiconsKind)GetValue(KindProperty); }
@@ -32,13 +33,14 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty KindProperty =
             DependencyProperty.Register("Kind", typeof(PackIconCodiconsKind), typeof(Icon), new PropertyMetadata(Changed));
 
+        // If Icon changed, update value
         private static void Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             Icon icon = (Icon)d;
             icon.Source = icon.Converter.ConvertIcon(icon.Kind, icon.Foreground);
-
         }
 
+        // Foreground color of the icon
         public SolidColorBrush Foreground
         {
             get { return (SolidColorBrush)GetValue(ForegroundProperty); }
@@ -48,6 +50,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty ForegroundProperty =
             DependencyProperty.Register("Foreground", typeof(SolidColorBrush), typeof(Icon), new PropertyMetadata(Changed));
 
+        // Converter Reference
         private IconToImageConverter Converter = new();
 
         public Icon()
@@ -56,6 +59,7 @@ namespace Blaze.UIElements
             Loaded += FirstUpdate;
         }
 
+        // Initial Setup of icon
         private void FirstUpdate(object sender, RoutedEventArgs e)
         {
             Source = Converter.ConvertIcon(Kind, Foreground);

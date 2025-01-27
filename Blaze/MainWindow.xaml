@@ -17,6 +17,7 @@
         ResizeMode="CanResize"
         Background="Transparent"
         StateChanged="Window_StateChanged"
+        d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         AllowsTransparency="True">
 
     <!-- Add Window Chrome -->
@@ -43,12 +44,27 @@
                         Orientation="Horizontal"
                         WindowChrome.IsHitTestVisibleInChrome="True">
 
+                <!-- Quick Theme Change -->
+                <UIElements:CustomButton Width="30"
+                                        Height="30"
+                                         VerticalContentAlignment="Bottom"
+                                         Padding="7"
+                                         BorderThickness="0"
+                                        Background="{DynamicResource ApplicationSecondaryBrush}"
+                                        Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                         HoverColor="{DynamicResource ApplicationSecondaryBrush}"
+                                        Click="Button_Click">
+                    <UIElements:Icon Kind="Lightbulb"
+                                     VerticalAlignment="Bottom"
+                                     Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
+                </UIElements:CustomButton>
+
                 <!-- Minimise-->
 
                 <UIElements:CustomButton Width="30"
                                         Height="30"
                                          VerticalContentAlignment="Bottom"
-                                         Padding="5"
+                                         Padding="7"
                                          BorderThickness="0"
                                         Background="{DynamicResource ApplicationSecondaryBrush}"
                                         Foreground="{DynamicResource OnApplicationSecondaryBrush}"
@@ -67,7 +83,7 @@
                                         Background="{DynamicResource ApplicationSecondaryBrush}"
                                         Foreground="{DynamicResource OnApplicationSecondaryBrush}"
                                          HoverColor="{DynamicResource ApplicationSecondaryBrush}"
-                                         Padding="5"
+                                         Padding="7"
                                         x:Name="MaximiseButton"
                                         Command="{Binding Maximise}" >
                     <UIElements:ChangingIcon FirstKind="ChromeMaximize"
@@ -81,7 +97,7 @@
 
                 <UIElements:CustomButton Width="30"
                                         Height="30"
-                                         Padding="5"
+                                         Padding="7"
                                          BorderThickness="0"
                                          HoverColor="Red"
                                         Background="{DynamicResource ApplicationSecondaryBrush}"
@@ -90,6 +106,8 @@
                     <UIElements:Icon Kind="ChromeClose" Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
                 </UIElements:CustomButton>
             </StackPanel>
+            
+            <!-- Display -->
             <Grid x:Name="Holder"
                   Grid.ColumnSpan="2"
                   Grid.Row="1"/>

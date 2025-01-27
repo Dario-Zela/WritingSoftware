@@ -35,6 +35,7 @@
                                         Padding="{Binding ItemPadding, 
                                                   RelativeSource={RelativeSource AncestorType=local:ThemeListView} }">
                                     <DockPanel>
+                                        <!-- Theme Name -->
                                         <TextBox HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
@@ -50,6 +51,7 @@
                                         </TextBox>
                                         <DockPanel HorizontalAlignment="Right"
                                                     VerticalAlignment="Top">
+                                            <!-- Edit Button -->
                                             <local:CustomButton Background="{DynamicResource ApplicationSecondaryBrush}"
                                                                 Foreground="{DynamicResource OnApplicationSecondaryBrush}"
                                                                 HoverColor="{DynamicResource ApplicationSecondaryBrush}"
@@ -69,7 +71,8 @@
                                                                 VerticalAlignment="Center"
                                                                 Margin="0,0,15,0"
                                                                 Visibility="{TemplateBinding IsSelected, Converter={StaticResource BoolToVis}}"/>
-                                            <local:ButtonPopup Cursor="Arrow"
+                                            <!-- More Bytton -->
+                                            <local:ButtonPopup Cursor="Hand"
                                                                 BorderThickness="0"
                                                                VerticalAlignment="Center"
                                                                Padding="7"
@@ -77,11 +80,12 @@
                                                                HoverColor="{DynamicResource ApplicationSurfaceBrush}"
                                                                SelectedBackgroundColor="{DynamicResource ApplicationSurfaceBrush}"
                                                                x:Name="MoreButton">
-                                                <iconPacks:MaterialDesign Kind="MoreVert"
+                                                <iconPacks:Codicons Kind="KebabVertical"
                                                                           Width="15"
                                                                           Height="15"/>
 
                                             </local:ButtonPopup>
+                                            <!-- More Button Popup -->
                                             <Popup x:Name="PopupMenu"
                                                    IsOpen="{Binding IsChecked, ElementName=MoreButton}"
                                                     StaysOpen="False"
@@ -160,6 +164,7 @@
                 </Style>
             </ListView.Style>
         </ListView>
+        <!-- Rename Popup -->
         <Popup x:Name="RenamePopup"
                AllowsTransparency="True"
                StaysOpen="False"
@@ -177,6 +182,7 @@
                 </Border>
                 <Grid Margin="20">
                     <StackPanel Margin="0,20,0,20">
+                        <!-- Rename Popup Description -->
                         <TextBox Style="{DynamicResource Header2}"
                              Text="Rename Theme"
                              Foreground="{DynamicResource ApplicationSecondaryBrush}"
@@ -244,7 +250,19 @@
                                 </TextBox.Style>
                             </TextBox>
                         </Border>
+                        <!-- Show Error if Rename Unsuccessful -->
+                        <TextBox Style="{DynamicResource Body2}"
+                                 Margin="0,0,0,10"
+                                 x:Name="RenameError"
+                                 FontWeight="Bold"
+                                 Visibility="Collapsed"
+                                 Text="Name already in use"
+                                 Foreground="{DynamicResource ApplicationErrorBrush}"
+                                 FontFamily="{DynamicResource ApplicationBodyFont}"
+                                 FontSize="{DynamicResource ApplicationBodyFontSize}"/>
+
                     </StackPanel>
+                    <!-- Buttons -->
                     <DockPanel HorizontalAlignment="Right"
                                VerticalAlignment="Bottom" Grid.Row="1">
                         <local:CustomButton Style="{DynamicResource TextButton}"

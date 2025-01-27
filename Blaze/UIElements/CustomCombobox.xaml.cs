@@ -18,10 +18,13 @@ using System.Windows.Shapes;
 namespace Blaze.UIElements
 {
     /// <summary>
-    /// Interaction logic for CustomCombobox.xaml
+    /// Interaction logic for CustomComboBox.xaml
     /// </summary>
-    public partial class CustomCombobox : ComboBox
+    public partial class CustomComboBox : ComboBox
     {
+        // Dependency proprieties of Custom Combobox
+
+        // Corner Radius of Custom Combobox
         public CornerRadius ButtonCornerRadius
         {
             get { return (CornerRadius)GetValue(ButtonCornerRadiusProperty); }
@@ -29,8 +32,9 @@ namespace Blaze.UIElements
         }
 
         public static readonly DependencyProperty ButtonCornerRadiusProperty =
-            DependencyProperty.Register("ButtonCornerRadius", typeof(CornerRadius), typeof(CustomCombobox));
+            DependencyProperty.Register("ButtonCornerRadius", typeof(CornerRadius), typeof(CustomComboBox));
 
+        // Color of Arrow when Toggled 
         public SolidColorBrush ToggleColor
         {
             get { return (SolidColorBrush)GetValue(ToggleColorProperty); }
@@ -38,8 +42,9 @@ namespace Blaze.UIElements
         }
 
         public static readonly DependencyProperty ToggleColorProperty =
-            DependencyProperty.Register("ToggleColor", typeof(SolidColorBrush), typeof(CustomCombobox));
+            DependencyProperty.Register("ToggleColor", typeof(SolidColorBrush), typeof(CustomComboBox));
 
+        // Foreground Color of text
         public SolidColorBrush CurrentForegroundColor
         {
             get { return (SolidColorBrush)GetValue(CurrentForegroundColorProperty); }
@@ -47,8 +52,9 @@ namespace Blaze.UIElements
         }
 
         public static readonly DependencyProperty CurrentForegroundColorProperty =
-            DependencyProperty.Register("CurrentForegroundColor", typeof(SolidColorBrush), typeof(CustomCombobox));
+            DependencyProperty.Register("CurrentForegroundColor", typeof(SolidColorBrush), typeof(CustomComboBox));
 
+        // Color of Menu when hover
         public SolidColorBrush MenuHoverColor
         {
             get { return (SolidColorBrush)GetValue(MenuHoverColorProperty); }
@@ -56,8 +62,9 @@ namespace Blaze.UIElements
         }
 
         public static readonly DependencyProperty MenuHoverColorProperty =
-            DependencyProperty.Register("MenuHoverColor", typeof(SolidColorBrush), typeof(CustomCombobox));
+            DependencyProperty.Register("MenuHoverColor", typeof(SolidColorBrush), typeof(CustomComboBox));
 
+        // Background Color of Menu
         public SolidColorBrush MenuBackgroundColor
         {
             get { return (SolidColorBrush)GetValue(MenuBackgroundColorProperty); }
@@ -65,11 +72,12 @@ namespace Blaze.UIElements
         }
 
         public static readonly DependencyProperty MenuBackgroundColorProperty =
-            DependencyProperty.Register("MenuBackgroundColor", typeof(SolidColorBrush), typeof(CustomCombobox));
+            DependencyProperty.Register("MenuBackgroundColor", typeof(SolidColorBrush), typeof(CustomComboBox));
 
-        public CustomCombobox()
+        public CustomComboBox()
         {
             InitializeComponent();
+            // Set Color of text
             this.DropDownOpened += OnDropdown;
             this.DropDownClosed += OnDropdown;
             this.Loaded += (s,e) => { OnDropdown(s, e); };

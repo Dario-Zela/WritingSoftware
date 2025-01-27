@@ -82,6 +82,7 @@
             </UIElements:CustomButton>
             <ScrollViewer Style="{StaticResource CustomScrollViewer}">
                 <StackPanel Margin="10,50,30,0">
+                    <!-- Header -->
                     <DockPanel>
                         <TextBox Text="Theme Editor"
                                 Style="{DynamicResource Header}"   
@@ -115,6 +116,7 @@
                     </DockPanel>
                     <Separator Margin="0,0,0,20"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                    <!-- Color Pallete -->
                     <TextBox Text="Color Palette"
                                Style="{DynamicResource Header2}"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"
@@ -259,6 +261,7 @@
                     </Grid>
                     <Separator Margin="0,0,0,20"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                    <!-- Text and Icon Colors -->
                     <TextBox Text="Text and Icon Colors"
                                Style="{DynamicResource Header2}"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"
@@ -272,8 +275,7 @@
                             FontWeight="Light">
                         “On” colors are used to color text and icons placed on different colors. “On Surface,” for example, colors most text and icons that appear on the “surface” color above.
                     </TextBox>
-                    <Grid Margin="0,10,0,0"
-                          >
+                    <Grid Margin="0,10,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -367,25 +369,30 @@
                     </Grid>
                     <Separator Margin="0,0,0,20"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                    <!-- Color Popup -->
                     <Popup IsOpen="False"
                                x:Name="ColorPopup"
                                StaysOpen="False"
                                AllowsTransparency="True"
                                Placement="Mouse"
                                HorizontalOffset="200">
-                        <Border Background="{DynamicResource ApplicationSurfaceBrush}"
+                        <Grid Margin="2">
+                            <Border Background="{DynamicResource ApplicationSurfaceBrush}"
                                     CornerRadius="10"
-                                    Padding="7"
-                                    Margin="2">
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
-                            </Border.Effect>
+                                    Padding="7">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
+                                </Border.Effect>
+
+                            </Border>
                             <UIElements:ColorSelector ColorPicked="{Binding CurrentlyActiveColor, Mode=TwoWay}"
-                                                      Height="400"
+                                                      Height="270"
+                                                      Margin="7"
                                                       x:Name="ColorPicker"
                                                       Width="200"/>
-                        </Border>
+                        </Grid>
                     </Popup>
+                    <!-- Fonts -->
                     <TextBox Text="Typefaces and Styles"
                              Style="{DynamicResource Header2}"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"
@@ -669,6 +676,7 @@
                     </Grid>
                     <Separator Margin="0,20,0,20"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                    <!-- Images -->
                     <TextBox Text="Theme Images"
                              Style="{DynamicResource Header2}"
                            Foreground="{DynamicResource OnApplicationSurfaceBrush}"

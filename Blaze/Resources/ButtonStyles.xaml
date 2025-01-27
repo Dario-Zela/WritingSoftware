@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:UIElements="clr-namespace:Blaze.UIElements">
+
+    <!-- Normal Button Style -->
     <Style TargetType="UIElements:CustomButton" x:Key="NormalButton">
         <Setter Property="Template">
             <Setter.Value>
@@ -25,6 +27,7 @@
         </Setter>
     </Style>
 
+    <!-- Alternate Button Style -->
     <Style TargetType="UIElements:CustomButton" x:Key="AlternateButton">
         <Setter Property="Template">
             <Setter.Value>
@@ -49,6 +52,7 @@
         </Setter>
     </Style>
 
+    <!-- Text Button Style -->
     <Style TargetType="UIElements:CustomButton" x:Key="TextButton">
         <Setter Property="Template">
             <Setter.Value>

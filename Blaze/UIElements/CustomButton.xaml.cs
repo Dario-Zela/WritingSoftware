@@ -20,6 +20,7 @@ namespace Blaze.UIElements
     /// </summary>
     public partial class CustomButton : Button
     {
+        // Corner Radius of Custom Button
         public CornerRadius CornerRadius
         {
             get { return (CornerRadius)GetValue(CornerRadiusProperty); }
@@ -29,6 +30,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(CustomButton));
 
+        // Hover Color of Custom Button
         public SolidColorBrush HoverColor
         {
             get { return (SolidColorBrush)GetValue(HoverColorProperty); }

@@ -24,6 +24,7 @@ namespace Blaze.View.Windows.Theme
         public ThemePreview()
         {
             InitializeComponent();
+            // If data context is not theme, hide preview
             Loaded += (s, e) =>
             {
                 if (DataContext is not Blaze.Model.Theme)

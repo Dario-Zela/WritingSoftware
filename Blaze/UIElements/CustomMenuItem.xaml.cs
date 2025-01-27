@@ -21,6 +21,7 @@ namespace Blaze.UIElements
     /// </summary>
     public partial class CustomMenuItem : ListViewItem
     {
+        // Command Executed on Item Selection
         public ICommand Command
         {
             get { return (ICommand)GetValue(CommandProperty); }
@@ -30,6 +31,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty CommandProperty =
             DependencyProperty.Register("Command", typeof(ICommand), typeof(CustomMenuItem));
 
+        // Parameters of command
         public object CommandParameter
         {
             get { return (object)GetValue(CommandParameterProperty); }

@@ -30,6 +30,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                <!-- Add Button -->
                                 <local:CustomButton Grid.Column="0"
                                                       Command="{Binding Add, 
                                                                 RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
@@ -45,6 +46,7 @@
                                                   RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox},
                                                         Converter={StaticResource BrushConverter}}"/>
                                 </local:CustomButton>
+                                <!-- Value Display -->
                                 <TextBox Text="{Binding Value, 
                                               RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
                                          BorderThickness="0"
@@ -59,6 +61,7 @@
                                          Grid.Column="1">
 
                                 </TextBox>
+                                <!-- Subtract Button -->
                                 <local:CustomButton Grid.Column="2"
                                                     BorderThickness="0"
                                                     Command="{Binding Subtract, 

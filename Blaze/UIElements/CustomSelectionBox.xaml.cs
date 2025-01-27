@@ -22,6 +22,9 @@ namespace Blaze.UIElements
     /// </summary>
     public partial class CustomSelectionBox : ComboBox
     {
+        // Dependency Proprieties of the Selection Box
+
+        // Corner Radius of Box
         public CornerRadius ButtonCornerRadius
         {
             get { return (CornerRadius)GetValue(ButtonCornerRadiusProperty); }
@@ -31,6 +34,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty ButtonCornerRadiusProperty =
             DependencyProperty.Register("ButtonCornerRadius", typeof(CornerRadius), typeof(CustomSelectionBox));
 
+        // Hover color of the Menu
         public SolidColorBrush MenuHoverColor
         {
             get { return (SolidColorBrush)GetValue(MenuHoverColorProperty); }
@@ -40,6 +44,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty MenuHoverColorProperty =
             DependencyProperty.Register("MenuHoverColor", typeof(SolidColorBrush), typeof(CustomSelectionBox));
 
+        // Background color of the Menu
         public SolidColorBrush MenuBackgroundColor
         {
             get { return (SolidColorBrush)GetValue(MenuBackgroundColorProperty); }
@@ -49,15 +54,16 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty MenuBackgroundColorProperty =
             DependencyProperty.Register("MenuBackgroundColor", typeof(SolidColorBrush), typeof(CustomSelectionBox));
 
-
-        public static DependencyProperty BarMarginProperty =
-            DependencyProperty.Register("BarMargin", typeof(Thickness), typeof(CustomSelectionBox));
-
+        // Margin of the separation bar
         public Thickness BarMargin
         {
             get { return (Thickness)base.GetValue(BarMarginProperty); }
             set { base.SetValue(BarMarginProperty, value); }
         }
+
+        public static DependencyProperty BarMarginProperty =
+            DependencyProperty.Register("BarMargin", typeof(Thickness), typeof(CustomSelectionBox));
+
 
         public CustomSelectionBox()
         {

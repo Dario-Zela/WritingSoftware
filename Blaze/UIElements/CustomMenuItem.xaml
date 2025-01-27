@@ -25,16 +25,18 @@
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type Button}">
+                                                <!-- Background -->
                                                 <Border x:Name="border"
-                                                Background="{TemplateBinding Background}"
-                                                BorderThickness="0"
-                                                SnapsToDevicePixels="true"
-                                                Cursor="Hand"
-                                                Padding="{Binding ItemMargin, 
-                                                        RelativeSource={RelativeSource AncestorType=local:MenuContent} }">
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderThickness="0"
+                                                        SnapsToDevicePixels="true"
+                                                        Cursor="Hand"
+                                                        Padding="{Binding ItemMargin, 
+                                                                RelativeSource={RelativeSource AncestorType=local:MenuContent} }">
                                                     <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                                 </Border>
                                                 <ControlTemplate.Triggers>
+                                                    <!-- Hover Color -->
                                                     <Trigger Property="IsMouseOver" Value="True">
                                                         <Setter Property="Background" TargetName="border" Value="{Binding HoverColor, 
                                                                                                                     RelativeSource={RelativeSource AncestorType=local:MenuContent},

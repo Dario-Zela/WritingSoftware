@@ -12,10 +12,13 @@ namespace Blaze
     /// </summary>
     public partial class MainWindow : Window
     {
+        // TODO: Remove
         private bool _isLight = true;
 
+        // Main Window instance
         public static MainWindow Instance { get; private set; }
 
+        // Checks if window is maximised
         public bool IsMaximised
         {
             get { return (bool)GetValue(IsMaximisedProperty); }
@@ -45,12 +48,14 @@ namespace Blaze
             Minimise = new RelayCommand(o => { Application.Current.MainWindow.WindowState = WindowState.Minimized; });
         }
 
+        // Change the currently displayed view
         public static void ChangeScene(UIElement element)
         {
             MainWindow.Instance.Holder.Children.Clear();
             MainWindow.Instance.Holder.Children.Add(element);
         }
 
+        // Fixes Window problems when maximised
         protected void Window_StateChanged(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Maximized)
@@ -65,6 +70,7 @@ namespace Blaze
             }
         }
 
+        // TODO: Remove
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var app = (App)Application.Current;

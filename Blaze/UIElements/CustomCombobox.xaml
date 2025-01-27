@@ -1,4 +1,4 @@
-﻿<ComboBox x:Class="Blaze.UIElements.CustomCombobox"
+﻿<ComboBox x:Class="Blaze.UIElements.CustomComboBox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -18,27 +18,27 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <local:CustomToggleButton
-                                x:Name="MoreButton"
-                                IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=IsDropDownOpen}"
-                                Background="{TemplateBinding Background}"
-                                Foreground="{TemplateBinding Foreground}"
-                                CornerRadius="{Binding ButtonCornerRadius, 
-                                              RelativeSource={RelativeSource AncestorType=local:CustomCombobox}}"
-                                Padding="{TemplateBinding Padding}"
-                                Margin="{TemplateBinding Margin}"
-                                HorizontalContentAlignment="Stretch"
-                                VerticalAlignment="Center"
-                                BorderThickness="0"
-                                Visibility="{TemplateBinding Visibility}"
-                                HoverColor="{TemplateBinding Background}">
+                            <local:CustomToggleButton x:Name="MoreButton"
+                                                      IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=IsDropDownOpen}"
+                                                      Background="{TemplateBinding Background}"
+                                                      Foreground="{TemplateBinding Foreground}"
+                                                      CornerRadius="{Binding ButtonCornerRadius, 
+                                                                    RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
+                                                      Padding="{TemplateBinding Padding}"
+                                                      Margin="{TemplateBinding Margin}"
+                                                      HorizontalContentAlignment="Stretch"
+                                                      VerticalAlignment="Center"
+                                                      BorderThickness="0"
+                                                      Visibility="{TemplateBinding Visibility}"
+                                                      HoverColor="{TemplateBinding Background}">
+                                <!-- Outer Box -->
                                 <DockPanel IsHitTestVisible="False">
                                     <TextBox  Text="{TemplateBinding Text}"
                                                 HorizontalAlignment="Left"
                                                 IsHitTestVisible="False"
                                               Style="{DynamicResource Body}"
                                                 Foreground="{Binding CurrentForegroundColor, 
-                                                             RelativeSource={RelativeSource AncestorType=local:CustomCombobox}}"
+                                                             RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
                                                 FontFamily="{TemplateBinding FontFamily}" 
                                                 FontSize="{TemplateBinding FontSize}" />
                                     <local:ChangingIcon FirstKind="ChevronDown"
@@ -48,22 +48,23 @@
                                                         Change="{TemplateBinding IsDropDownOpen}"
                                                         Foreground="{TemplateBinding Foreground}"
                                                         ActiveForeground="{Binding ToggleColor, 
-                                                                           RelativeSource={RelativeSource AncestorType=local:CustomCombobox}}"
+                                                                           RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
                                                         Width="10" />
                                 </DockPanel>
                             </local:CustomToggleButton>
+                            <!-- Popup -->
                             <Popup x:Name="PopupMenu" IsOpen="{TemplateBinding IsDropDownOpen}"
                                                             StaysOpen="False"
                                                             AllowsTransparency="True"
                                                             PlacementTarget = "{Binding ElementName = MoreButton}">
                                 <local:MenuContent CornerRadius="10"
                                                    ItemsSource="{Binding Items, 
-                                                                 RelativeSource={RelativeSource AncestorType=local:CustomCombobox}}"
+                                                                 RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
                                                     ItemMargin="10"
                                                     Background="{Binding MenuBackgroundColor, 
-                                                                 RelativeSource={RelativeSource AncestorType=local:CustomCombobox}}"
+                                                                 RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
                                                     HoverColor="{Binding MenuHoverColor, 
-                                                                 RelativeSource={RelativeSource AncestorType=local:CustomCombobox}}">
+                                                                 RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}">
                                 </local:MenuContent>
                             </Popup>
                         </Grid>

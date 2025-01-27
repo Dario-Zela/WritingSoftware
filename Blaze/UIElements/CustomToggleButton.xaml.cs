@@ -21,6 +21,7 @@ namespace Blaze.UIElements
     /// </summary>
     public partial class CustomToggleButton : ToggleButton
     {
+        // Corner Radius of the Toggle Button
         public CornerRadius CornerRadius
         {
             get { return (CornerRadius)GetValue(CornerRadiusProperty); }
@@ -30,6 +31,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(CustomToggleButton));
 
+        // Hover Color of the Toggle Button
         public SolidColorBrush HoverColor
         {
             get { return (SolidColorBrush)GetValue(HoverColorProperty); }
@@ -38,6 +40,7 @@ namespace Blaze.UIElements
 
         public static readonly DependencyProperty HoverColorProperty =
             DependencyProperty.Register("HoverColor", typeof(SolidColorBrush), typeof(CustomToggleButton));
+
         public CustomToggleButton()
         {
             InitializeComponent();

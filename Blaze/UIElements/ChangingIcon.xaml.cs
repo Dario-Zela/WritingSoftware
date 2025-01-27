@@ -27,6 +27,9 @@ namespace Blaze.UIElements
     /// </summary>
     public partial class ChangingIcon : Image
     {
+        // Dependency Proprieties of the Control
+
+        // Image first shown
         public PackIconCodiconsKind FirstKind
         {
             get { return (PackIconCodiconsKind)GetValue(FirstKindProperty); }
@@ -36,6 +39,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty FirstKindProperty =
             DependencyProperty.Register("FirstKind", typeof(PackIconCodiconsKind), typeof(ChangingIcon));
 
+        // Image shown after change fires
         public PackIconCodiconsKind SecondKind
         {
             get { return (PackIconCodiconsKind)GetValue(SecondKindProperty); }
@@ -45,6 +49,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty SecondKindProperty =
             DependencyProperty.Register("SecondKind", typeof(PackIconCodiconsKind), typeof(ChangingIcon));
 
+        // When to change the Image
         public bool Change
         {
             get { return (bool)GetValue(ChangeProperty); }
@@ -55,6 +60,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty ChangeProperty =
             DependencyProperty.Register("Change", typeof(bool), typeof(ChangingIcon), new PropertyMetadata(ChangeIcon));
 
+        // Appply image change
         private static void ChangeIcon(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ChangingIcon icon = (ChangingIcon)d;
@@ -68,6 +74,7 @@ namespace Blaze.UIElements
             }
         }
 
+        // Foreground shown when second image is shown
         public SolidColorBrush ActiveForeground
         {
             get { return (SolidColorBrush)GetValue(ActiveForegroundProperty); }
@@ -77,6 +84,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty ActiveForegroundProperty =
             DependencyProperty.Register("ActiveForeground", typeof(SolidColorBrush), typeof(ChangingIcon));
 
+        // Foreground shown when first image is shown
         public SolidColorBrush Foreground
         {
             get { return (SolidColorBrush)GetValue(ForegroundProperty); }
@@ -86,6 +94,7 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty ForegroundProperty =
             DependencyProperty.Register("Foreground", typeof(SolidColorBrush), typeof(ChangingIcon));
 
+        // Image Converter reference
         private IconToImageConverter Converter = new();
 
         public ChangingIcon()
@@ -94,6 +103,7 @@ namespace Blaze.UIElements
             this.Loaded += InitialiseImage;
         }
 
+        // Initialises the image when loaded
         private void InitialiseImage(object sender, RoutedEventArgs e)
         {
             Source = Converter.ConvertIcon(FirstKind, Foreground);

@@ -8,6 +8,7 @@ namespace Blaze.Core
 {
     public static class Constants
     {
+        // Location of source folder
         public static string FOLDER_LOCATION = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Blaze";
     }
 }

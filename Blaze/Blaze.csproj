@@ -23,13 +23,9 @@
   <ItemGroup>
     <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.1" />
-    <PackageReference Include="MahApps.Metro.IconPacks" Version="5.1.0" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Codicons" Version="5.1.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.1" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Security.AccessControl" Version="6.0.1" />
-    <PackageReference Include="System.Security.Permissions" Version="9.0.1" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.1" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.VCRTForwarders.140" Version="1.1.0" />

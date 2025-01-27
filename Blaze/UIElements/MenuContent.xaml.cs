@@ -20,7 +20,7 @@ namespace Blaze.UIElements
     /// </summary>
     public partial class MenuContent : ListView
     {
-
+        // Corner Radius of Menu Content
         public CornerRadius CornerRadius
         {
             get { return (CornerRadius)GetValue(CornerRadiusProperty); }
@@ -30,15 +30,17 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(MenuContent));
 
-        public static DependencyProperty ItemMarginProperty = 
-            DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(MenuContent));
-
+        // Marging of items displayed
         public Thickness ItemMargin
         {
             get { return (Thickness)base.GetValue(ItemMarginProperty); }
             set { base.SetValue(ItemMarginProperty, value); }
         }
 
+        public static DependencyProperty ItemMarginProperty = 
+            DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(MenuContent));
+
+        // Hover color of Menu
         public SolidColorBrush HoverColor
         {
             get { return (SolidColorBrush)GetValue(HoverColorProperty); }
