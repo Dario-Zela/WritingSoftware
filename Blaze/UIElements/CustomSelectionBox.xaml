@@ -28,7 +28,7 @@
                             <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0" SnapsToDevicePixels="true" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
                                 <StackPanel Orientation="Horizontal">
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="{Binding BarMargin, RelativeSource={RelativeSource AncestorType=local:CustomSelectionBox}}" />
-                                    <local:Icon Kind="ChevronDown" Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
+                                    <local:IconCodicon Kind="ChevronDown" Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
                                             Width="10"/>
                                 </StackPanel>
 

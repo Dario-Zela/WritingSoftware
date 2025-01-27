@@ -115,9 +115,6 @@ namespace Blaze.UIElements
         public ListView ListViewReference => ContainerListView;
 
         // Commands
-        public RelayCommand DuplicateTheme {  get; set; }
-        public RelayCommand RenameTheme {  get; set; }
-        public RelayCommand DeleteTheme { get; set; }
         public RelayCommand EditTheme { get; set; }
         public RelayCommand CloseRenamePopup { get; set; }
         public RelayCommand SaveRename { get; set; }
@@ -126,10 +123,7 @@ namespace Blaze.UIElements
         {
             InitializeComponent();
             DataContext = this;
-            DuplicateTheme = new RelayCommand(DuplicateThemeMethod);
-            RenameTheme = new RelayCommand(StartRenameDialouge);
             SaveRename = new RelayCommand(RenameThemeMethod);
-            DeleteTheme = new RelayCommand(DeleteThemeMethod);
             EditTheme = new RelayCommand(EditThemeMethod);
             CloseRenamePopup = new RelayCommand(CloseRenamePopupMethod);
 
@@ -142,23 +136,10 @@ namespace Blaze.UIElements
             RenamePopup.IsOpen = false;
         }
 
-        // Force Close More Popup
-        private void ClosePopup(object obj)
-        {
-            for (int i = 0; i < ContainerListView.Items.Count; i++)
-            {
-                if (ContainerListView.Items[i] == obj)
-                {
-                    ContainerListView.FindVisualChildren<ListViewItem>().ElementAt(i).FindVisualChildren<ButtonPopup>().First().IsChecked = false;
-                }
-            }
-        }
-
         // Start Rename Popup
-        private void StartRenameDialouge(object obj)
+        private void StartRenameDialouge(object sender, RoutedEventArgs e)
         {
-            // Close More Popup
-            ClosePopup(obj);
+            object obj = (sender as ComboBoxItem).DataContext;
             RenameError.Visibility = Visibility.Collapsed;
             RenamePopup.IsOpen = true;
             OldNameBox.Text = obj.ToString();
@@ -174,9 +155,9 @@ namespace Blaze.UIElements
         }
 
         // Delete Theme c
-        private void DeleteThemeMethod(object obj)
+        private void DeleteThemeMethod(object sender, RoutedEventArgs e)
         {
-            ClosePopup(obj);
+            object obj = (sender as ComboBoxItem).DataContext;
             string filePath = System.IO.Path.GetFullPath(Constants.FOLDER_LOCATION) + "\\Themes\\";
             filePath += obj.ToString() + ".xaml";
             File.Delete(filePath);
@@ -204,9 +185,9 @@ namespace Blaze.UIElements
         }
 
         // Duplicate Theme 
-        private void DuplicateThemeMethod(object obj)
+        private void DuplicateThemeMethod(object sender, RoutedEventArgs e)
         {
-            ClosePopup(obj);
+            object obj = (sender as ComboBoxItem).DataContext;
             string filePath = System.IO.Path.GetFullPath(Constants.FOLDER_LOCATION) + "\\Themes\\";
             string oldFilePath = filePath + obj.ToString() + ".xaml";
             string newFilePath = FindNewName(obj.ToString());

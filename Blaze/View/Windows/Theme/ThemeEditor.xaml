@@ -77,7 +77,7 @@
                                  BorderThickness="0"
                                  HoverColor="{DynamicResource ApplicationSurfaceBrush}"
                                  Background="Transparent">
-                <UIElements:Icon Kind="ArrowLeft"
+                <UIElements:IconCodicon Kind="ArrowLeft"
                              Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
             </UIElements:CustomButton>
             <ScrollViewer Style="{StaticResource CustomScrollViewer}">

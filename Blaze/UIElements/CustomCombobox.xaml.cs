@@ -88,5 +88,11 @@ namespace Blaze.UIElements
             InitializeComponent();
             DataContext = this;
         }
+        
+        // Make sure no item is ever selected
+        private void UndoSelection(object sender, SelectionChangedEventArgs e)
+        {
+            SelectedIndex = -1;
+        }
     }
 }

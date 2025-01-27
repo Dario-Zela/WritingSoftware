@@ -13,6 +13,7 @@
              d:DataContext="{d:DesignInstance Type=local:CustomComboBox}"
             x:Name="ComboBoxControl"
              xmlns:converter="clr-namespace:Blaze.Core"
+          SelectionChanged="UndoSelection"
             d:IsDropDownOpen="False">
     <ComboBox.Resources>
         <converter:ColorIntensityConverter x:Key="ColorIntensityConverter" />
@@ -34,7 +35,7 @@
                                     CornerRadius="{Binding ButtonCornerRadius, RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"
                                     HorizontalAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                                 <Grid>
-                                    <local:Icon Kind="ChevronDown" Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
+                                    <local:IconCodicon Kind="ChevronDown" Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
                                                 HorizontalAlignment="Right" Width="10"/>
                                 </Grid>
                             </Border>

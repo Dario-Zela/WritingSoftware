@@ -19,11 +19,11 @@ using static ICSharpCode.AvalonEdit.Document.TextDocumentWeakEventManager;
 namespace Blaze.UIElements
 {
     /// <summary>
-    /// Interaction logic for Icon.xaml
+    /// Interaction logic for IconCodicon.xaml
     /// </summary>
-    public partial class Icon : Image
+    public partial class IconCodicon : Image
     {
-        // Icon Kind displayed
+        // IconCodicon Kind displayed
         public PackIconCodiconsKind Kind
         {
             get { return (PackIconCodiconsKind)GetValue(KindProperty); }
@@ -31,12 +31,12 @@ namespace Blaze.UIElements
         }
 
         public static readonly DependencyProperty KindProperty =
-            DependencyProperty.Register("Kind", typeof(PackIconCodiconsKind), typeof(Icon), new PropertyMetadata(Changed));
+            DependencyProperty.Register("Kind", typeof(PackIconCodiconsKind), typeof(IconCodicon), new PropertyMetadata(Changed));
 
-        // If Icon changed, update value
+        // If IconCodicon changed, update value
         private static void Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            Icon icon = (Icon)d;
+            IconCodicon icon = (IconCodicon)d;
             icon.Source = icon.Converter.ConvertIcon(icon.Kind, icon.Foreground);
         }
 
@@ -48,12 +48,12 @@ namespace Blaze.UIElements
         }
 
         public static readonly DependencyProperty ForegroundProperty =
-            DependencyProperty.Register("Foreground", typeof(SolidColorBrush), typeof(Icon), new PropertyMetadata(Changed));
+            DependencyProperty.Register("Foreground", typeof(SolidColorBrush), typeof(IconCodicon), new PropertyMetadata(Changed));
 
         // Converter Reference
-        private IconToImageConverter Converter = new();
+        private CodiconToImageSourceConverter Converter = new();
 
-        public Icon()
+        public IconCodicon()
         {
             InitializeComponent();
             Loaded += FirstUpdate;

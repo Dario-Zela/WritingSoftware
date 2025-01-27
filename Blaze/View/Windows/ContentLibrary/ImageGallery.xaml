@@ -31,7 +31,7 @@
                                                  AccentColor="{Binding PrimaryColor, ElementName=ImageGalleryController}"
                                                 Background="{Binding SurfaceColor, ElementName=ImageGalleryController}">
                     <UIElements:CustomComboSelection.PreTextContent>
-                        <UIElements:Icon Kind="ListSelection"
+                        <UIElements:IconCodicon Kind="ListSelection"
                                          Foreground="Black"
                                          Width="15"/>
                     </UIElements:CustomComboSelection.PreTextContent>
@@ -51,7 +51,6 @@
                 </UIElements:CustomComboSelection>
 
                 <UIElements:CustomComboBox BorderThickness="0"
-                                                 SelectedIndex="0"
                                                  Padding="10,4,10,4"
                                                Header="Move All to Album"
                                                  ButtonCornerRadius="10"
@@ -60,7 +59,7 @@
                                                  AccentColor="{Binding PrimaryColor, ElementName=ImageGalleryController}"
                                                 Background="{Binding SurfaceColor, ElementName=ImageGalleryController}">
                     <UIElements:CustomComboBox.PreTextContent>
-                        <UIElements:Icon Kind="ListSelection"
+                        <UIElements:IconCodicon Kind="ListSelection"
                                          Foreground="Black"
                                          Width="15"/>
                     </UIElements:CustomComboBox.PreTextContent>

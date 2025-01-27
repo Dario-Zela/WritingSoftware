@@ -8,6 +8,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White"
+              x:Name="Container"
              d:DataContext="{d:DesignInstance d:Type=local:ThemeListView}"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
     <UserControl.Resources>
@@ -71,51 +72,45 @@
                                                                 VerticalAlignment="Center"
                                                                 Margin="0,0,15,0"
                                                                 Visibility="{TemplateBinding IsSelected, Converter={StaticResource BoolToVis}}"/>
+
                                             <!-- More Bytton -->
-                                            <local:ButtonPopup Cursor="Hand"
-                                                                BorderThickness="0"
-                                                               VerticalAlignment="Center"
-                                                               Padding="5"
-                                                               CornerRadius="20"
-                                                               HoverColor="{DynamicResource ApplicationSurfaceBrush}"
-                                                               SelectedBackgroundColor="{DynamicResource ApplicationSurfaceBrush}"
-                                                               x:Name="MoreButton">
-                                                <iconPacks:Material Kind="DotsVertical"
-                                                                          Width="12"
-                                                                          Height="12"/>
-                                            </local:ButtonPopup>
-                                            <!-- More Button Popup -->
-                                            <Popup x:Name="PopupMenu"
-                                                   IsOpen="{Binding IsChecked, ElementName=MoreButton, Mode=TwoWay}"
-                                                    StaysOpen="False"
-                                                    AllowsTransparency="True">
-                                                <local:MenuContent CornerRadius="10"
-                                                                   ItemMargin="10"
-                                                                   Background="{DynamicResource ApplicationSurfaceBrush}"
-                                                                   FontFamily="{DynamicResource ApplicationButtonFont}"
-                                                                   FontSize="{DynamicResource ApplicationButtonFontSize}"
-                                                                   HoverColor="{DynamicResource ApplicationSurfaceBrush}">
-                                                    <local:CustomMenuItem Content="Duplicate Theme"
-                                                                          Selected="MenuContent_Selected"
-                                                                          Background="{DynamicResource ApplicationSurfaceBrush}"
-                                                                          Command="{Binding DuplicateTheme, 
-                                                                                    RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
-                                                                          CommandParameter="{Binding DataContext,
-                                                                                            RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
-                                                    <local:CustomMenuItem Content="Rename Theme"
-                                                                          Background="{DynamicResource ApplicationSurfaceBrush}"
-                                                                          Command="{Binding RenameTheme, 
-                                                                                    RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
-                                                                          CommandParameter="{Binding DataContext,
-                                                                                    RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
-                                                    <local:CustomMenuItem Content="Delete Theme"
-                                                                          Background="{DynamicResource ApplicationSurfaceBrush}"
-                                                                          Command="{Binding DeleteTheme, 
-                                                                                    RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
-                                                                          CommandParameter="{Binding DataContext,
-                                                                                    RelativeSource={RelativeSource AncestorType=ListViewItem}}"/>
-                                                </local:MenuContent>
-                                            </Popup>
+                                            <local:CustomExtraButton HeaderKind="DotsVertical"
+                                                                     BorderThickness="0"
+                                                                     Width="25"
+                                                                     Height="25"
+                                                                     Padding="0,5,0,5"
+                                                                     ButtonCornerRadius="20"
+                                                                     MenuBackgroundColor="{DynamicResource ApplicationSurfaceBrush}"
+                                                                     MenuHoverColor="{DynamicResource ApplicationSurfaceBrush}"
+                                                                     Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                                                                     AccentColor="{DynamicResource OnApplicationSurfaceBrush}"
+                                                                     Background="{DynamicResource ApplicationSurfaceBrush}">
+                                                <ComboBoxItem Padding="5"
+                                                              DataContext="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}"
+                                                              Selected="DuplicateThemeMethod">
+                                                    <TextBlock FontSize="{DynamicResource ApplicationButtonFontSize}"
+                                                             FontFamily="{DynamicResource ApplicationButtonFont}"
+                                                              FontWeight="DemiBold"
+                                                             Text="Duplicate Theme"/>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem Padding="5"
+                                                              DataContext="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}"
+                                                              Selected="StartRenameDialouge">
+                                                    <TextBlock FontSize="{DynamicResource ApplicationButtonFontSize}"
+                                                              FontWeight="DemiBold"
+                                                             FontFamily="{DynamicResource ApplicationButtonFont}"
+                                                             Text="Rename Theme"/>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem Padding="5"
+                                                              DataContext="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}"
+                                                              Selected="DeleteThemeMethod">
+                                                    <TextBlock FontSize="{DynamicResource ApplicationButtonFontSize}"
+                                                              FontWeight="DemiBold"
+                                                             FontFamily="{DynamicResource ApplicationButtonFont}"
+                                                             Text="Delete Theme"/>
+                                                </ComboBoxItem>
+                                            </local:CustomExtraButton>
+                                            
                                         </DockPanel>
                                     </DockPanel>
                                 </Border>
@@ -171,6 +166,7 @@
         <Popup x:Name="RenamePopup"
                AllowsTransparency="True"
                StaysOpen="False"
+               PlacementTarget="{Binding ElementName=Container}"
                Placement="Center">
             <Grid Margin="10">
 

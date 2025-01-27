@@ -217,7 +217,16 @@ namespace Blaze.Core
     }
 
     // Converts an icon to a image source
-    public class IconToImageConverter : PackIconCodiconsKindToImageConverter
+    public class CodiconToImageSourceConverter : PackIconCodiconsKindToImageConverter
+    {
+        public ImageSource ConvertIcon(object iconKind, Brush foregroundBrush)
+        {
+            return CreateImageSource(iconKind, foregroundBrush);
+        }
+    }
+
+    // Converts an icon to a image source
+    public class MaterialIconToImageConverter : PackIconMaterialKindToImageConverter
     {
         public ImageSource ConvertIcon(object iconKind, Brush foregroundBrush)
         {

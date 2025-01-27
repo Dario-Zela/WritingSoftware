@@ -39,7 +39,7 @@
                                                                     RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
                                                     Background="{TemplateBinding Background}"
                                                     HoverColor="{TemplateBinding Background}">
-                                    <local:Icon Kind="Add"
+                                    <local:IconCodicon Kind="Add"
                                                 Width="{Binding ItemWidth, 
                                                   RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
                                                 Foreground="{Binding Foreground, 
@@ -70,7 +70,7 @@
                                               RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
                                                     Background="{TemplateBinding Background}"
                                                     HoverColor="{TemplateBinding Background}">
-                                    <local:Icon Kind="Remove"
+                                    <local:IconCodicon Kind="Remove"
                                                 Width="{Binding ItemWidth, 
                                                         RelativeSource={RelativeSource AncestorType=local:CustomNumericalBox}}"
                                                 Foreground="{Binding Foreground, 

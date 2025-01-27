@@ -54,7 +54,7 @@
                                         Foreground="{DynamicResource OnApplicationSecondaryBrush}"
                                          HoverColor="{DynamicResource ApplicationSecondaryBrush}"
                                         Click="Button_Click">
-                    <UIElements:Icon Kind="Lightbulb"
+                    <UIElements:IconCodicon Kind="Lightbulb"
                                      VerticalAlignment="Bottom"
                                      Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
                 </UIElements:CustomButton>
@@ -70,7 +70,7 @@
                                         Foreground="{DynamicResource OnApplicationSecondaryBrush}"
                                          HoverColor="{DynamicResource ApplicationSecondaryBrush}"
                                         Command="{Binding Minimise}" >
-                    <UIElements:Icon Kind="ChromeMinimize"
+                    <UIElements:IconCodicon Kind="ChromeMinimize"
                                      VerticalAlignment="Bottom"
                                      Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
                 </UIElements:CustomButton>
@@ -103,7 +103,7 @@
                                         Background="{DynamicResource ApplicationSecondaryBrush}"
                                         Foreground="{DynamicResource OnApplicationSecondaryBrush}"
                                         Command="{Binding CloseWindow}" >
-                    <UIElements:Icon Kind="ChromeClose" Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
+                    <UIElements:IconCodicon Kind="ChromeClose" Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
                 </UIElements:CustomButton>
             </StackPanel>
             

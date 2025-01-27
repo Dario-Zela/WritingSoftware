@@ -29,7 +29,7 @@
                                     CornerRadius="{Binding ButtonCornerRadius, RelativeSource={RelativeSource AncestorType=local:CustomComboSelection}}"
                                     HorizontalAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                                 <Grid>
-                                    <local:Icon Kind="ChevronDown" Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
+                                    <local:IconCodicon Kind="ChevronDown" Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
                                                 HorizontalAlignment="Right" Width="10"/>
                                 </Grid>
                             </Border>

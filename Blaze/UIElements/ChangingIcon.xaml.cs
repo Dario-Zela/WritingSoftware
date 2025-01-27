@@ -95,7 +95,7 @@ namespace Blaze.UIElements
             DependencyProperty.Register("Foreground", typeof(SolidColorBrush), typeof(ChangingIcon));
 
         // Image Converter reference
-        private IconToImageConverter Converter = new();
+        private CodiconToImageSourceConverter Converter = new();
 
         public ChangingIcon()
         {

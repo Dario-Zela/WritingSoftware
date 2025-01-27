@@ -41,7 +41,7 @@ namespace Blaze
             IsMaximised = false;
             DataContext = this;
             Instance = this;
-            Holder.Children.Add(new ImageGallery());
+            Holder.Children.Add(new ThemeLibrary());
 
             //Adding methods to the commands
             CloseWindow = new RelayCommand(o => { Application.Current.Shutdown(); });

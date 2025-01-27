@@ -1,12 +1,139 @@
-﻿<UserControl x:Class="Blaze.UIElements.CustomExtraButton"
+﻿<ComboBox x:Class="Blaze.UIElements.CustomExtraButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Blaze.UIElements"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
-</UserControl>
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:Background="{DynamicResource ApplicationBackgroundBrush}"
+             d:Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+             d:Text="Testing"
+             d:DataContext="{d:DesignInstance Type=local:CustomExtraButton}"
+            x:Name="ComboBoxControl"
+                SelectionChanged="UndoSelection"
+             xmlns:converter="clr-namespace:Blaze.Core"
+            d:IsDropDownOpen="False">
+    <ComboBox.Resources>
+        <converter:ColorIntensityConverter x:Key="ColorIntensityConverter" />
+        <converter:Adder x:Key="Adder"/>
+        <converter:ColorBrushToBrushConverter x:Key="BrushConverter"/>
+        <!-- Toggle button style of the combobox -->
+        <Style x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="ClickMode" Value="Press"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid>
+                            <Border x:Name="templateRoot" 
+                                    Padding="{TemplateBinding Padding}"
+                                    CornerRadius="{Binding ButtonCornerRadius, RelativeSource={RelativeSource AncestorType=local:CustomExtraButton}}"
+                                    HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                                <Grid>
+                                    <local:IconMaterial Kind="{Binding HeaderKind, RelativeSource={RelativeSource AncestorType=local:CustomExtraButton}}"
+                                                Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
+                                                HorizontalAlignment="Center" Width="10"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="templateRoot" Value="{Binding Background, 
+                                                                    RelativeSource={RelativeSource TemplatedParent},
+                                                                    Converter={StaticResource ColorIntensityConverter}, ConverterParameter=0.5|250}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Template for a combobox -->
+        <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+            <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+                </Grid.ColumnDefinitions>
+                <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="3" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Placement="Bottom">
+                    <Grid MinWidth="{Binding ActualWidth, ElementName=templateRoot, Converter={StaticResource Adder}, ConverterParameter=5}">
+                        <Border Background="{TemplateBinding Background}"
+                            CornerRadius="10"
+                            x:Name="dropDownBorder"
+                            MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                            BorderThickness="0"
+                            Margin="5,2,5,5">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" />
+                            </Border.Effect>
+                        </Border>
+
+                        <Border Name="mask" 
+                                    Background="{TemplateBinding Background }"
+                                    CornerRadius="15"
+                                Margin="5,2,5,5"
+                                    BorderThickness="0"/>
+                        <StackPanel Margin="4,1,4,4">
+                            <StackPanel.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=mask}"/>
+                            </StackPanel.OpacityMask>
+                            <ScrollViewer Style="{StaticResource CustomScrollViewer}" HorizontalScrollBarVisibility="Hidden">
+                                <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Grid>
+                </Popup>
+                <ToggleButton Padding="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}" x:Name="toggleButton" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="HasItems" Value="false">
+                    <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                </Trigger>
+                <Trigger Property="IsDropDownOpen" Value="true">
+                    <Setter Property="Foreground" TargetName="toggleButton" Value="{Binding AccentColor, RelativeSource={RelativeSource AncestorType=local:CustomExtraButton}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </ComboBox.Resources>
+    <ComboBox.Style>
+        <!-- Style definition of combobox -->
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
+        </Style>
+    </ComboBox.Style>
+    <ComboBox.ItemContainerStyle>
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <!-- Background -->
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                x:Name="border"
+                                Padding="{TemplateBinding Padding}"
+                                Cursor="Hand"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{Binding MenuBackgroundColor, RelativeSource={RelativeSource AncestorType=local:CustomExtraButton}}">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- On Mouse Effect -->
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{Binding MenuHoverColor, RelativeSource={RelativeSource AncestorType=local:CustomExtraButton},
+                                                                                         Converter={StaticResource ColorIntensityConverter}, ConverterParameter=1.5|150}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ComboBox.ItemContainerStyle>
+</ComboBox>
