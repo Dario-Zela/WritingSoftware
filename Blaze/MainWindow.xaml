@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Blaze"
-        xmlns:theme="clr-namespace:Blaze.View.Windows.Theme"
+        xmlns:theme="clr-namespace:Blaze.View.Theme"
         xmlns:UIElements="clr-namespace:Blaze.UIElements"
         xmlns:converter="clr-namespace:Blaze.Core"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
@@ -51,12 +51,12 @@
                                          Padding="7"
                                          BorderThickness="0"
                                         Background="{DynamicResource ApplicationSecondaryBrush}"
-                                        Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                        Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
                                          HoverColor="{DynamicResource ApplicationSecondaryBrush}"
                                         Click="Button_Click">
                     <UIElements:IconCodicon Kind="Lightbulb"
                                      VerticalAlignment="Bottom"
-                                     Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
+                                     Foreground="{DynamicResource ApplicationOnSecondaryBrush}"/>
                 </UIElements:CustomButton>
 
                 <!-- Minimise-->
@@ -67,12 +67,12 @@
                                          Padding="7"
                                          BorderThickness="0"
                                         Background="{DynamicResource ApplicationSecondaryBrush}"
-                                        Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                        Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
                                          HoverColor="{DynamicResource ApplicationSecondaryBrush}"
                                         Command="{Binding Minimise}" >
                     <UIElements:IconCodicon Kind="ChromeMinimize"
                                      VerticalAlignment="Bottom"
-                                     Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
+                                     Foreground="{DynamicResource ApplicationOnSecondaryBrush}"/>
                 </UIElements:CustomButton>
 
                 <!-- Maximise -->
@@ -81,16 +81,16 @@
                                         Height="30"
                                          BorderThickness="0"
                                         Background="{DynamicResource ApplicationSecondaryBrush}"
-                                        Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                        Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
                                          HoverColor="{DynamicResource ApplicationSecondaryBrush}"
                                          Padding="7"
                                         x:Name="MaximiseButton"
                                         Command="{Binding Maximise}" >
-                    <UIElements:ChangingIcon FirstKind="ChromeMaximize"
+                    <UIElements:ChangingIconCodicon FirstKind="ChromeMaximize"
                                              SecondKind="ChromeRestore"
                                              Change="{Binding IsMaximised, RelativeSource={RelativeSource AncestorType=local:MainWindow}}"
-                                             Foreground="{DynamicResource OnApplicationSecondaryBrush}"
-                                             ActiveForeground="{DynamicResource OnApplicationSecondaryBrush}"/>
+                                             Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
+                                             ActiveForeground="{DynamicResource ApplicationOnSecondaryBrush}"/>
                 </UIElements:CustomButton>
 
                 <!-- Close -->
@@ -101,9 +101,9 @@
                                          BorderThickness="0"
                                          HoverColor="Red"
                                         Background="{DynamicResource ApplicationSecondaryBrush}"
-                                        Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                        Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
                                         Command="{Binding CloseWindow}" >
-                    <UIElements:IconCodicon Kind="ChromeClose" Foreground="{DynamicResource OnApplicationSecondaryBrush}"/>
+                    <UIElements:IconCodicon Kind="ChromeClose" Foreground="{DynamicResource ApplicationOnSecondaryBrush}"/>
                 </UIElements:CustomButton>
             </StackPanel>
             

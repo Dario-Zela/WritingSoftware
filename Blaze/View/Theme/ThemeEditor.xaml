@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Blaze.View.Windows.Theme.ThemeEditor"
+﻿<UserControl x:Class="Blaze.View.Theme.ThemeEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Blaze.View.Windows.Theme"
+             xmlns:local="clr-namespace:Blaze.View.Theme"
              mc:Ignorable="d" 
              xmlns:converter="clr-namespace:Blaze.Core"
              xmlns:UIElements="clr-namespace:Blaze.UIElements"
@@ -78,7 +78,7 @@
                                  HoverColor="{DynamicResource ApplicationSurfaceBrush}"
                                  Background="Transparent">
                 <UIElements:IconCodicon Kind="ArrowLeft"
-                             Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                             Foreground="{DynamicResource ApplicationOnSurfaceBrush}"/>
             </UIElements:CustomButton>
             <ScrollViewer Style="{StaticResource CustomScrollViewer}">
                 <StackPanel Margin="10,50,30,0">
@@ -87,7 +87,7 @@
                         <TextBox Text="Theme Editor"
                                 Style="{DynamicResource Header}"   
                                VerticalAlignment="Bottom"
-                               Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                               Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                                FontSize="{DynamicResource ApplicationHeaderFontSize}"
                                FontFamily="{DynamicResource ApplicationHeaderFont}"/>
                         <DockPanel HorizontalAlignment="Right">
@@ -98,7 +98,7 @@
                                                  HorizontalAlignment="Right"
                                                  FontFamily="{DynamicResource ApplicationButtonFont}"
                                                  FontSize="{DynamicResource ApplicationButtonFontSize}"
-                                                 Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                                                 Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                                                  Margin="0,0,10,0"
                                                      Command="{Binding Back}"
                                                  Background="{DynamicResource ApplicationSurfaceBrush}"/>
@@ -109,17 +109,17 @@
                                                      Command="{Binding Save}"
                                                  FontFamily="{DynamicResource ApplicationButtonFont}"
                                                  FontSize="{DynamicResource ApplicationButtonFontSize}"
-                                                 Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                                 Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
                                                  Background="{DynamicResource ApplicationSecondaryBrush}"/>
                         </DockPanel>
 
                     </DockPanel>
                     <Separator Margin="0,0,0,20"
-                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"/>
                     <!-- Color Pallete -->
                     <TextBox Text="Color Palette"
                                Style="{DynamicResource Header2}"
-                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                            FontSize="{DynamicResource ApplicationHeaderFontSize}"
                            FontFamily="{DynamicResource ApplicationHeaderFont}"/>
                     <Grid Margin="0,10,0,0">
@@ -260,11 +260,11 @@
 
                     </Grid>
                     <Separator Margin="0,0,0,20"
-                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"/>
                     <!-- Text and Icon Colors -->
                     <TextBox Text="Text and Icon Colors"
                                Style="{DynamicResource Header2}"
-                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                            FontSize="{DynamicResource ApplicationHeaderFontSize}"
                            FontFamily="{DynamicResource ApplicationHeaderFont}"/>
                     <TextBox FontSize="{DynamicResource ApplicationBodyFontSize}"
@@ -368,7 +368,7 @@
                         </DockPanel>
                     </Grid>
                     <Separator Margin="0,0,0,20"
-                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"/>
                     <!-- Color Popup -->
                     <Popup IsOpen="False"
                                x:Name="ColorPopup"
@@ -395,7 +395,7 @@
                     <!-- Fonts -->
                     <TextBox Text="Typefaces and Styles"
                              Style="{DynamicResource Header2}"
-                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                            FontSize="{DynamicResource ApplicationHeaderFontSize}"
                            FontFamily="{DynamicResource ApplicationHeaderFont}"/>
                     <TextBox FontSize="{DynamicResource ApplicationBodyFontSize}"
@@ -430,38 +430,38 @@
                                 <StackPanel Visibility="{Binding IsChecked, ElementName=HeaderPreview, Converter={StaticResource VisibilityConverter}}">
                                     <TextBox Text="This is an example header."
                                                Style="{DynamicResource Header}"
-                                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                                            FontSize="{Binding HeaderFontSize}"
                                            FontFamily="{Binding HeaderFont}"/>
                                     <TextBox Text="Some headers will be a bit smaller."
                                                Style="{DynamicResource Header2}"
                                              Margin="0,20,0,0"
-                                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                                            FontSize="{Binding HeaderFontSize}"
                                            FontFamily="{Binding HeaderFont}"/>
                                 </StackPanel>
                                 <StackPanel Visibility="{Binding IsChecked, ElementName=BodyPreview, Converter={StaticResource VisibilityConverter}}">
                                     <TextBox Text="This is an example of your main body text."
                                                Style="{DynamicResource Body}"
-                                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                                            FontSize="{Binding BodyFontSize}"
                                            FontFamily="{Binding BodyFont}"/>
                                     <TextBox Text="This is an example of your detail text. It is sometimes used to add extra information or in some UI elements."
                                                Style="{DynamicResource Body2}"
                                              Margin="0,20,0,0"
-                                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                                            FontSize="{Binding BodyFontSize}"
                                            FontFamily="{Binding BodyFont}"/>
                                     <TextBox Text="This is an example of your caption text, which is often used to add context or describe something - like the different parts of this page!"
                                              Margin="0,20,0,0"
                                                Style="{DynamicResource Body3}"
-                                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                                            FontSize="{Binding BodyFontSize}"
                                            FontFamily="{Binding BodyFont}"/>
                                 </StackPanel>
                                 <StackPanel Visibility="{Binding IsChecked, ElementName=ButtonPreview, Converter={StaticResource VisibilityConverter}}">
                                     <UIElements:CustomButton Background="{DynamicResource ApplicationSecondaryBrush}"
-                                                             Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                                             Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
                                                              Content="Normal Button"
                                                              Style="{DynamicResource NormalButton}"
                                                              FontFamily="{Binding ButtonFont}"
@@ -469,7 +469,7 @@
                                                              VerticalContentAlignment="Center"
                                                              HorizontalAlignment="Left"/>
                                     <UIElements:CustomButton Background="{DynamicResource ApplicationSurfaceBrush}"
-                                                             Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                                                             Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                                                              Style="{DynamicResource AlternateButton}"
                                                              Margin="0,20,0,0"
                                                              Content="Alternate Button"
@@ -478,7 +478,7 @@
                                                              VerticalContentAlignment="Center"
                                                              HorizontalAlignment="Left"/>
                                     <UIElements:CustomButton Background="{DynamicResource ApplicationSurfaceBrush}"
-                                                             Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                                                             Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                                                              Style="{DynamicResource TextButton}"
                                                              Margin="0,20,0,0"
                                                              Content="Text Button"
@@ -529,7 +529,7 @@
                                                        MenuHoverColor="{DynamicResource ApplicationPrimaryBrush}">
                                 <UIElements:CustomSelectionBox.ItemTemplate>
                                     <DataTemplate DataType="FontFamily">
-                                        <TextBlock Text="{Binding Source}"
+                                        <TextBlock Text="{Binding Source, IsAsync=True}"
                                                    ToolTip="{Binding Source}"
                                                FontFamily="{Binding}"
                                                    FontSize="{DynamicResource ApplicationButtonFontSize}"/>
@@ -591,7 +591,7 @@
                                                        MenuHoverColor="{DynamicResource ApplicationPrimaryBrush}">
                                 <UIElements:CustomSelectionBox.ItemTemplate>
                                     <DataTemplate DataType="FontFamily">
-                                        <TextBlock Text="{Binding Source}"
+                                        <TextBlock Text="{Binding Source, IsAsync=True}"
                                                    ToolTip="{Binding Source}"
                                                FontFamily="{Binding}"
                                                    FontSize="{DynamicResource ApplicationButtonFontSize}"/>
@@ -651,7 +651,7 @@
                                                        MenuHoverColor="{DynamicResource ApplicationPrimaryBrush}">
                                 <UIElements:CustomSelectionBox.ItemTemplate>
                                     <DataTemplate DataType="FontFamily">
-                                        <TextBlock Text="{Binding Source}"
+                                        <TextBlock Text="{Binding Source, IsAsync=True}"
                                                    ToolTip="{Binding Source}"
                                                FontFamily="{Binding}"
                                                    FontSize="{DynamicResource ApplicationButtonFontSize}"/>
@@ -675,11 +675,11 @@
                         </Grid>
                     </Grid>
                     <Separator Margin="0,20,0,20"
-                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"/>
                     <!-- Images -->
                     <TextBox Text="Theme Images"
                              Style="{DynamicResource Header2}"
-                           Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                           Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                            FontSize="{DynamicResource ApplicationHeaderFontSize}"
                            FontFamily="{DynamicResource ApplicationHeaderFont}"/>
                     <TextBox FontSize="{DynamicResource ApplicationBodyFontSize}"

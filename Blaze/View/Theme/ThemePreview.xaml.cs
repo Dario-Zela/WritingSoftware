@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Blaze.View.Windows.Theme
+namespace Blaze.View.Theme
 {
     /// <summary>
     /// Interaction logic for ThemePreview.xaml

@@ -15,15 +15,15 @@
                      Color="#E61C1C" />
 
     <!-- Text and Icon Colors -->
-    <SolidColorBrush x:Key="OnApplicationPrimaryBrush"
+    <SolidColorBrush x:Key="ApplicationOnPrimaryBrush"
                      Color="#FFFFFF" />
-    <SolidColorBrush x:Key="OnApplicationSecondaryBrush"
+    <SolidColorBrush x:Key="ApplicationOnSecondaryBrush"
                      Color="#FFFFFF" />
-    <SolidColorBrush x:Key="OnApplicationSurfaceBrush"
+    <SolidColorBrush x:Key="ApplicationOnSurfaceBrush"
                      Color="#112B3C" />
-    <SolidColorBrush x:Key="OnApplicationBackgroundBrush"
+    <SolidColorBrush x:Key="ApplicationOnBackgroundBrush"
                      Color="#FFFFFF" />
-    <SolidColorBrush x:Key="OnApplicationErrorBrush"
+    <SolidColorBrush x:Key="ApplicationOnErrorBrush"
                      Color="#FFFFFF" />
 
     <!-- Text  -->

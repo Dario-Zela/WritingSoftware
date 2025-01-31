@@ -54,7 +54,7 @@
                                                     VerticalAlignment="Top">
                                             <!-- Edit Button -->
                                             <local:CustomButton Background="{DynamicResource ApplicationSecondaryBrush}"
-                                                                Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+                                                                Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
                                                                 HoverColor="{DynamicResource ApplicationSecondaryBrush}"
                                                                 Command="{Binding EditTheme, 
                                                                         RelativeSource={RelativeSource AncestorType=local:ThemeListView} }"
@@ -82,10 +82,10 @@
                                                                      ButtonCornerRadius="20"
                                                                      MenuBackgroundColor="{DynamicResource ApplicationSurfaceBrush}"
                                                                      MenuHoverColor="{DynamicResource ApplicationSurfaceBrush}"
-                                                                     Foreground="{DynamicResource OnApplicationSurfaceBrush}"
-                                                                     AccentColor="{DynamicResource OnApplicationSurfaceBrush}"
+                                                                     Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
+                                                                     AccentColor="{DynamicResource ApplicationOnSurfaceBrush}"
                                                                      Background="{DynamicResource ApplicationSurfaceBrush}">
-                                                <ComboBoxItem Padding="5"
+                                                <ComboBoxItem Padding="10"
                                                               DataContext="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}"
                                                               Selected="DuplicateThemeMethod">
                                                     <TextBlock FontSize="{DynamicResource ApplicationButtonFontSize}"
@@ -93,7 +93,7 @@
                                                               FontWeight="DemiBold"
                                                              Text="Duplicate Theme"/>
                                                 </ComboBoxItem>
-                                                <ComboBoxItem Padding="5"
+                                                <ComboBoxItem Padding="10"
                                                               DataContext="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}"
                                                               Selected="StartRenameDialouge">
                                                     <TextBlock FontSize="{DynamicResource ApplicationButtonFontSize}"
@@ -101,7 +101,7 @@
                                                              FontFamily="{DynamicResource ApplicationButtonFont}"
                                                              Text="Rename Theme"/>
                                                 </ComboBoxItem>
-                                                <ComboBoxItem Padding="5"
+                                                <ComboBoxItem Padding="10"
                                                               DataContext="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}"
                                                               Selected="DeleteThemeMethod">
                                                     <TextBlock FontSize="{DynamicResource ApplicationButtonFontSize}"
@@ -164,6 +164,7 @@
         </ListView>
         <!-- Rename Popup -->
         <Popup x:Name="RenamePopup"
+               VerticalOffset="-50"
                AllowsTransparency="True"
                StaysOpen="False"
                PlacementTarget="{Binding ElementName=Container}"
@@ -222,10 +223,16 @@
                                                 <ControlTemplate TargetType="TextBox">
                                                     <Grid>
                                                         <TextBox Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" 
-                                                             BorderThickness="0"
-                                                             FontFamily="{DynamicResource ApplicationBodyFont}"
-                                                             FontSize="{DynamicResource ApplicationBodyFontSize}"
-                                                             FontWeight="DemiBold"/>
+                                                                 BorderThickness="0"
+                                                                 x:Name="NameBox"
+                                                                 FontFamily="{DynamicResource ApplicationBodyFont}"
+                                                                 FontSize="{DynamicResource ApplicationBodyFontSize}"
+                                                                 FontWeight="DemiBold">
+                                                            <TextBox.InputBindings>
+                                                                <KeyBinding Command="{Binding SaveRename, RelativeSource={RelativeSource AncestorType=local:ThemeListView}}" Key="Return" />
+                                                                <KeyBinding Command="{Binding SaveRename, RelativeSource={RelativeSource AncestorType=local:ThemeListView}}" Key="Enter" />
+                                                            </TextBox.InputBindings>
+                                                        </TextBox>
                                                         <TextBlock HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 Text="Enter New Theme Name"
@@ -241,6 +248,9 @@
                                                             </MultiTrigger.Conditions>
                                                             <Setter Property="Visibility" TargetName="UserMessage" Value="Visible"/>
                                                         </MultiTrigger>
+                                                        <Trigger Property="IsFocused" Value="True">
+                                                            <Setter TargetName="NameBox" Property="FocusManager.FocusedElement" Value="{Binding ElementName=NameBox}"/>
+                                                        </Trigger>
                                                     </ControlTemplate.Triggers>
                                                 </ControlTemplate>
                                             </Setter.Value>

@@ -27,7 +27,7 @@
                                      Cursor="Hand"
                                      Padding="{TemplateBinding Padding}"/>
                             <ContentPresenter Content="{TemplateBinding Content}"
-                                              
+                                              IsHitTestVisible="False"
                                               x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Grid>
                         <ControlTemplate.Triggers>

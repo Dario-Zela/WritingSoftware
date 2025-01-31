@@ -1,0 +1,288 @@
+﻿<UserControl x:Class="Blaze.View.ContentLibrary.AlbumDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Blaze.View.ContentLibrary"
+             mc:Ignorable="d" 
+             xmlns:vwp="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
+             xmlns:UIElements="clr-namespace:Blaze.UIElements"
+             xmlns:Model="clr-namespace:Blaze.Model"
+             xmlns:converter="clr-namespace:Blaze.Core"
+             x:Name="DisplayContainer"
+             d:Background="White"
+             d:DataContext="{d:DesignInstance Type=local:AlbumDisplay}"
+             d:Foreground="Black"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+        <converter:ColorBrushToBrushConverter x:Key="BrushConverter"/>
+        <Style TargetType="UIElements:CustomButton" x:Key="PathFactoryButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="UIElements:CustomButton">
+                        <UIElements:CustomButton Background="{Binding Background, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                 HoverColor="{Binding Background, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay},
+                                                                Converter={StaticResource BrushConverter}}"
+                                                 Content="{TemplateBinding Content}"
+                                                 Padding="5"
+                                                 Command="{TemplateBinding Command}"
+                                                 CommandParameter="{TemplateBinding CommandParameter}"
+                                                 BorderThickness="0"
+                                                 CornerRadius="10"
+                                                 FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                 FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                 HorizontalAlignment="Left"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="PathFactorySeparator">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <TextBox Style="{StaticResource Body}"
+                                 Text=">"
+                                 IsHitTestVisible="False"
+                                 VerticalAlignment="Center"
+                                 FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                 FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="{Binding Background}"
+                Margin="0,0,0,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="PathContainer">
+            <Grid  Margin="20,0,20,20">
+                <Border Background="{Binding Background}"
+                        BorderThickness="0"
+                        CornerRadius="10">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
+                    </Border.Effect>
+                </Border>
+                <DockPanel Margin="5">
+                    <UIElements:CustomButton Background="{Binding Background, Converter={StaticResource BrushConverter}}"
+                                             HoverColor="{Binding Background,
+                                                            Converter={StaticResource BrushConverter}}"
+                                             Width="25"
+                                             Padding="5"
+                                             Click="GoBack"
+                                             BorderThickness="0"
+                                             CornerRadius="25"
+                                             HorizontalAlignment="Left">
+                        <UIElements:IconCodicon Kind="ArrowLeft"
+                                                Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay},
+                                                                Converter={StaticResource BrushConverter}}"/>
+                    </UIElements:CustomButton>
+                    <DockPanel Margin="10,0,0,0"
+                               x:Name="PathDisplay">
+                    </DockPanel>
+                </DockPanel>
+            </Grid>
+        </StackPanel>
+        <ScrollViewer Margin="20,0,20,0" 
+                      Grid.Row="1"
+                      Style="{StaticResource CustomScrollViewer}">
+            <ListView SelectedIndex="-1"
+                      x:Name="Display"
+                      ItemsSource="{Binding DisplayView}">
+                <ListView.Style>
+                    <Style TargetType="ListView">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListView">
+                                    <Border Padding="{TemplateBinding Padding}"
+                                            BorderThickness="0">
+                                        <ItemsControl>
+                                            <vwp:VirtualizingWrapPanel IsItemsHost="True"/>
+                                        </ItemsControl>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.Style>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Width" Value="170"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <Grid Margin="7">
+                                        <Border Background="White"
+                                                    Height="150"
+                                                    CornerRadius="5">
+                                            <Border.Effect>
+                                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270"/>
+                                            </Border.Effect>
+
+                                        </Border>
+                                        <Grid Margin="5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <DockPanel VerticalAlignment="Top">
+                                                <UIElements:ChangingIconMaterial FirstKind="CheckboxBlankOutline"
+                                                                                 SecondKind="CheckboxMarked"
+                                                                                 Width="20"
+                                                                                 x:Name="checkbox"
+                                                                                 Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay},
+                                                                                                    Converter={StaticResource BrushConverter}}"
+                                                                                 ActiveForeground="{Binding AccentColor, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay},
+                                                                                                        Converter={StaticResource BrushConverter}}"
+                                                                                 Change="{TemplateBinding IsSelected}">
+                                                </UIElements:ChangingIconMaterial>
+                                                <UIElements:CustomButton Background="{Binding Background, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                                                 HoverColor="{Binding Background, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay},
+                                                                                               Converter={StaticResource BrushConverter}}"
+                                                                                 Width="25"
+                                                                             HorizontalAlignment="Right"
+                                                                                 Height="25"
+                                                                                 Click="OpenDeletePopup"
+                                                                                 Padding="5"
+                                                                                 BorderThickness="0"
+                                                                                 CornerRadius="25">
+                                                    <UIElements:IconMaterial Kind="Delete"
+                                                                                     HorizontalAlignment="Right"
+                                                                                    Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay},
+                                                                                                    Converter={StaticResource BrushConverter}}"/>
+                                                </UIElements:CustomButton>
+                                            </DockPanel>
+                                            <Button Style="{StaticResource ButtonNoHover}" 
+                                                    Click="HandleSelection"
+                                                    Cursor="Hand"
+                                                    Grid.Row="1">
+                                                <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                        x:Name="AlbumBorder"
+                                                        BorderThickness="0"
+                                                        Background="Transparent">
+                                                    <UIElements:ImageOrBorder Background="{DynamicResource ApplicationPrimaryBrush}"
+                                                                          Source="{Binding AvailableImage, IsAsync=True}"/>
+                                                </Border>
+                                            </Button>
+                                            <Grid Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border BorderThickness="2"
+                                                        BorderBrush="Transparent">
+                                                    <TextBox Text="{Binding Name}"
+                                                             BorderThickness="0"
+                                                             TextChanged="UpdateName"
+                                                             HorizontalAlignment="Stretch"/>
+                                                </Border>
+                                                <DockPanel HorizontalAlignment="Right"
+                                                           VerticalAlignment="Center"
+                                                               Grid.Column="2"
+                                                               Margin="7,0,0,0"
+                                                               Visibility="{Binding IsAlbum, Converter={StaticResource BooleanToVisibility}}">
+                                                    <TextBlock Text="{Binding ImageCount}" 
+                                                               FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                               FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"/>
+                                                    <UIElements:IconMaterial Kind="Image"
+                                                                                 Margin="5,0,0,0"
+                                                                                 Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay},
+                                                                                                Converter={StaticResource BrushConverter}}"
+                                                                                 Width="10"/>
+                                                </DockPanel>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding GalleryMode, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}" Value="False"/>
+                                                <Condition Binding="{Binding IsAlbum}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Focusable" Value="False"/>
+                                            <Setter TargetName="checkbox" Property="Visibility" Value="Collapsed"/>
+                                        </MultiDataTrigger>
+                                        <DataTrigger Binding="{Binding IsAlbum}" Value="True">
+                                            <Setter TargetName="AlbumBorder" Property="BorderThickness" Value="4"/>
+                                        </DataTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </ScrollViewer>
+        <Popup x:Name="DeleteWarning"
+               VerticalOffset="-50"
+                AllowsTransparency="True"
+                StaysOpen="False"
+                Placement="Center">
+            <Grid Margin="10"
+                  Width="400"
+                  Height="300">
+                <Border Background="{Binding Background, ElementName=DisplayContainer}"
+                        CornerRadius="15"
+                        Padding="20">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="15" ShadowDepth="3" Direction="270"/>
+                    </Border.Effect>
+                </Border>
+                <Grid Margin="20">
+                    <StackPanel Margin="0,10,0,10">
+                        <TextBox Style="{DynamicResource Header}"
+                                 Text="Delete Album"
+                                 TextWrapping="Wrap"
+                                 Foreground="{Binding Foreground, ElementName=DisplayContainer}"
+                                 FontFamily="{Binding HeaderFont, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                 FontSize="{Binding HeaderFontSize, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                 Margin="0,0,0,30"/>
+                        <TextBox Style="{DynamicResource Body}"
+                                 Text="Delete Text"
+                                 x:Name="DeleteText"
+                                 Margin="0,0,0,20"
+                                 TextWrapping="Wrap"
+                                 FontWeight="Normal"
+                                 Foreground="{Binding Foreground, ElementName=DisplayContainer}"
+                                 FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                 FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"/>
+                        <TextBox Style="{DynamicResource Body}"
+                                 FontStyle="Italic"
+                                 Text="These images will be removed from all of your projects. This action cannot be undone."
+                                 Foreground="{Binding Foreground, ElementName=DisplayContainer}"
+                                 TextWrapping="Wrap"
+                                 FontFamily="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                 FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                 Margin="0,0,0,30"/>
+                    </StackPanel>
+                    <DockPanel HorizontalAlignment="Right"
+                               VerticalAlignment="Bottom" Grid.Row="1">
+                        <UIElements:CustomButton Style="{DynamicResource TextButton}"
+                                                Content="Cancel"
+                                                    Click="CancelDelete"
+                                                Margin="0,0,20,0"
+                                                Background="{Binding Background, ElementName=DisplayContainer}"
+                                                Foreground="{Binding Foreground, ElementName=DisplayContainer}"
+                                                    FontFamily="{Binding ButtonFont, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                    FontSize="{Binding ButtonFontSize, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                VerticalContentAlignment="Center"/>
+                        <UIElements:CustomButton Style="{DynamicResource NormalButton}"
+                                                Content="Delete"
+                                                Click="ExecuteDelete"
+                                                Background="{Binding ErrorColor, ElementName=DisplayContainer}"
+                                                Foreground="{Binding OnErrorColor, ElementName=DisplayContainer}"
+                                                 FontFamily="{Binding ButtonFont, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                 FontSize="{Binding ButtonFontSize, RelativeSource={RelativeSource AncestorType=local:AlbumDisplay}}"
+                                                VerticalContentAlignment="Center"/>
+                    </DockPanel>
+                </Grid>
+            </Grid>
+        </Popup>
+    </Grid>
+</UserControl>

@@ -4,6 +4,7 @@
 
     <!-- Normal Button Style -->
     <Style TargetType="UIElements:CustomButton" x:Key="NormalButton">
+        <Setter Property="Padding" Value="10,5,10,5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="UIElements:CustomButton">
@@ -18,7 +19,7 @@
                                              FontSize="{TemplateBinding FontSize}"
                                              FontWeight="DemiBold"
                                              CornerRadius="5"
-                                             Padding="10,5,10,5"
+                                             Padding="{TemplateBinding Padding}"
                                              VerticalContentAlignment="Center"
                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
@@ -29,6 +30,7 @@
 
     <!-- Alternate Button Style -->
     <Style TargetType="UIElements:CustomButton" x:Key="AlternateButton">
+        <Setter Property="Padding" Value="10,5,10,5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="UIElements:CustomButton">
@@ -44,7 +46,7 @@
                                              FontSize="{TemplateBinding FontSize}"
                                              FontWeight="DemiBold"
                                              CornerRadius="5"
-                                             Padding="10,5,10,5"
+                                             Padding="{TemplateBinding Padding}"
                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
                 </ControlTemplate>
@@ -54,6 +56,7 @@
 
     <!-- Text Button Style -->
     <Style TargetType="UIElements:CustomButton" x:Key="TextButton">
+        <Setter Property="Padding" Value="10,5,10,5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="UIElements:CustomButton">
@@ -68,9 +71,22 @@
                                              FontSize="{TemplateBinding FontSize}"
                                              FontWeight="DemiBold"
                                              CornerRadius="5"
-                                             Padding="10,5,10,5"
+                                             Padding="{TemplateBinding Padding}"
                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonNoHover">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

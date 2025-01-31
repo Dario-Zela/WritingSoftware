@@ -1,15 +1,15 @@
-﻿using System;
+﻿using MahApps.Metro.IconPacks.Converter;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Data;
 using System.Windows;
-using System.Windows.Media;
-using MahApps.Metro.IconPacks.Converter;
 using System.Windows.Controls;
-using System.Diagnostics;
+using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Blaze.Core
 {

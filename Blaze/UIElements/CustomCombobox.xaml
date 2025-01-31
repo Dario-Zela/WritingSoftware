@@ -8,12 +8,11 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              d:DesignHeight="450" d:DesignWidth="800"
              d:Background="{DynamicResource ApplicationBackgroundBrush}"
-             d:Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+             d:Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
              d:Text="Testing"
              d:DataContext="{d:DesignInstance Type=local:CustomComboBox}"
             x:Name="ComboBoxControl"
              xmlns:converter="clr-namespace:Blaze.Core"
-          SelectionChanged="UndoSelection"
             d:IsDropDownOpen="False">
     <ComboBox.Resources>
         <converter:ColorIntensityConverter x:Key="ColorIntensityConverter" />
@@ -61,26 +60,28 @@
                 <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="3" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" Placement="Bottom">
                     <Grid MinWidth="{Binding ActualWidth, ElementName=templateRoot, Converter={StaticResource Adder}, ConverterParameter=5}">
                         <Border Background="{TemplateBinding Background}"
-                            CornerRadius="10"
+                            CornerRadius="5"
                             x:Name="dropDownBorder"
                             MaxHeight="{TemplateBinding MaxDropDownHeight}"
                             BorderThickness="0"
-                            Margin="5,2,5,5">
+                            Margin="5,3,5,5">
                             <Border.Effect>
-                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" />
+                                <DropShadowEffect BlurRadius="5" ShadowDepth="2" Direction="270" />
                             </Border.Effect>
                         </Border>
 
                         <Border Name="mask" 
-                                    Background="{TemplateBinding Background }"
-                                    CornerRadius="15"
-                                Margin="5,2,5,5"
-                                    BorderThickness="0"/>
-                        <StackPanel Margin="4,1,4,4">
+                                Background="{TemplateBinding Background }"
+                                CornerRadius="10"
+                                Margin="5,3,5,5"
+                                BorderThickness="0"/>
+                        <StackPanel Margin="5,3,5,5">
                             <StackPanel.OpacityMask>
                                 <VisualBrush Visual="{Binding ElementName=mask}"/>
                             </StackPanel.OpacityMask>
-                            <ScrollViewer Style="{StaticResource CustomScrollViewer}" HorizontalScrollBarVisibility="Hidden">
+                            <ScrollViewer Style="{StaticResource CustomScrollViewer}"
+                                          HorizontalScrollBarVisibility="Disabled"
+                                          MaxHeight="{TemplateBinding MaxDropDownHeight, Converter={StaticResource Adder}, ConverterParameter=-50}">
                                 <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             </ScrollViewer>
                         </StackPanel>
@@ -96,6 +97,8 @@
                              FontWeight="DemiBold"
                              Foreground="{TemplateBinding Foreground}"
                              Background="Transparent"
+                              FontSize="{TemplateBinding FontSize}"
+                            FontFamily="{TemplateBinding FontFamily}"
                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                              IsHitTestVisible="false" Margin="{TemplateBinding Padding}" 
                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
@@ -124,6 +127,7 @@
     </ComboBox.Style>
     <ComboBox.ItemContainerStyle>
         <Style TargetType="ComboBoxItem">
+            <Setter Property="Padding" Value="{Binding ItemPadding, RelativeSource={RelativeSource AncestorType=local:CustomComboBox}}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBoxItem">

@@ -1,15 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework>net9.0-windows7.0</TargetFramework>
     <OutputType>WinExe</OutputType>
     <WarningLevel>4</WarningLevel>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>False</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <ApplicationIcon>Blaze.ico</ApplicationIcon>
+    <StartupObject>Blaze.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <WarningLevel>0</WarningLevel>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Page Remove="Template\ApplicationTheme.xaml" />
@@ -17,6 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Background.bmp" />
+    <Content Include="Blaze.ico" />
     <Content Include="Template\ApplicationTheme.xaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -28,7 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />
-    <Folder Include="View\Components\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AvalonEdit" Version="6.3.0.90" />
@@ -37,6 +43,7 @@
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.1.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.1" />
+    <PackageReference Include="VirtualizingWrapPanel" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.VCRTForwarders.140" Version="1.1.0" />

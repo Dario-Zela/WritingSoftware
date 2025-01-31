@@ -1,5 +1,5 @@
 ﻿using Blaze.Core;
-using Blaze.View.Windows.Theme;
+using Blaze.View.Theme;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -110,6 +110,14 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty OnSecondaryBrushProperty =
             DependencyProperty.Register("OnSecondaryBrush", typeof(SolidColorBrush), typeof(ThemeListView));
 
+        public bool IsRenameOpen
+        {
+            get { return (bool)GetValue(IsRenameOpenProperty); }
+            set { SetValue(IsRenameOpenProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsRenameOpenProperty =
+            DependencyProperty.Register("IsRenameOpen", typeof(bool), typeof(ThemeListView));
 
         // List View
         public ListView ListViewReference => ContainerListView;
@@ -126,6 +134,7 @@ namespace Blaze.UIElements
             SaveRename = new RelayCommand(RenameThemeMethod);
             EditTheme = new RelayCommand(EditThemeMethod);
             CloseRenamePopup = new RelayCommand(CloseRenamePopupMethod);
+            IsRenameOpen = false;
 
             RenamePopup.Closed += (s, e) => RenameBox.Text = "";
         }
@@ -134,6 +143,7 @@ namespace Blaze.UIElements
         private void CloseRenamePopupMethod(object obj)
         {
             RenamePopup.IsOpen = false;
+            IsRenameOpen = false;
         }
 
         // Start Rename Popup
@@ -142,7 +152,9 @@ namespace Blaze.UIElements
             object obj = (sender as ComboBoxItem).DataContext;
             RenameError.Visibility = Visibility.Collapsed;
             RenamePopup.IsOpen = true;
+            IsRenameOpen = true;
             OldNameBox.Text = obj.ToString();
+            RenameBox.Focus();
         }
 
         // Open Theme Editor
@@ -177,10 +189,10 @@ namespace Blaze.UIElements
                 RenameError.Visibility = Visibility.Visible;
                 return;
             }
-            
+
             File.Move(oldFilePath, newFilePath);
             ((App)Application.Current).InitialiseThemes();
-            
+
             RenamePopup.IsOpen = false;
         }
 

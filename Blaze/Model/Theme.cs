@@ -1,5 +1,5 @@
 ﻿using Blaze.Core;
-using Blaze.View.Windows.Theme;
+using Blaze.View.Theme;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +12,6 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Windows.Devices.Printers;
 
 namespace Blaze.Model
 {

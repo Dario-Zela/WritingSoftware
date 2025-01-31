@@ -8,7 +8,7 @@
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              d:DesignHeight="450" d:DesignWidth="800"
              d:Background="{DynamicResource ApplicationBackgroundBrush}"
-             d:Foreground="{DynamicResource OnApplicationSecondaryBrush}"
+             d:Foreground="{DynamicResource ApplicationOnSecondaryBrush}"
              d:Text="Testing"
              d:DataContext="{d:DesignInstance Type=local:CustomExtraButton}"
             x:Name="ComboBoxControl"
@@ -37,7 +37,7 @@
                                 <Grid>
                                     <local:IconMaterial Kind="{Binding HeaderKind, RelativeSource={RelativeSource AncestorType=local:CustomExtraButton}}"
                                                 Foreground="{TemplateBinding Foreground, Converter={StaticResource BrushConverter}}"
-                                                HorizontalAlignment="Center" Width="10"/>
+                                                HorizontalAlignment="Center"/>
                                 </Grid>
                             </Border>
                         </Grid>

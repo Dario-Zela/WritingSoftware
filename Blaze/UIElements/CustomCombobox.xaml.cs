@@ -83,12 +83,21 @@ namespace Blaze.UIElements
         public static readonly DependencyProperty HeaderProperty =
             DependencyProperty.Register("Header", typeof(string), typeof(CustomComboBox));
 
+        public Thickness ItemPadding
+        {
+            get { return (Thickness)GetValue(ItemPaddingProperty); }
+            set { SetValue(ItemPaddingProperty, value); }
+        }
+
+        public static readonly DependencyProperty ItemPaddingProperty =
+            DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(CustomComboBox));
+
         public CustomComboBox()
         {
             InitializeComponent();
             DataContext = this;
         }
-        
+
         // Make sure no item is ever selected
         private void UndoSelection(object sender, SelectionChangedEventArgs e)
         {

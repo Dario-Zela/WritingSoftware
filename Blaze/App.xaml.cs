@@ -1,10 +1,10 @@
-﻿using System;
-using System.Windows;
+﻿using Blaze.Core;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using Blaze.Core;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
+using System.Windows;
 
 namespace Blaze
 {

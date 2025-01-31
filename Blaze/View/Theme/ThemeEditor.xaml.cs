@@ -21,7 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Blaze.View.Windows.Theme
+namespace Blaze.View.Theme
 {
     /// <summary>
     /// Interaction logic for ThemeEditor.xaml
@@ -44,7 +44,7 @@ namespace Blaze.View.Windows.Theme
             }
             fontFamilies.Sort(new Comparison<FontFamily>((f1, f2) => { return string.Compare(f1.Source, f2.Source); }));
         }
-        
+
         // Which Preview Button is Active
         private ToggleButton currentlyCheckedPreview;
 

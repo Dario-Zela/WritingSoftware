@@ -20,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Blaze.View.Windows.Theme
+namespace Blaze.View.Theme
 {
     /// <summary>
     /// Interaction logic for ThemeLibrary.xaml
@@ -61,8 +61,8 @@ namespace Blaze.View.Windows.Theme
             }
 
             // Keep preview open only if wide enough
-            SizeChanged += (s, e) => 
-            { 
+            SizeChanged += (s, e) =>
+            {
                 Preview.Visibility = ActualWidth > 1000 == true ? Visibility.Visible : Visibility.Collapsed;
                 PreviewGridColumn.Width = ActualWidth > 1000 == true ? new GridLength(400) : GridLength.Auto;
             };

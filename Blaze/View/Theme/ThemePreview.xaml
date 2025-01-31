@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Blaze.View.Windows.Theme.ThemePreview"
+﻿<UserControl x:Class="Blaze.View.Theme.ThemePreview"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Blaze.View.Windows.Theme"
+             xmlns:local="clr-namespace:Blaze.View.Theme"
              mc:Ignorable="d" 
              xmlns:converter="clr-namespace:Blaze.Core"
              xmlns:UIElements="clr-namespace:Blaze.UIElements"
@@ -34,10 +34,10 @@
                     <TextBox Text="Preview"
                              Margin="0,30,0,0"
                                          Style="{DynamicResource Header}"
-                       Foreground="{DynamicResource OnApplicationSurfaceBrush}"
+                       Foreground="{DynamicResource ApplicationOnSurfaceBrush}"
                        FontSize="{DynamicResource ApplicationHeaderFontSize}"
                        FontFamily="{DynamicResource ApplicationHeaderFont}"/>
-                    <Separator Foreground="{DynamicResource OnApplicationSurfaceBrush}"/>
+                    <Separator Foreground="{DynamicResource ApplicationOnSurfaceBrush}"/>
                 </StackPanel>
                 <Border Background="{Binding SurfaceColor, Converter={StaticResource BrushConverter}}"
                             BorderThickness="1"
